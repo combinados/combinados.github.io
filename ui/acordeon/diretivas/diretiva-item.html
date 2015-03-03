@@ -1,0 +1,11 @@
+<div class="item {{situacao}}">
+    <div
+        class="item-cabecalho {{situacao}}"    
+        ng-click="abrir(indice)">
+        <img ng-src="{{boleiro.foto}}">
+        <p>{{boleiro.nome}}</p>
+        <p>Pontos: {{boleiro.pontos}}</p>
+        <p>Placares: {{boleiro.placares}}</p>
+    </div>
+    <div ng-transclude></div>
+</div>

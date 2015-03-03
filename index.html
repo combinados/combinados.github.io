@@ -1,5 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="bolao">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title>Bolão</title>    
+    <link rel="stylesheet" href="common/css/bolao.css" >
+	<link rel="stylesheet" href="ui/carrossel/css/styles.css">
+	<link rel="stylesheet" href="ui/acordeon/css/styles.css">
+</head>
+
 <body>
-	<h1>Teste</h1>
+<div class="bolao" ng-controller="RodadaControle">
+	<acordeon>
+		<item ng-repeat="boleiro in boleiros" indice="{{$index}}" boleiro="boleiro"> 
+<!-- 				<p>{{boleiro.placares}}</p> -->
+			<carrossel>
+				<pagina ng-repeat="rodada in boleiro.rodadas" conteudo="rodada"> 
+					<img ng-src="{{rodada.image}}">
+				</pagina>
+			</carrossel>
+		</item>
+	</acordeon>
+</div>
+
+<script src="common/js/angular.js">
+
+
+
+
+</script>
+<script src="ui/carrossel/js/carrossel.js">
+
+
+
+
+</script>
+<script src="ui/acordeon/js/acordeon.js">
+
+
+
+
+</script>
+<script src="common/js/bolao.js">
+
+
+
+
+</script>
+
+
 </body>
 </html>

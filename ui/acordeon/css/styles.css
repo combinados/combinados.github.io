@@ -1,0 +1,85 @@
+.acordeon {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* background-color: black; */
+}
+
+.item {
+    transition: all linear 0.5s;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+        cursor: pointer;
+
+}
+
+.item-fechado {
+    height: 10%;
+    background-color: white;
+    z-index: 1001;
+/*     border-bottom: ridge wheat; */
+}
+
+.item-aberto {
+    height: 60%;
+    /* background: green; */
+    border-radius: 7%;
+}
+
+.item-cabecalho {
+    width: 100%;
+    /* background: yellow; */
+    position: absolute;
+    /* float: left; */
+}
+
+.item-cabecalho img {
+    background-color: black;
+    border-radius: 50%;
+    /* margin:1%; */
+/*     z-index:1004; */
+    float: left;
+}
+
+.item-cabecalho.item-aberto {
+    height: 16%;
+    width: 10%;
+    overflow: hidden;
+    z-index: 1003;
+}
+
+.item-cabecalho.item-aberto img {
+    width:100%;
+}
+
+.item-cabecalho.item-aberto p {    
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+
+.item-cabecalho.item-fechado {
+    height: 100%;
+}
+
+.item-cabecalho.item-fechado img {
+    width:10%;
+}
+
+
+.item-cabecalho.item-fechado p {
+    background-color: black;
+    border-radius: 20%;
+    margin:1%;
+    color: wheat;
+    float: left;
+    margin: 1%;
+    padding: 2%;
+    text-align: center;
+    width: 23%;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+    text-decoration: none;
+}
