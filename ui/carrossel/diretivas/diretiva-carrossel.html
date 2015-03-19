@@ -1,19 +1,12 @@
 <div class="carrossel">
     <nav class="navegacao">       	
         <ul class="pontos">
-<<<<<<< HEAD
             <li 
                 class="ponto"
                 ng-class="{'ativo':ehIndicePaginaAtual($index)}"
                 ng-repeat="pagina in paginas" 
                 ng-click="atualizarIndice($index);">
                 {{$index + 1}}
-=======
-            <li class="ponto" ng-repeat="pagina in paginas">                
-                <a  ng-class="{'ativo':ehIndicePaginaAtual($index)}"
-                    ng-click="atualizarIndice($index);">{{pagina.descricao}}
-                </a>
->>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
              </li>
         </ul>
     </nav>    
