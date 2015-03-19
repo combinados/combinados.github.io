@@ -18,12 +18,16 @@ bolao.factory('BD', ['$http', '$templateCache', function($http, $templateCache) 
         // change the value of the "this" variable inside it
         // so we need to keep a reference to the current instance "this" :
         var self = this;
-        
+        //'application/json'
         return $http({
                   method  : 'GET',
                   url     : apiUrl,
                   cache: $templateCache,
-                  headers : {'X-Api-Secret': 'xxx', 'Authorization': 'xxx', 'Content-Type': 'application/json', 'Accept-Encoding': 'gzip'}  
+                  headers : {
+                                'X-Api-Secret': 'xxx', 
+                                'Authorization': 'xxx', 
+                                'Content-Type': undefined
+                            }  
                 })
                 .then(function(response) {
                   console.log(response);
