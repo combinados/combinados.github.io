@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .carrossel {
+=======
+ .carrossel {
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
     width: 100%;
     height: 100%;
     background: #e6e6e6;
@@ -49,6 +53,7 @@ NAV
     text-align: center;
     position: absolute;
     z-index: 1000;
+<<<<<<< HEAD
 /*     border: 1px solid green; */
     height: 28%;
 }
@@ -67,10 +72,22 @@ NAV
 
 .navegacao .ponto {
     display: inline-block;
+=======
+}
+
+.navegacao ul {
+    margin: 0;
+}
+
+.navegacao .ponto,.navegacao .ponto a {
+    display: inline-block;
+    zoom: 1;
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 }
 
 .pontos .ponto {
     position: relative;
+<<<<<<< HEAD
     margin-left: 0%;
     width: 3.5%;
     height: 8%;
@@ -92,23 +109,72 @@ NAV
 /**************************** MEU CSS PARA ANIMAÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢O */
 
 /* Ativa a animaÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â£o */
+=======
+    margin: 2%;
+    width: 2%;
+    height: 2%;
+}
+
+.pontos .ponto a {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: #FFF;
+    border: 1px solid transparent;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: background-color 0.25s, border-color 0.25s;
+    -moz-transition: background-color 0.25s, border-color 0.25s;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+.pontos .ponto a.ativo {
+    border-color: #FFF;
+    background-color: transparent;
+}
+
+/**************************** MEU CSS PARA ANIMAÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã†â€™O */
+
+/* Ativa a animaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o */
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 
 .paginas {    
     position: absolute;
     top: 0;
     text-align:center;
+<<<<<<< HEAD
     width: 100%;
+=======
+    width:100%;
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
     height: 100%;
     overflow: hidden;
 }
 
 .pagina {
+<<<<<<< HEAD
     transition: all linear 1.5s;
+=======
+    transition: all linear 0.5s;
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
     width:100%;    
     position: absolute;
     top: 0;
     height: 100%;
+<<<<<<< HEAD
     overflow: inherit;
+=======
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 }
 
 .paginas.esquerda .pagina {
@@ -128,6 +194,7 @@ NAV
     right:0;
 }
 
+<<<<<<< HEAD
 .conteudo {
     overflow-y: scroll;
     top: 20%;
@@ -137,6 +204,13 @@ NAV
     height: 80%;
     font-size: 1em;
     /* border: 1px solid blue; */
+=======
+.pagina img {
+    max-height:100%;
+    max-width: 100%;
+    width:100%;
+    margin:auto;
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 }
 
 /* Detalhes */

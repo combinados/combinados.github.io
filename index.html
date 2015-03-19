@@ -12,6 +12,7 @@
 <body>
 <div class="bolao" ng-controller="RodadaControle">
 	<acordeon>
+<<<<<<< HEAD
 		<item ng-repeat="boleiro in boleiros" indice="{{$index}}" boleiro="boleiro">
 			<carrossel>
 				<pagina ng-repeat="rodada in boleiro.rodadas" conteudo="rodada"> 
@@ -26,6 +27,13 @@
 					    <td class="direita"><img ng-src="{{jogo.visitante.escudo}}"></td>
   					</tr>
   				</table>
+=======
+		<item ng-repeat="boleiro in boleiros" indice="{{$index}}" boleiro="boleiro"> 
+<!-- 				<p>{{boleiro.placares}}</p> -->
+			<carrossel>
+				<pagina ng-repeat="rodada in boleiro.rodadas" conteudo="rodada"> 
+					<img ng-src="{{rodada.image}}">
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 				</pagina>
 			</carrossel>
 		</item>

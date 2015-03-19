@@ -40,7 +40,10 @@ angular.module('bolao.acordeon', [])
         require: '^acordeon',
         restrict: 'E',
         transclude: true,
+<<<<<<< HEAD
 //         transclude: element,
+=======
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
         replace: true,
         scope: {
             boleiro: '=',

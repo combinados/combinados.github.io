@@ -7,10 +7,18 @@
 
 .item {
     transition: all linear 0.5s;
+<<<<<<< HEAD
     /* width: 100%; */
     overflow: hidden;
     position: relative;
     cursor: pointer;
+=======
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+        cursor: pointer;
+
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 }
 
 .item-fechado {
@@ -52,12 +60,17 @@
     width:100%;
 }
 
+<<<<<<< HEAD
 .item-cabecalho.item-aberto div {    
+=======
+.item-cabecalho.item-aberto p {    
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
     width: 0px;
     height: 0px;
     overflow: hidden;
 }
 
+<<<<<<< HEAD
 .item-cabecalho.item-fechado {    
     color: wheat;       
     text-align: center;
@@ -69,10 +82,18 @@
 }
 
 .item-cabecalho.item-fechado img {    
+=======
+.item-cabecalho.item-fechado {
+    height: 100%;
+}
+
+.item-cabecalho.item-fechado img {
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
     width:10%;
 }
 
 
+<<<<<<< HEAD
 .item-cabecalho.item-fechado .nome {
     margin: 2%;
     padding: 2%;
@@ -89,4 +110,20 @@
     background-color: black;
     float: left;
     width: 12%;   
+=======
+.item-cabecalho.item-fechado p {
+    background-color: black;
+    border-radius: 20%;
+    margin:1%;
+    color: wheat;
+    float: left;
+    margin: 1%;
+    padding: 2%;
+    text-align: center;
+    width: 23%;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+    text-decoration: none;
+>>>>>>> 28e5103b15a6db2ae859a4f257bb74d31d6d3168
 }
