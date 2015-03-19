@@ -1,0 +1,16 @@
+<div class="carrossel">
+    <nav class="navegacao">       	
+        <ul class="pontos">
+            <li 
+                class="ponto"
+                ng-class="{'ativo':ehIndicePaginaAtual($index)}"
+                ng-repeat="pagina in paginas" 
+                ng-click="atualizarIndice($index);">
+                {{$index + 1}}
+             </li>
+        </ul>
+    </nav>    
+    <div ng-transclude class="paginas {{direcao}}"></div>    
+    <a class="seta anterior" ng-click="paginaAnterior()"></a>
+    <a class="seta proxima" ng-click="proximaPagina()"></a>
+</div>
