@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "nome": "Reinaldo",
+    "nome": "Agenor",
     "foto": "assets/images/boy_avatar/128X128/boy_",
-    "pontos": 63,
-    "placares": 40,
+    "pontos": 100,
+    "placares": 20,
     "totalRodadas": 38,
     "rodadas": [
       {
@@ -4799,10 +4799,10 @@
   },
   {
     "id": 2,
-    "nome": "Reinaldo",
+    "nome": "Patriolino",
     "foto": "assets/images/boy_avatar/128X128/boy_",
-    "pontos": 63,
-    "placares": 40,
+    "pontos": 99,
+    "placares": 19,
     "totalRodadas": 38,
     "rodadas": [
       {
@@ -9597,10 +9597,10 @@
   },
   {
     "id": 3,
-    "nome": "Reinaldo",
+    "nome": "Diel",
     "foto": "assets/images/boy_avatar/128X128/boy_",
-    "pontos": 63,
-    "placares": 40,
+    "pontos": 100,
+    "placares": 30,
     "totalRodadas": 38,
     "rodadas": [
       {
@@ -14395,7 +14395,7 @@
   },
   {
     "id": 4,
-    "nome": "Reinaldo",
+    "nome": "Rosinete",
     "foto": "assets/images/boy_avatar/128X128/boy_",
     "pontos": 63,
     "placares": 40,
@@ -19193,9 +19193,9 @@
   },
   {
     "id": 5,
-    "nome": "Reinaldo",
+    "nome": "Zé Russo",
     "foto": "assets/images/boy_avatar/128X128/boy_",
-    "pontos": 63,
+    "pontos": 73,
     "placares": 40,
     "totalRodadas": 38,
     "rodadas": [
@@ -23993,7 +23993,7 @@
     "id": 6,
     "nome": "Reinaldo",
     "foto": "assets/images/boy_avatar/128X128/boy_",
-    "pontos": 63,
+    "pontos": 103,
     "placares": 40,
     "totalRodadas": 38,
     "rodadas": [
@@ -28789,10 +28789,10 @@
   },
   {
     "id": 7,
-    "nome": "Reinaldo",
+    "nome": "Dallas",
     "foto": "assets/images/boy_avatar/128X128/boy_",
-    "pontos": 63,
-    "placares": 40,
+    "pontos": 80,
+    "placares": 4,
     "totalRodadas": 38,
     "rodadas": [
       {
