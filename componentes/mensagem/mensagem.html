@@ -1,0 +1,20 @@
+{{#erros}}
+  <div role="alert" class="sd alert icon danger">
+    <span class="fa fa-times-circle" aria-hidden="true"></span>
+    <strong>Erro!</strong> {{{mensagem}}}. {{#property}} Contexto: {{property}}{{/property}}
+  </div>
+{{/erros}}
+
+{{#sucessos}}
+  <div role="alert" class="sd alert icon success">
+    <span class="fa fa-check-circle" aria-hidden="true"></span>
+    <strong>Parabéns!</strong> {{mensagem}} {{#property}} Contexto: {{property}}{{/property}}
+  </div>
+{{/sucessos}}
+
+{{#atencoes}}
+  <div role="alert" class="sd alert icon warning">
+     <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+     <strong>Atenção!</strong> {{mensagem}}. {{#property}} Contexto: {{property}}{{/property}}
+  </div>
+{{/atencoes}}

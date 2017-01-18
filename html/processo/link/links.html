@@ -1,0 +1,33 @@
+{{#exibir}}
+<div id="tblLinks" class="row">
+  <div class="table-responsive col-lg-12">
+    <table class="sd table table-striped vertical-center table-hover text-center uppercase">
+      <thead>
+        <tr>
+          <th class="text-left">NÚMERO INTERNO</th>
+          <th class="text-center">TIPO DE PROCESSO</th>
+          <th class="text-center">NATUREZA</th>
+          <th class="text-center">DATA DE ENTRADA</th>
+          <th class="text-center" style="width:5%;">AÇÃO</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#processo.links}}
+        <tr>
+          <td class="text-left"><a href="#{{#lowerCase}}{{link.tipo_processo}}{{/lowerCase}}?processoId={{link.id}}">{{link.numero_interno}}</a></td>
+          <td class="text-center">{{link.tipo_processo}}</td>
+          <td class="text-center">{{link.natureza}}</td>
+          <td class="text-center">{{#dataFormatada}}{{link.data_entrada}}{{/dataFormatada}}</td>
+          <td class=" text-center">
+            <button type="button" class="sd btn small default btnExcluirLink" data-link-id="{{link.id}}" title="Excluir" type="button">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+              <span class="sr-only">Excluir</span>
+            </button>
+          </td>
+        </tr>
+        {{/processo.links}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{/exibir}}

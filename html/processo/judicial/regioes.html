@@ -1,0 +1,11 @@
+{{#vazio}}
+<option selected>Selecione primeiro a natureza e a instância</option>
+{{/vazio}}
+
+{{^vazio}}
+<option value="">Selecione um item</option>
+{{/vazio}}
+
+{{#regioes}}
+<option value="{{id}}">{{descricao}}</option>
+{{/regioes}}

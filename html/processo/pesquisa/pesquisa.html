@@ -1,0 +1,60 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form id="frmPesquisarProcesso" class="sd form" role="form">
+      <div class="row">
+        <div class="col-lg-4 col-md-3">
+          <div class="form-group">
+            <label class="control-label">Número Interno</label>
+            <input id="numero" name="numero" class="form-control" type="text" pattern="^[\w]{3}-[\d]{4}\/[\d]{4}$" placeholder="Natureza-Número/Ano">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-3">
+          <div class="form-group">
+            <label class="control-label">Número CNJ</label>
+            <input id="cnj" aria-describedby="erro-cnj" name="cnj" class="form-control" pattern="^\d{7}-\d{2}\.\d{4}\.\d?\.\d{2}.\d{4}|\d*$" placeholder="NNNNNNN-DD.AAAA.J.TR.OOOO" title="NNNNNNN-DD.AAAA.J.TR.OOOO">
+            <span id="erro-cnj" class="hidden help-block text-danger">Formato incorreto!</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <div class="form-group">
+            <label class="control-label">Numeração Outro Padrão</label>
+            <input id="numero_outro" aria-describedby="erro-outro" name="numero_outro" type="text" class="form-control" maxlength="25">
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-3">
+          <div class="form-group">
+            <label class="control-label">Envolvido</label>
+            <input aria-describedby="erro-envolvido" name="envolvido" class="form-control" placeholder="Nome do Envolvido">
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <div class="form-group">
+            <label class="control-label" for="cmbNaturezaAcao">Situação Cadastral</label>
+            <select aria-describedby="erro-situacao" name="situacao" class="form-control" id="cmbSituacoes">
+              <option value="">Selecione um item</option>
+              {{#dados}}
+              <option value="{{id}}">{{descricao}}</option>
+              {{/dados}}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div id="botoes" class="col-lg-12">
+          <button id="btnPesquisar" class="sd btn primary" type="submit">PESQUISAR</button>
+          <button class="sd btn default" type="reset" value="limpar">LIMPAR</button>
+        </div>
+      </div>
+    </form>
+    <br>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div id="processosConteiner"></div>
+    <div id="envolvidoCompontente" class="hidden"></div>
+    <div id="pedidoCompontente" class="hidden"></div>
+    <button id="btnExibirProcessos" class="sd btn default hidden" type="submit">Exibir Processos</button>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+{{#exibir}}
+<div id="tblEnvolvidos" class="table-responsive">
+  <table class="sd table table-striped vertical-center table-hover uppercase">
+    <thead>
+      <tr>
+        <th>nome</th>
+        <th>Qualificação</th>
+        <th class="text-center">Tipo</th>
+        <th class="text-center">Identificação</th>
+        <th class="text-center">Lotação</th>
+        <th class="text-center">Espólio</th>
+        <th class="text-center">Terceirizado</th>
+        <th class="text-center">Opções de Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#processo.envolvidos}}
+      <tr>
+        <td>{{envolvido.nome}}</td>
+        <td>{{qualificacao.descricao}}</td>
+        {{#envolvido.pessoa_juridica}}
+        <td>Pessoa Jurídica</td>
+        <td><b>CNPJ:</b> {{#processo.cnpjFormatado}} {{envolvido.pessoa_juridica.cnpj}} {{/processo.cnpjFormatado}}</td>
+        <td> - </td>
+        {{/envolvido.pessoa_juridica}}
+        {{#envolvido.pessoa_fisica}}
+        <td>Pessoa Física</td>
+        <td><b>CPF:</b> {{#processo.cpfFormatado}}{{envolvido.pessoa_fisica.cpf}}{{/processo.cpfFormatado}}</td>
+        <td> - </td>
+        {{/envolvido.pessoa_fisica}}
+        {{#envolvido.empregado}}
+        <td>Empregado</td>
+        <td>
+          <b>CPF:</b> {{#processo.cpfFormatado}}{{envolvido.empregado.cpf}}{{/processo.cpfFormatado}}
+        </td>
+        <td>
+          <b>Atual:</b> {{envolvido.empregado.lotacao_atual}}
+          <br><b>Ajuizamento:</b> {{envolvido.empregado.lotacao_dt_ajuizamento}}
+        </td>
+        {{/envolvido.empregado}} {{#envolvido.advogado}}
+        <td>Advogado da Empresa</td>
+        <td><b>Email:</b> {{envolvido.advogado.email}}</td>
+        <td> - </td>
+        {{/envolvido.advogado}}
+
+        <td class=" text-center">
+          {{#envolvido.empregado.espolio}}
+          <i class="fa fa-check"></i> {{/envolvido.empregado.espolio}} {{#envolvido.pessoa_fisica.espolio}}
+          <i class="fa fa-check"></i> {{/envolvido.pessoa_fisica.espolio}}
+        </td>
+
+        <td class=" text-center">
+          {{#envolvido.pessoa_fisica.terceirizado}}
+            <i class="fa fa-check" aria-hidden="true"></i>
+          {{/envolvido.pessoa_fisica.terceirizado}}
+        </td>
+
+        <td class=" text-center" colspan="2">
+          <div class="btn-group pull-right">
+            <button type="button" class="sd btn small default editar-envolvido-js" data-envolvido-id="{{envolvido.id}}" data-envolvido-qualificacao="{{qualificacao.id}}" data-envolvido-espolio="{{#envolvido.empregado.espolio}}true{{/envolvido.empregado.espolio}}{{#envolvido.pessoa_fisica.espolio}}true{{/envolvido.pessoa_fisica.espolio}}"
+              title="Editar Envolvido">
+              <i class="fa fa-pencil-square-o editar-envolvido-js" aria-hidden="true"></i>
+              <span class="sr-only">Editar</span>
+            </button>
+            <button type="button" class="sd btn small default excluir-envolvido-js" data-envolvido-id="{{envolvido.id}}" title="Desassociar Envolvido">
+              <i class="fa fa-trash-o excluir-envolvido-js" aria-hidden="true"></i>
+              <span class="sr-only">Desassociar</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      {{/processo.envolvidos}}
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <button id="btnSalvarQualificacoes" class="sd btn default hidden pull-right" type="submit">Salvar mudanças</button>
+  </div>
+</div>
+<div id="modalConfirm" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Deseja desassociar o envolvido?</h4>
+      </div>
+      <div class="modal-body">
+        <p>O envolvido será desassociado do processo. Deseja continuar?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-ok">Continuar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+{{/exibir}}

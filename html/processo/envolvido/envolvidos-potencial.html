@@ -1,0 +1,100 @@
+{{#exibir}}
+<div id="envolvidoPotencial" class="sd form table-responsive">
+  <table class="table table-bordered table-hover uppercase">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        {{#PessoaFisica}}
+          <th>CPF</th>
+          <th>Terceirizada</th>
+          <th>Espólio</th>
+        {{/PessoaFisica}}
+
+        {{#Empregado}}
+          <th>CPF</th>
+          <th>Matrícula</th>
+          <th>Ativo</th>
+          <th class="text-center">Lotação</th>
+          <th>Espólio</th>
+        {{/Empregado}}
+
+        {{#Advogado}}
+          <th>E-MAIL</th>
+        {{/Advogado}}
+
+        {{#PessoaJuridica}}
+          <th>CNPJ</th>
+        {{/PessoaJuridica}}
+
+        <th class="text-center">
+          {{^Advogado}}Qualificação{{/Advogado}}
+          {{#Advogado}}OPÇÕES DE AÇÃO{{/Advogado}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#envolvidosPotencial}}
+      <tr>
+
+        <td>
+          {{envolvido.nome}}
+        </td>
+
+        <td>{{envolvido.pessoa_fisica.cpf}}{{envolvido.empregado.cpf}}{{envolvido.pessoa_juridica.cnpj}}{{envolvido.advogado.cpf}}</td>
+
+        {{#Empregado}}
+          <td>{{envolvido.empregado.matricula}}</td>
+          <td>
+              {{#envolvido.empregado.contratoAtivo}}<i class="fa fa-check"></i>{{/envolvido.empregado.contratoAtivo}}
+          </td>
+          <td>
+            <dl>
+              <dt>Atual</dt>
+              <dd>{{envolvido.empregado.lotacao_atual}}</dd>
+              <dt>Ajuizamento</dt>
+              <dd>{{envolvido.empregado.lotacao_dt_ajuizamento}}</dd>
+            </dl>
+          </td>
+          <td class="text-center">
+            <div class="checkbox">
+              <input type="checkbox" name="espolio" id="espolio-{{envolvido.id}}">
+              <label for="espolio-{{envolvido.id}}"></label>
+            </div>
+          </td>
+        {{/Empregado}}
+
+        {{#PessoaFisica}}
+          <td class="text-center">
+            <div class="checkbox">
+              <input type="checkbox" name="terceirizado" id="terceirizado-{{envolvido.id}}">
+              <label for="terceirizado-{{envolvido.id}}"></label>
+            </div>
+          </td>
+          <td class="text-center">
+            <div class="checkbox">
+              <input type="checkbox" name="espolio" id="espolio-{{envolvido.id}}">
+              <label for="espolio-{{envolvido.id}}"></label>
+            </div>
+          </td>
+        {{/PessoaFisica}}
+
+        <td class="text-center">
+          {{#Advogado}}
+            <a href="processo.html#judicial" class="sd btn primary distribuir-js" data-envolvido-id="{{envolvido.id}}">Distribuir</a>
+          {{/Advogado}}
+
+          {{^Advogado}}
+            <select aria-describedby="qualificacao" name="qualificacao" class="form-control sd btn" data-envolvido-id="{{envolvido.id}}">
+              <option selected>Selecione uma qualificação</option>
+              {{#qualificacoes}}
+              <option value="{{id}}">{{descricao}}</option>
+              {{/qualificacoes}}
+            </select>
+          {{/Advogado}}
+        </td>
+      </tr>
+      {{/envolvidosPotencial}}
+    </tbody>
+  </table>
+</div>
+{{/exibir}}

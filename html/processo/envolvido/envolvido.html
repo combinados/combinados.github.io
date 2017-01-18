@@ -1,0 +1,40 @@
+<div id="modalEnvolvido"></div>
+{{#exibir}}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-6 col-md-4">
+        <h3><i class="fa fa-users"></i> Envolvidos</h3>
+        <dl class="dl-horizontal">
+          {{#processo.numero_cnj}}
+          <dt>Número CNJ</dt>
+          <dd>{{#processo.cnjFormatado}} {{processo.numero_cnj}} {{/processo.cnjFormatado}}</dd>
+          {{/processo.numero_cnj}} {{#processo.numero_outro_padrao}}
+          <dt>Número Outro Padrão</dt>
+          <dd>{{processo.numero_outro_padrao}}</dd>
+          {{/processo.numero_outro_padrao}}
+        </dl>
+      </div>
+      <div class="col-lg-6 col-md-8">
+        <div class="btn-group pull-right">
+          <button class="sd btn default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-plus"></i> ASSOCIAR ENVOLVIDO <b class="caret"></b>
+          </button>
+          <ul id="cmbTipoEnvolvido" class="dropdown-menu">
+            <li><a href="#modalempregado"><i class="fa fa-user"></i> Empregado</a></li>
+            <li><a href="#modalpessoa_fisica"><i class="fa fa-female"></i> Pessoa Física</a></li>
+            <li><a href="#modalpessoa_juridica"><i class="fa fa-industry"></i> Pessoa Jurídica</a></li>
+            <li class="disabled"><a href="#modaloutro"><i class="fa fa-user-secret"></i> Outro</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Contener Para a tabela de envolvidos -->
+        <div id="envolvidos"> </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/exibir}}

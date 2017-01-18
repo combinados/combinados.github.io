@@ -1,0 +1,65 @@
+{{#processo}}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h3><i class="fa fa-folder-open"></i> Processo</h3>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <dl class="dl-horizontal">
+          <dt>Número Interno</dt>
+          <dd>{{numero_interno}}</dd>
+
+          <dt>Numeração Outro Padrão</dt>
+          <dd>{{numero_outro_padrao}}</dd>
+
+          <dt>Natureza</dt>
+          <dd>{{natureza.descricao}}</dd>
+
+          <dt>Situação Cadastral</dt>
+          <dd>{{situacao}}</dd>
+
+          <dt>Status Processo</dt>
+          <dd>{{status}}</dd>
+        </dl>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <dl class="dl-horizontal">
+          <dt>UF Origem</dt>
+          <dd>{{uf}}</dd>
+
+          <dt>Data de Entrada</dt>
+          <dd>{{#dataFormatada}}{{data_entrada}}{{/dataFormatada}}</dd>
+
+          <dt>Data de Cadastro</dt>
+          <dd>{{#dataFormatada}}{{data_cadastro}}{{/dataFormatada}}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 pull-left btn-group">
+        <button id="btnEditarProcesso" class="sd btn warning" type="button">
+          <i class="fa fa-user-plus"></i> EDITAR
+        </button>
+      </div>
+    </div>
+    <hr>
+    <!-- Contener para os componentes de pedidos -->
+    <div id="pedidoCompontente"></div>
+    <!-- Contener para os componentes de envolvidos -->
+    <div id="envolvidoCompontente"></div>
+    <!-- Container para os componentes de links -->
+    <div id="linkCompontente"></div>
+    <!-- Container para os componentes de anexos -->
+    <div id="anexoCompontente"></div>
+    <div class="row">
+      <div class="col-lg-12">
+        {{#botaoFinalizarPreCadastro}}
+        <button id="btnFinalizarPreCadastro" class="sd btn primary" type="submit">Finalizar Pré Cadastro</button>{{/botaoFinalizarPreCadastro}} {{#botaoFinalizarCadastro}}
+        <button id="btnFinalizarCadastro" class="sd btn primary" type="submit">Finalizar Cadastro</button>{{/botaoFinalizarCadastro}}
+        <a href="javascript:history.back()" class="sd btn default" role="button" title="Voltar">Voltar</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/processo}}

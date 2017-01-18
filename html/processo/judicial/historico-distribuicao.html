@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h3><i class="fa fa-code-fork"></i> Histórico de Advogados</h3>
+      </div>
+      <div id="tblHistoricoDistribuicao" class="col-lg-12 col-md-12 table-responsive">
+        <table class="sd table table-striped vertical-center table-hover text-center uppercase">
+          <thead>
+            <tr>
+              <th class="text-center">DATA INÍCIO</th>
+              <th class="text-center">DATA FIM</th>
+              <th>ADVOGADO RESPONSÁVEL</th>
+              <th class="text-center">CPF</th>
+              <th class="text-center">ATUAÇÃO</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#dados.historico_distribuicao}}
+            <tr>
+              <td class=" text-center">{{#dataFormatada}}{{distribuicao.data_inicio}}{{/dataFormatada}}</td>
+              <td class=" text-center">{{#dataFormatada}}{{distribuicao.data_fim}}{{/dataFormatada}}</td>
+              <td>{{distribuicao.nome_advogado}}</td>
+              <td class=" text-center">{{distribuicao.cpf_advogado}}</td>
+              <td>{{distribuicao.atuacao_advogado}}</td>
+            </tr>
+            {{/dados.historico_distribuicao}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{{#vazio}}
+<option>Selecione primeiro a região</option>
+{{/vazio}}
+
+{{^vazio}}
+<option value="">Selecione um item</option>
+{{/vazio}}
+
+{{#comarcas}}
+<option value="{{id}}">{{descricao}}</option>
+{{/comarcas}}

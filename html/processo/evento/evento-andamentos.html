@@ -1,0 +1,39 @@
+{{#exibirAndamentos}}
+<div id="tblAndamentos" class="row">
+  <div class="table-responsive col-lg-12">
+    <table class="sd table table-striped vertical-center table-hover uppercase">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th class="text-center">Andamento</th>
+          <th class="text-center">Fase</th>
+          <th class="text-center">Observação</th>
+          <th class="text-center">Opções de Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#processo.andamentos}}
+        <tr>
+          <td>{{#processo.dataFormatada}} {{andamento.data}} {{/processo.dataFormatada}}</td>
+          <td>{{andamento.evento}}</td>
+          <td>{{andamento.fase}}</td>
+          <td>{{andamento.observacao}}</td>
+          <td class=" text-center">
+            <div class="btn-group pull-right">
+              <button type="button" class="sd btn small icon default andamento-providencias-js" data-andamento-id="{{andamento.id}}" title="Associar Providência">
+                <i class="fa fa-thumb-tack andamento-providencias-js" data-andamento-id="{{andamento.id}}" aria-hidden="true"></i>
+                <span class="sr-only">Associar Providência</span>
+              </button>
+              <button type="button" class="sd btn small icon default excluir-andamento-js" data-andamento-id="{{andamento.id}}" title="Desassociar Andamento">
+                <i class="fa fa-trash-o excluir-andamento-js" data-andamento-id="{{andamento.id}}" aria-hidden="true"></i>
+                <span class="sr-only">Desassociar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        {{/processo.andamentos}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{/exibirAndamentos}}
