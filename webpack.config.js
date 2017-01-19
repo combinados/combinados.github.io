@@ -41,6 +41,14 @@ let plugins = [
         filename: "js/comum.js",
         minChunks: 2 // How many times a dependency must come up before being extracted
     }),
+    new CopyWebpackPlugin([{
+        from: path.resolve(__dirname, 'html/google-credentials.html')
+    }]),
+    new CopyWebpackPlugin([{
+        from: path.resolve(__dirname, 'css/externo/main.css')
+    }]), new CopyWebpackPlugin([{
+        from: path.resolve(__dirname, 'imagens/firebase-logo.png')
+    }]),
     // new CopyWebpackPlugin([{
     //     from: path.resolve(__dirname, 'html/index.html')
     // }]),
