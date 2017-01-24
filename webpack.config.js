@@ -23,8 +23,22 @@ let plugins = [
         excludeChunks: ['relatorios'],
         favicon: 'imagens/logo.gif',
         template: 'layout/base.ejs',
-        ambiente: producao ? "prod" : "dev"
-        // minify: producao ? true : false
+        ambiente: producao ? "prod" : "dev",
+        // minify: {},
+        minify: {
+            removeComments: true,
+            removeCommentsFromCDATA: true,
+            removeCDATASectionsFromCDATA: true,
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            removeAttributeQuotes: true,
+            useShortDoctype: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            removeScriptTypeAttributes: true,
+            removeStyleTypeAttributes: true,
+        },
     }),
     new HtmlWebpackPlugin({
         title: "Módulo Relatórios",
@@ -121,7 +135,8 @@ let config = {
                         }]
                     ]
                 }
-            }, {
+            },
+            {
                 test: /\.html$/,
                 loader: 'html-loader',
                 exclude: /node_modules/,

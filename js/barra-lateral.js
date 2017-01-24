@@ -44,10 +44,10 @@ export function atualizarPagina(evento, callback) {
         callback.atacharEvento(hash);
     }
     // atualizarMenu(hash);
-    inicializarMCW();
+    inicializarMDC();
 }
 
-function inicializarMCW(hash) {
+function inicializarMDC(hash) {
     let drawer = new MDCTemporaryDrawer(qs(".mdc-temporary-drawer"));
     document.querySelector(".demo-menu").addEventListener("click", () => drawer.open = true);
 

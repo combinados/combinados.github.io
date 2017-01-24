@@ -4,7 +4,7 @@ import bulma from "../../css/externo/bulma.scss";
 import comumCss from "../../css/comum.css";
 import processoCss from "../../css/processo.css";
 import Cabecalho from "../../componentes/cabecalho/cabecalho";
-import Evento from "./evento/evento-controle";
+import Painel from "./painel/painel-controle";
 import RepositorioLocal from "../armazenamento";
 import {
   qs,
@@ -32,9 +32,9 @@ class ModuloAdministrativo {
 
   atacharEvento(hash) {
     switch (true) {
-      case /^#pesquisar(.*)$/.test(hash):
-        hash = hash.replace(/^#pesquisar([\?]?(.*))$/, "$2");
-        new Evento({}).abrirTelaPrincipal({
+      case /^#listarUsuarios(.*)$/.test(hash):
+        hash = hash.replace(/^#listarUsuarios([\?]?(.*))$/, "$2");
+        new Painel({}).abrirTelaPrincipal({
           "andamentos": true,
           "providencias": true
         });
