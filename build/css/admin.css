@@ -564,9 +564,6 @@
  */
 /* TODO(sgomes): Figure out what to do about desktop font sizes. */
 /* TODO(sgomes): Figure out what to do about i18n and i18n font sizes. */
-/* All variables are local, so disable pattern checking. */
-/* stylelint-disable scss/dollar-variable-pattern */
-/* stylelint-enable scss/dollar-variable-pattern */
 .mdc-permanent-drawer {
   /* Use aspect ratio trick to maintain 16:9 aspect ratio on the header */
   /* stylelint-disable selector-no-qualifying-type */
@@ -1379,9 +1376,6 @@
  */
 /* TODO(sgomes): Figure out what to do about desktop font sizes. */
 /* TODO(sgomes): Figure out what to do about i18n and i18n font sizes. */
-/* All variables are local, so disable pattern checking. */
-/* stylelint-disable scss/dollar-variable-pattern */
-/* stylelint-enable scss/dollar-variable-pattern */
 .mdc-temporary-drawer {
   /* Use aspect ratio trick to maintain 16:9 aspect ratio on the header */
   /* stylelint-disable selector-no-qualifying-type */
@@ -6649,8 +6643,8 @@ table.vertical-center th, td {
   float: none; }
 
 /*Rodapé*/
-.logo-gif {
-  max-width: 40px; }
+.logo {
+  max-width: 150px; }
 
 footer {
   background-color: #002c50;
@@ -6673,5 +6667,3 @@ img {
   interpolation-mode: bicubic; }
 .processo {
   background: url(imagens/logo-reinaldo-footer.png); }
-
-/*# sourceMappingURL=admin.css.map*/
