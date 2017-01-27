@@ -21,7 +21,7 @@ let plugins = [
         title: "Módulo Administrativo",
         filename: 'admin.html',
         excludeChunks: ['relatorios'],
-        favicon: 'imagens/logo.gif',
+        favicon: 'imagens/comb-animado.gif',
         template: 'layout/base.ejs',
         ambiente: producao ? "prod" : "dev",
         // minify: {},
@@ -164,7 +164,7 @@ let config = {
                 })
             },
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpg|gif|svg)$/,
                 exclude: /node_modules/,
                 loader: "url-loader",
                 query: {

@@ -15,7 +15,7 @@
   "dependencies": {
     "@material/base": "^0.1.0",
     "@material/checkbox": "^0.1.1",
-    "@material/drawer": "^0.1.1",
+    "@material/drawer": "^0.1.2",
     "@material/form-field": "^0.1.0",
     "@material/icon-toggle": "^0.1.1",
     "@material/ripple": "^0.1.1",
