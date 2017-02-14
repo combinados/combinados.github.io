@@ -3,7 +3,7 @@
 |               | ![Justiça Linux](imagens/LinuxLawyer.png =20%x*)  |  |
 |               | Gerenciador Judicial                              |  |
 
-#Sistema de gerenciamento jurídico
+#Bolão dos Combinados
 ## Pré requisitos
 - nodejs 6.x
 - npm 3.x
