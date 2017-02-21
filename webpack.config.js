@@ -140,7 +140,8 @@ let config = {
             },
             {
                 test: /\.html$/,
-                loader: 'html-loader',
+                // loader: 'html-loader',
+                loader: 'babel-loader?presets[]=es2015!es6-template-string-loader',
                 exclude: /node_modules/,
             },
             {
@@ -171,7 +172,7 @@ let config = {
                 loader: "url-loader",
                 query: {
                     "limit": 1024,
-                    "name": "imagens/[name].[ext]"
+                    "name": "imagens/[name]-[hash].[ext]"
                 }
             }
         ]

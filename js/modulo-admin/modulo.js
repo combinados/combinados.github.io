@@ -1,11 +1,10 @@
 import material from "../../css/externo/material.scss";
-import bulma from "../../css/externo/bulma.scss";
 
-import comumCss from "../../css/comum.css";
-import processoCss from "../../css/processo.css";
-import Cabecalho from "../../componentes/cabecalho/cabecalho";
+// import comumCss from "../../css/comum.css";
+// import processoCss from "../../css/processo.css";
+// import Cabecalho from "../../componentes/cabecalho/cabecalho";
 import Painel from "./painel/painel-controle";
-import RepositorioLocal from "../armazenamento";
+// import RepositorioLocal from "../armazenamento";
 import {
   qs,
   $on,
@@ -20,14 +19,14 @@ class ModuloAdministrativo {
   constructor(modulo) {
     this.titulo = "Módulo Administrativo";
     this.seletor = "a[href^='processo']";
-    this.repositorio = new RepositorioLocal(modulo);
+    // this.repositorio = new RepositorioLocal(modulo);
     this.paginaPadrao = "#usuarios";
-    this.cabecalho = new Cabecalho();
+    // this.cabecalho = new Cabecalho();
     // this.evento = new Evento(this.repositorio);
   }
 
   inicio() {
-    this.cabecalho.desenhar(".navbar-brand", this.titulo);
+    // this.cabecalho.desenhar(".navbar-brand", this.titulo);
   }
 
   atacharEvento(hash) {
