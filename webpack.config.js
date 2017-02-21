@@ -126,6 +126,8 @@ let config = {
                 include: [
                     path.join(__dirname, 'js'),
                     path.join(__dirname, 'componentes'),
+                    path.join(__dirname, 'html'),
+                    path.join(__dirname, 'layout'),
                     path.join(__dirname, 'node_modules', '@material')
                 ],
                 options: {
