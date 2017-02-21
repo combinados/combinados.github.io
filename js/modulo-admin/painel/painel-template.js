@@ -1,4 +1,6 @@
 import painelTemplate from "../../../html/principal.html";
+import listaUsuarios from "../../../html/listaUsuarios";
+import imagens from "../../../imagens/justice.gif";
 import {
   formatarData,
   qs
@@ -9,6 +11,6 @@ export default class PainelTemplate {
   constructor() {
   }
   exibirTelaPrincipal(elemento, dados) {
-    elemento.innerHTML = painelTemplate;
+    elemento.innerHTML = listaUsuarios(dados);
   }
 }

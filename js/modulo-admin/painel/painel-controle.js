@@ -6,9 +6,9 @@ import {
 
 export default class Painel {
 
-  constructor() {
+  constructor(conteiner) {
     this.servico = new PainelServico();
-    this.visao = new PainelVisao("#principal");
+    this.visao = new PainelVisao(conteiner);
   }
   abrirTelaPrincipal(opcoes = {}) {
     opcoes = Object.assign({
@@ -18,6 +18,12 @@ export default class Painel {
       "processo": this.processo
     }, opcoes);
 
-    this.visao.abrirTelaPrincipal(opcoes);
+    this.servico.buscarUsuarios()
+    .then(resposta => {
+      const opcoes = resposta;
+      this.visao.abrirTelaPrincipal(opcoes);
+    });
+
+
   }
 }

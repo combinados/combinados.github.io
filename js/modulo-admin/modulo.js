@@ -14,14 +14,14 @@ import {
 import {
   atualizarPagina,
   paginaPronta
-} from "../barra-lateral";
+} from "../rotas";
 
 class ModuloAdministrativo {
   constructor(modulo) {
     this.titulo = "Módulo Administrativo";
     this.seletor = "a[href^='processo']";
     this.repositorio = new RepositorioLocal(modulo);
-    this.paginaPadrao = "#pesquisar";
+    this.paginaPadrao = "#usuarios";
     this.cabecalho = new Cabecalho();
     // this.evento = new Evento(this.repositorio);
   }
@@ -32,12 +32,9 @@ class ModuloAdministrativo {
 
   atacharEvento(hash) {
     switch (true) {
-      case /^#listarUsuarios(.*)$/.test(hash):
+      case /^#usuarios(.*)$/.test(hash):
         hash = hash.replace(/^#listarUsuarios([\?]?(.*))$/, "$2");
-        new Painel({}).abrirTelaPrincipal({
-          "andamentos": true,
-          "providencias": true
-        });
+        new Painel("#principal").abrirTelaPrincipal();
         break;
       case /^#judicial(.*)$/.test(hash):
         hash = hash.replace(/^#judicial([\?]?(.*))$/, "$2");

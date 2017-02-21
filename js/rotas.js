@@ -11,7 +11,7 @@ import {
     MDCSnackbar
 } from "@material/snackbar";
 import {
-    MDCRipple
+    MDCRipple as MDCRipple
 } from "@material/ripple";
 
 
@@ -61,7 +61,7 @@ function inicializarMDC(hash) {
         snackbar.show(data);
     });
 
-    MDCRipple.attachTo(qs(".demo-surface"));
+    // MDCRipple.attachTo(qs(".demo-surface"));
 }
 
 function atualizarMenu(hash) {

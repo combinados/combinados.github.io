@@ -9,13 +9,14 @@ tail -n +4 package0.json |xargs npm install --save-dev
 @material/ripple
 @material/snackbar
 @material/typography
+@material/layout-grid
+
 autoprefixer
 babel-core
 babel-plugin-transform-object-assign
 babel-plugin-transform-runtime
 babel-polyfill
 babel-runtime
-bulma
 copy-webpack-plugin
 eslint
 file-loader

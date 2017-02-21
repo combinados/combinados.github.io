@@ -22,8 +22,8 @@ let plugins = [
         filename: 'admin.html',
         excludeChunks: ['relatorios'],
         favicon: 'imagens/comb-animado.gif',
-        template: 'layout/base.ejs',
-        ambiente: producao ? "prod" : "dev",
+        template: 'layout/template.js',
+        producao,
         // minify: {},
         minify: {
             removeComments: true,
@@ -45,7 +45,7 @@ let plugins = [
         filename: 'relatorios.html',
         excludeChunks: ['admin'],
         favicon: 'imagens/favicon.ico',
-        template: 'layout/base.ejs',
+        template: 'layout/template.js',
         ambiente: producao ? "prod" : "dev",
         // minify: producao ? true : false,
         //		hash: true
