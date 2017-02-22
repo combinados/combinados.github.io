@@ -8,7 +8,7 @@ const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const CleanPlugin = require('clean-webpack-plugin');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
-const dir_build = path.join(__dirname, '2017');
+const dir_build = "2017";
 const producao = process.env.AMBIENTE === 'producao';
 
 let plugins = [
