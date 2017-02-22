@@ -7639,3 +7639,40 @@ a.mdc-list-item {
   margin: 0;
   color: #FFF;
   box-sizing: border-box; }
+@charset "UTF-8";
+/* Regras de Negócio*/
+table.uppercase td {
+  text-transform: uppercase; }
+
+/*Ajuste para o polyfill quando o input date está em um dialog*/
+date-input-polyfill[data-open="true"] {
+  z-index: 10000; }
+
+/*centraliza verticalmente*/
+table.vertical-center th, td {
+  vertical-align: middle !important;
+  float: none; }
+
+/*Rodapé*/
+.logo {
+  max-width: 50%; }
+
+footer {
+  background-color: #002c50;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  line-height: 1.42857;
+  margin: 0; }
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 12px;
+  padding-right: 12px; }
+
+img {
+  border: 0;
+  vertical-align: middle;
+  interpolation-mode: bicubic; }
