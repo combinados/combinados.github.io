@@ -8,7 +8,7 @@ const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const CleanPlugin = require('clean-webpack-plugin');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
-const dir_build = path.join(__dirname, 'build');
+const dir_build = path.join(__dirname, '2017');
 const producao = process.env.AMBIENTE === 'producao';
 
 let plugins = [
@@ -22,7 +22,7 @@ let plugins = [
         filename: 'admin.html',
         excludeChunks: ['relatorios'],
         favicon: 'imagens/comb-animado.gif',
-        template: 'layout/template.js',
+        template: 'componentes/layout/template.js',
         producao,
         // minify: {},
         minify: {
@@ -45,8 +45,8 @@ let plugins = [
         filename: 'relatorios.html',
         excludeChunks: ['admin'],
         favicon: 'imagens/favicon.ico',
-        template: 'layout/template.js',
-        ambiente: producao ? "prod" : "dev",
+        template: 'componentes/layout/template.js',
+        producao,
         // minify: producao ? true : false,
         //		hash: true
     }),
@@ -85,7 +85,7 @@ if (producao) {
                 comments: false,
             },
         }),
-        new CleanPlugin('build'),
+        new CleanPlugin(dir_build),
         new webpack.NoEmitOnErrorsPlugin(),
     ]);
 } else {
@@ -149,7 +149,7 @@ let config = {
             {
                 test: /\.s?css$/,
                 loader: ExtractTextPlugin.extract({
-                    fallbackLoader: 'style-loader',
+                    fallback: 'style-loader',
                     loader: [{
                             loader: 'css-loader',
                         },

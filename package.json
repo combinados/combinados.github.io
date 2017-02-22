@@ -2,12 +2,12 @@
   "author": "Reinaldo",
   "license": "Pode passar. kkk!",
   "scripts": {
-    "documentar": "showdown makehtml -i README.md -o ./build/ajuda.html --tables",
+    "documentar": "showdown makehtml -i README.md -o ./2017/ajuda.html --tables",
     "empacotar-producao": "AMBIENTE=producao webpack --progress",
     "publicar": "npm-run-all apagar empacotar-producao documentar",
     "empacotar": "webpack --progress",
     "observar": "webpack --watch",
-    "apagar": "rm -rf build/",
+    "apagar": "rm -rf 2017",
     "redefinir": "npm-run-all apagar empacotar documentar",
     "start": "webpack-dashboard -c magenta -- webpack-dev-server --hot --inline --progress",
     "postinstall": "npm-run-all start"
