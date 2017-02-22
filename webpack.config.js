@@ -102,7 +102,7 @@ const config = {
         "relatorios": "./componentes/modulo-relatorios/modulo.js"
     },
     output: {
-        path: dir_build,
+        path: path.resolve(__dirname, dir_build),
         publicPath: "",
         filename: "js/[name].bundle.js",
         // chunkFilename: "[name]-[id].chunk.js"
