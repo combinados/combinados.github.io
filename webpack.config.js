@@ -103,7 +103,7 @@ let config = {
     },
     output: {
         path: dir_build,
-        publicPath: dir_build,
+        publicPath: "",
         filename: "js/[name].bundle.js",
         // chunkFilename: "[name]-[id].chunk.js"
     },
