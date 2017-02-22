@@ -4,7 +4,7 @@
   "scripts": {
     "documentar": "showdown makehtml -i README.md -o ./2017/ajuda.html --tables",
     "empacotar-producao": "AMBIENTE=producao webpack --progress",
-    "publicar": "npm-run-all apagar empacotar-producao documentar",
+    "publicar": "npm-run-all empacotar-producao documentar",
     "empacotar": "webpack --progress",
     "observar": "webpack --watch",
     "apagar": "rm -rf 2017",
