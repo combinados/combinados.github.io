@@ -1,6 +1,6 @@
-import material from "comum/css/externo/material.scss";
+import material from "componentes/comum/css/externo/material.scss";
 
-import comumCss from "comum/css/comum.css";
+import comumCss from "componentes/comum/css/comum.css";
 // import processoCss from "../../css/processo.css";
 // import Cabecalho from "../../componentes/cabecalho/cabecalho";
 import Painel from "./painel/painel-controle";
@@ -9,20 +9,17 @@ import {
   qs,
   $on,
   queryStringParaJson
-} from "comum/comum";
+} from "componentes/comum/comum";
 import {
   atualizarPagina,
   paginaPronta
-} from "comum/rotas";
+} from "componentes/comum/rotas";
 
 class ModuloAdministrativo {
   constructor(modulo) {
     this.titulo = "Módulo Administrativo";
     this.seletor = "a[href^='processo']";
-    // this.repositorio = new RepositorioLocal(modulo);
     this.paginaPadrao = "#usuarios";
-    // this.cabecalho = new Cabecalho();
-    // this.evento = new Evento(this.repositorio);
   }
 
   inicio() {

@@ -1,9 +1,9 @@
 import usuarioCard from "./usuarioCard.html";
-import foto from "comum/imagens/justice.gif";
+import foto from "componentes/comum/imagens/justice.gif";
 import {
   formatarData,
   qs
-} from "comum/comum";
+} from "componentes/comum/comum";
 
 export default class PainelTemplate {
 

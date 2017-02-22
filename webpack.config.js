@@ -22,7 +22,7 @@ let plugins = [
         filename: 'admin.html',
         excludeChunks: ['relatorios'],
         favicon: 'componentes/comum/imagens/comb-animado.gif',
-        template: 'componentes/layout/template.js',
+        template: 'componentes/comum/layout/template.js',
         producao,
         // minify: {},
         minify: {
@@ -45,7 +45,7 @@ let plugins = [
         filename: 'relatorios.html',
         excludeChunks: ['admin'],
         favicon: 'componentes/comum/imagens/favicon.ico',
-        template: 'componentes/layout/template.js',
+        template: 'componentes/comum/layout/template.js',
         producao,
         // minify: producao ? true : false,
         //		hash: true
@@ -109,9 +109,8 @@ const config = {
     },
     resolve: {
         alias: {
-            "comum": path.join(__dirname, "componentes/comum"),
             "componentes": path.join(__dirname, "componentes")
-        },
+        }
     },
     plugins: plugins,
     module: {

@@ -2,7 +2,7 @@ import PainelVisao from "./painel-visao";
 import PainelServico from "./painel-servico";
 import {
   mensagemUtil
-} from "componentes/mensagem/mensagem";
+} from "componentes/comum/mensagem/mensagem";
 
 export default class Painel {
 

@@ -4,8 +4,8 @@ import base from "./base.html";
 import cabecalho from "./cabecalho.html";
 import principal from "./principal.html";
 import rodape from "./rodape.html";
-import logo from "comum/imagens/logo-reinaldo-footer.png";
-import logoAnimado from "comum/imagens/comb-animado.gif";
+import logo from "componentes/comum/imagens/logo-reinaldo-footer.png";
+import logoAnimado from "componentes/comum/imagens/comb-animado.gif";
 
 
 export default (plugin) => {

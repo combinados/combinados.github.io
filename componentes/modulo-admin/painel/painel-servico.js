@@ -1,4 +1,4 @@
-import Servico from "comum/servico"
+import Servico from "componentes/comum/servico"
 export default class EventoServico extends Servico {
     constructor() {
         super();
