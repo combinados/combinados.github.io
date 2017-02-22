@@ -1,6 +1,6 @@
-import material from "../../css/externo/material.scss";
+import material from "comum/css/externo/material.scss";
 
-import comumCss from "../../css/comum.css";
+import comumCss from "comum/css/comum.css";
 // import processoCss from "../../css/processo.css";
 // import Cabecalho from "../../componentes/cabecalho/cabecalho";
 import Painel from "./painel/painel-controle";
@@ -9,11 +9,11 @@ import {
   qs,
   $on,
   queryStringParaJson
-} from "../comum";
+} from "comum/comum";
 import {
   atualizarPagina,
   paginaPronta
-} from "../rotas";
+} from "comum/rotas";
 
 class ModuloAdministrativo {
   constructor(modulo) {

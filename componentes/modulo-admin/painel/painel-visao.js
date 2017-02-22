@@ -3,8 +3,8 @@ import {
   $on,
   $parent,
   $delegate
-} from "../../comum";
-import Mensagem from "../../../componentes/mensagem/mensagem";
+} from "comum/comum";
+import Mensagem from "componentes/mensagem/mensagem";
 import PainelTemplate from "./painel-template";
 
 export default class PainelVisao {

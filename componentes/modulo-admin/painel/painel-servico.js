@@ -1,4 +1,4 @@
-import Servico from "../../servico"
+import Servico from "comum/servico"
 export default class EventoServico extends Servico {
     constructor() {
         super();

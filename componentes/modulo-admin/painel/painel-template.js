@@ -1,10 +1,9 @@
-import painelTemplate from "html/principal.html";
-import usuarioCard from "html/usuarioCard.html";
-import foto from "imagens/justice.gif";
+import usuarioCard from "./usuarioCard.html";
+import foto from "comum/imagens/justice.gif";
 import {
   formatarData,
   qs
-} from "../../comum";
+} from "comum/comum";
 
 export default class PainelTemplate {
 

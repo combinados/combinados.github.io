@@ -1,7 +1,7 @@
 import mensagemTemplate from "./mensagem.html";
 import {
   qs
-} from "../../js/comum";
+} from "comum/comum";
 
 const botaoEntrar = "<a class=\\\"sd btn icon left warning\\\" onclick=\\\"history.go(0)\\\"><span class=\\\"fa fa-sign-in\\\" aria-hidden=\\\"true\\\"></span><span class=\\\"sr-only\\\">Entrar</span>Aqui</a>";
 const statusCode = {

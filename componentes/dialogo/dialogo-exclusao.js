@@ -2,7 +2,7 @@ import modalExcluirTemplate from "./dialogo-exclusao.html";
 import {
   qs,
   $on
-} from "../../js/comum";
+} from "comum/comum";
 
 export default class Dialogo {
   constructor(opcoes) {

@@ -21,7 +21,7 @@ let plugins = [
         title: "Módulo Administrativo",
         filename: 'admin.html',
         excludeChunks: ['relatorios'],
-        favicon: 'imagens/comb-animado.gif',
+        favicon: 'componentes/comum/imagens/comb-animado.gif',
         template: 'componentes/layout/template.js',
         producao,
         // minify: {},
@@ -44,7 +44,7 @@ let plugins = [
         title: "Módulo Relatórios",
         filename: 'relatorios.html',
         excludeChunks: ['admin'],
-        favicon: 'imagens/favicon.ico',
+        favicon: 'componentes/comum/imagens/favicon.ico',
         template: 'componentes/layout/template.js',
         producao,
         // minify: producao ? true : false,
@@ -56,12 +56,12 @@ let plugins = [
         minChunks: 2 // How many times a dependency must come up before being extracted
     }),
     new CopyWebpackPlugin([{
-        from: path.resolve(__dirname, 'html/google-credentials.html')
+        from: path.resolve(__dirname, 'componentes/comum/html/google-credentials.html')
     }]),
     new CopyWebpackPlugin([{
-        from: path.resolve(__dirname, 'css/externo/main.css')
+        from: path.resolve(__dirname, 'componentes/comum/css/externo/main.css')
     }]), new CopyWebpackPlugin([{
-        from: path.resolve(__dirname, 'imagens/firebase-logo.png')
+        from: path.resolve(__dirname, 'componentes/comum/imagens/firebase-logo.png')
     }]),
     // new CopyWebpackPlugin([{
     //     from: path.resolve(__dirname, 'html/index.html')
@@ -94,12 +94,12 @@ if (producao) {
     ]);
 }
 
-let config = {
+const config = {
     cache: true,
     entry: {
         "vendor": ["nodep-date-input-polyfill", "babel-polyfill"],
-        "admin": "./js/modulo-admin/modulo.js",
-        "relatorios": "./js/modulo-relatorios/modulo.js"
+        "admin": "./componentes/modulo-admin/modulo.js",
+        "relatorios": "./componentes/modulo-relatorios/modulo.js"
     },
     output: {
         path: dir_build,
@@ -109,9 +109,8 @@ let config = {
     },
     resolve: {
         alias: {
-            'admin': path.join(__dirname, ''),
-            "imagens": path.join(__dirname, "imagens"),
-            "html": path.join(__dirname, "html")
+            "comum": path.join(__dirname, "componentes/comum"),
+            "componentes": path.join(__dirname, "componentes")
         },
     },
     plugins: plugins,
@@ -126,10 +125,7 @@ let config = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [
-                    path.join(__dirname, 'js'),
                     path.join(__dirname, 'componentes'),
-                    path.join(__dirname, 'html'),
-                    path.join(__dirname, 'layout'),
                     path.join(__dirname, 'node_modules', '@material')
                 ],
                 options: {
