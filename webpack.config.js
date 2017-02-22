@@ -109,7 +109,9 @@ let config = {
     },
     resolve: {
         alias: {
-            'admin': path.join(__dirname, '')
+            'admin': path.join(__dirname, ''),
+            "imagens": path.join(__dirname, "imagens"),
+            "html": path.join(__dirname, "html")
         },
     },
     plugins: plugins,

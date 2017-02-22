@@ -1,6 +1,6 @@
 import material from "../../css/externo/material.scss";
 
-// import comumCss from "../../css/comum.css";
+import comumCss from "../../css/comum.css";
 // import processoCss from "../../css/processo.css";
 // import Cabecalho from "../../componentes/cabecalho/cabecalho";
 import Painel from "./painel/painel-controle";

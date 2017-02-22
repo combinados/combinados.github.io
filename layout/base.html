@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        ${this.titulo}
+    </title>
+    <!-- <base href="/"> -->
+    ${this.cabecalho({teste:this.producao ? ".dev" : ".min"})}
+</head>
+
+<body class="mdc-typography demo-body">
+    <div>
+        <div id="modalConfirmacao" style="margin-top: 0"></div>
+        ${this.navegacaoCabecalho()}
+        ${this.barraLateral({logoAnimado:this.logoAnimado})}
+        ${this.principal()}
+    </div>
+    <footer>
+        ${this.rodape({ logo:this.logo, logoAnimado:this.logoAnimado })}
+    </footer>
+</body>
+
+</html>
