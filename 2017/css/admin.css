@@ -1493,6 +1493,8 @@
     width: calc(100% - 56px);
     max-width: 280px;
     height: 100%;
+    -webkit-transform: translateX(-107%);
+            transform: translateX(-107%);
     -webkit-transform: translateX(calc(-100% - 20px));
             transform: translateX(calc(-100% - 20px));
     will-change: transform;
@@ -1510,6 +1512,8 @@
       color: white;
       color: white; }
     [dir="rtl"] .mdc-temporary-drawer .mdc-temporary-drawer__drawer, .mdc-temporary-drawer[dir="rtl"] .mdc-temporary-drawer__drawer {
+      -webkit-transform: translateX(107%);
+              transform: translateX(107%);
       -webkit-transform: translateX(calc(100% + 20px));
               transform: translateX(calc(100% + 20px)); }
     @media (min-width: 600px) {
@@ -3755,6 +3759,7 @@ a.mdc-list-item {
 .mdc-checkbox {
   display: inline-block;
   position: relative;
+  box-sizing: content-box;
   width: 18px;
   height: 18px;
   padding: 11px;
@@ -3929,6 +3934,10 @@ a.mdc-list-item {
     [aria-disabled="true"] .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background, .mdc-theme--dark
     [aria-disabled="true"] .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background {
       background-color: rgba(255, 255, 255, 0.3); }
+
+.mdc-checkbox--upgraded .mdc-checkbox__background, .mdc-checkbox--upgraded .mdc-checkbox__checkmark, .mdc-checkbox--upgraded .mdc-checkbox__checkmark__path, .mdc-checkbox--upgraded .mdc-checkbox__mixedmark {
+  -webkit-transition: none !important;
+  transition: none !important; }
 
 .mdc-checkbox--anim-unchecked-checked .mdc-checkbox__background, .mdc-checkbox--anim-unchecked-indeterminate .mdc-checkbox__background {
   -webkit-animation: mdc-checkbox-fade-in-background 180ms linear;
@@ -5690,6 +5699,10 @@ a.mdc-list-item {
   text-decoration: none;
   text-transform: uppercase;
   vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   box-sizing: border-box;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.18); }

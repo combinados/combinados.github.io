@@ -10,6 +10,7 @@ tail -n +4 package0.json |xargs npm install --save-dev
 @material/snackbar
 @material/typography
 @material/layout-grid
+@material/list
 
 autoprefixer
 babel-core
