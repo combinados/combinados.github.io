@@ -11,6 +11,9 @@ tail -n +4 package0.json |xargs npm install --save-dev
 @material/typography
 @material/layout-grid
 @material/list
+@material/theme
+@material/ripple
+@material/card
 
 autoprefixer
 babel-core

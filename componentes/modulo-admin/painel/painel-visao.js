@@ -1,21 +1,15 @@
 import {
-  qs,
-  $on,
-  $parent,
-  $delegate
+    qs
 } from "componentes/comum/comum";
-import Mensagem from "componentes/comum/mensagem/mensagem";
-import PainelTemplate from "./painel-template";
+import painelTemplate from "./painel-template.html";
 
 export default class PainelVisao {
 
-  constructor(conteiner) {
-    this.$conteiner = qs(conteiner);
-    this.$parcial = qs("#principal");
-    this.template = new PainelTemplate();
-  }
+    constructor(conteiner) {
+        this.$conteiner = qs(conteiner);
+    }
 
-  abrirTelaPrincipal(opcoes = {}) {
-    this.template.exibirTelaPrincipal(this.$conteiner, opcoes);
-  }
+    abrirTelaPrincipal(opcoes = {}) {
+        this.$conteiner.innerHTML = painelTemplate();
+    }
 }

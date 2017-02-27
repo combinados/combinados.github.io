@@ -1,6 +1,18 @@
+import * as firebase from "firebase";
+import material from "componentes/comum/css/externo/material.scss";
 import {
     MDCTemporaryDrawer
 } from "@material/drawer";
+
+const config = {
+    apiKey: "AIzaSyBb46_Qu1bo3QR8x47LnKdYt9BheD2P0pc",
+    authDomain: "combinados.firebaseapp.com",
+    databaseURL: "https://combinados.firebaseio.com",
+    storageBucket: "firebase-combinados.appspot.com",
+    messagingSenderId: "607735444379"
+};
+
+export default firebase.initializeApp(config);
 
 let drawer = new MDCTemporaryDrawer(qs(".mdc-temporary-drawer"));
 document.querySelector(".demo-menu").addEventListener("click", () => drawer.open = true);

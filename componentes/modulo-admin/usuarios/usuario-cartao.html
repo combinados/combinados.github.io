@@ -1,0 +1,20 @@
+<!-- ${Object.entries(this.val()).map(([c,v])=>v).map(usuario => {
+      usuario.botoes = ["Direito", "Esquedo"];
+    return `-->
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+    <div class="mdc-card">
+        <div class="mdc-card__horizontal-block">
+            <section class="mdc-card__primary">
+                <h1 class="mdc-card__title mdc-card__title--large">${usuario.nome}</h1>
+                <h2 class="mdc-card__subtitle">Classificação: ${usuario.classificacao}</h2>
+            </section>
+            <img class="mdc-card__media-item" src="${usuario.foto}">
+        </div>
+        <section class="mdc-card__actions">
+            <!-- ${usuario.botoes.map(botao => ` -->
+            <button class="mdc-button mdc-button--primary mdc-card__action">${botao}</button>
+            <!-- `).join("")} -->
+        </section>
+    </div>
+</div>
+<!-- `}).join("")} -->

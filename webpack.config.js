@@ -127,13 +127,9 @@ const config = {
                     path.join(__dirname, 'componentes'),
                     path.join(__dirname, 'node_modules', '@material')
                 ],
-                options: {
-                    "presets": [
-                        ["es2015", {
-                            "modules": false
-                        }],
-                        ["stage-0"]
-                    ]
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', "stage-0"]
                 }
             },
             {
@@ -144,10 +140,13 @@ const config = {
             },
             {
                 test: /\.s?css$/,
-                loader: ExtractTextPlugin.extract({
+                use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    loader: [{
+                    use: [{
                             loader: 'css-loader',
+                            options: {
+                                minimize: true || { /* CSSNano Options */ }
+                            }
                         },
                         {
                             loader: 'postcss-loader',

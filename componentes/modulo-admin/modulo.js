@@ -1,10 +1,5 @@
-import material from "componentes/comum/css/externo/material.scss";
-
 import comumCss from "componentes/comum/css/comum.css";
-// import processoCss from "../../css/processo.css";
-// import Cabecalho from "../../componentes/cabecalho/cabecalho";
 import Painel from "./painel/painel-controle";
-// import RepositorioLocal from "../armazenamento";
 import {
     qs,
     $on,
