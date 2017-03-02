@@ -160,14 +160,19 @@ function verificarLoginGoogle(googleUser) {
  *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
  *    out, and that is where we update the UI.
  */
-function initApp() {
-  window.verificarLoginGoogle = verificarLoginGoogle;
-    // Listening for auth state changes.
-    // [START authstatelistener]
+export function initApp() {
+    window.verificarLoginGoogle = verificarLoginGoogle;
+    const $usuarioDiv = document.querySelector("#usuario-corrente");
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            alert(JSON.stringify(user, null, "  "));
-            // [END_EXCLUDE]
+            // $usuarioDiv.style.background = `background-image: url("${user.photoURL}")`;
+            $usuarioDiv.style.backgroundImage = `url("${user.photoURL}")`;
+            const primeiroNome = user.displayName.split(" ")[0]
+            const restoNome = user.displayName.split(" ")[1]
+
+            $usuarioDiv.innerHTML = `
+                <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
+                // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
         } else {}
     });
     // [END authstatelistener]

@@ -1,4 +1,33 @@
-/*login google*/
+.login-card {
+    height: 30px;
+    width: 60px;
+}
+
+
+/*.login-card--with-avatar {
+    position: absolute;
+    background: #bdbdbd;
+    height: 2.5rem;
+
+    width: 2.5rem;
+
+    border-radius: 50%;
+}*/
+
+
+/*.login-card--small {
+    max-width: 10.938rem;
+}*/
+
+.login-card--small .mdc-card__media {
+    background-size: 30px;
+    background-repeat: no-repeat
+}
+
+.login-card__title {
+    font-size: .75rem !important;
+    margin: -22px -7px !important;
+}
 
 main {
     margin-top: 45px;
