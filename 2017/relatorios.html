@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <title>
@@ -11,26 +11,19 @@
 <meta name="google-signin-client_id" content="607735444379-7i6fbl9qoqgbiihrp5mpakom5lv5nrq6.apps.googleusercontent.com">
 <meta name="google-signin-cookiepolicy" content="single_host_origin">
 <meta name="google-signin-scope" content="profile email">
-<link rel="stylesheet" href="teste.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.min.js" async defer></script>
 
 <link rel="shortcut icon" href="favicon.ico"></head>
 
 <body class="mdc-typography demo-body">
     <div>
         <div id="modalConfirmacao" style="margin-top: 0"></div>
-        <div class="demo-toolbar mdc-theme--primary-bg mdc-theme--text-primary-on-primary mdc-typography--title mdc-elevation--z4">
-
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle">
-            <button class="demo-menu material-icons">menu</button>
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-bottom">
-            <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-        </div>
-    </div>
+        <div dir="rtl" class="demo-toolbar mdc-theme--primary-bg mdc-theme--text-primary-on-primary mdc-typography--title mdc-elevation--z4">
+    <button class="demo-menu material-icons">menu</button>
+    <div class="g-signin2" data-onsuccess="verificarLoginGoogle" data-theme="dark" data-width="79" data-height="24"></div>
+    <fb:login-button data-auto-logout-link="true" scope="public_profile,email" size="large"></fb:login-button>
 </div>
  <aside class="mdc-temporary-drawer mdc-typography mdc-temporary-drawer--animating" style="z-index: 20;">
     <nav class="mdc-temporary-drawer__drawer">

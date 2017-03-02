@@ -1,3 +1,15 @@
+/*login google*/
+
+.abcRioButton.abcRioButtonBlue {
+    margin: 0 4px -7px;
+}
+
+.abcRioButtonContents {
+    right: 0px;
+    position: absolute;
+}
+
+
 /* Regras de Negócio*/
 
 table.uppercase td {
