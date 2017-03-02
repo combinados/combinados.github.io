@@ -10,6 +10,7 @@
 // @import "@material/snackbar/mdc-snackbar";
 @import "@material/layout-grid/mdc-layout-grid";
 @import "@material/card/mdc-card";
+@import "@material/toolbar/mdc-toolbar";
 
 .demo-body {
     padding: 0;
@@ -42,3 +43,19 @@
     color: #FFF;
     box-sizing: border-box;
 }
+
+.mdc-toolbar-demo {
+   margin: 0px;
+ }
+ .demo-paragraph {
+   margin: 0px;
+   padding: 20px 16px;
+ }
+ .material-icons {
+   text-decoration: none;
+   cursor: pointer;
+   padding-right: 8px;
+ }
+ [dir='rtl'] .material-icons {
+   padding-left: 8px;
+ }

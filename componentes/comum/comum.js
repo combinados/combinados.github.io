@@ -4,7 +4,7 @@ import {
     MDCTemporaryDrawer
 } from "@material/drawer";
 let drawer = new MDCTemporaryDrawer(qs(".mdc-temporary-drawer"));
-document.querySelector(".demo-menu").addEventListener("click", () => drawer.open = true);
+document.querySelector("#menu").addEventListener("click", () => drawer.open = true);
 
 export function formatarData(data, render) {
     data = render(data).trim();
