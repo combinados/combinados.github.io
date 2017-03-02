@@ -10,24 +10,6 @@ const CONFIG_FIREBASE = {
 
 export default firebase.initializeApp(CONFIG_FIREBASE);
 
-// Google
-const CONFIG_GOOGLE = {
-    client_id: "607735444379-7i6fbl9qoqgbiihrp5mpakom5lv5nrq6.apps.googleusercontent.com"
-};
-
-// (function(d, s, id) {
-//     var js, fjs = d.getElementsByTagName(s)[0];
-//     if (d.getElementById(id)) return;
-//     js = d.createElement(s);
-//     js.id = id;
-//     js.src = "//apis.google.com/js/platform.js";
-//     fjs.parentNode.insertBefore(js, fjs);
-// }(document, "script", "google-id"));
-//
-// window.glAsyncInit = function() {
-//     gapi.auth2.init(CONFIG_GOOGLE);
-// }
-
 // Facebook
 const CONFIG_FACEBOOK = {
     appId: "420607971611753",
