@@ -3,7 +3,7 @@ import navegacaoCabecalho from "./parcial/navegacao-cabecalho.html";
 import base from "./base.html";
 import cabecalho from "./cabecalho.html";
 import rodape from "./rodape.html";
-import logo from "componentes/comum/imagens/logo-reinaldo-footer.png";
+import logo from "componentes/comum/imagens/logo.png";
 import logoAnimado from "componentes/comum/imagens/comb-animado.gif";
 import gmail from "componentes/comum/imagens/gmail.png";
 import twitter from "componentes/comum/imagens/twitter.png";
