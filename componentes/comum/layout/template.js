@@ -5,6 +5,9 @@ import cabecalho from "./cabecalho.html";
 import rodape from "./rodape.html";
 import logo from "componentes/comum/imagens/logo-reinaldo-footer.png";
 import logoAnimado from "componentes/comum/imagens/comb-animado.gif";
+import gmail from "componentes/comum/imagens/gmail.png";
+import twitter from "componentes/comum/imagens/twitter.png";
+import github from "componentes/comum/imagens/github.png";
 
 export default (plugin) => {
     const opcoes = {
@@ -15,7 +18,10 @@ export default (plugin) => {
         navegacaoCabecalho,
         rodape,
         logo,
-        logoAnimado
+        logoAnimado,
+        gmail,
+        twitter,
+        github
     };
 
     return `${base(opcoes)}`;
