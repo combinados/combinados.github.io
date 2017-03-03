@@ -12,18 +12,20 @@ export default class UsuarioVisao {
 
     constructor(conteiner) {
         this.$conteiner = qs(conteiner);
+        this.$principal = qs("#principal");
     }
 
-    // emFormaDeCartao(opcoes = {}) {
-    //     this.$conteiner.innerHTML = opcoes.usuarios.map(usuario => {
-    //         usuario.foto = foto;
-    //         usuario.botoes = ["Direito", "Esquedo"];
-    //         return usuarioCard({
-    //             usuario
-    //         })
-    //     }).join("");
-    // }
-    //
+    atacharEvento(comando, controle) {
+        const self = this;
+        switch (comando) {
+            case "excluirProcesso":
+                $delegate(self.$parcial, "#tblProcessos .processo-excluir-js", "click", e => controle(self.pegarProcesso(e)));
+                break;
+            case "novoOuAtualizacao":
+                $on(this.$principal, "usuario.novoOuAtualizacao", evento => controle(evento.detail));
+                break;
+        }
+    }
     emFormaDeCartao(opcoes = {}) {
         opcoes["foto"] = foto;
         this.$conteiner.innerHTML = usuarioCard(opcoes);

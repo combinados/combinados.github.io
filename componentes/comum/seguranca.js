@@ -1,4 +1,9 @@
 import * as firebase from "firebase";
+import imagemPadrao from "componentes/comum/imagens/defaultprofile-300px.png"
+import {
+  qs,
+  dispararEvento
+} from "componentes/comum/comum";
 // Firebase
 const CONFIG_FIREBASE = {
     apiKey: "AIzaSyBb46_Qu1bo3QR8x47LnKdYt9BheD2P0pc",
@@ -38,41 +43,15 @@ function verificarLoginFacebook(event) {
         var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
             unsubscribe();
             // Check if we are already signed-in Firebase with the correct user.
-            if (!isUserEqual(event.authResponse, firebaseUser)) {
+            if (!ehUsuarioFacebookIgualFirebase(event.authResponse, firebaseUser)) {
                 // Build Firebase credential with the Facebook auth token.
                 // [START facebookcredential]
-                var credential = firebase.auth.FacebookAuthProvider.credential(
-                    event.authResponse.accessToken);
-                // [END facebookcredential]
-                // Sign in with the credential from the Facebook user.
-                // [START authwithcred]
-                firebase.auth().signInWithCredential(credential)
-                    .then(usuario =>
-                        firebase.database().ref("usuarios/" + usuario.uid).set({
-                            nome: usuario.displayName,
-                            email: usuario.email,
-                            foto: usuario.photoURL
-                        })
-                    )
-                    .catch(error => {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        // The email of the user"s account used.
-                        var email = error.email;
-                        // The firebase.auth.AuthCredential type that was used.
-                        var credential = error.credential;
-                        // [START_EXCLUDE]
-                        if (errorCode === "auth/account-exists-with-different-credential") {
-                            alert("You have already signed up with a different auth provider for that email.");
-                            // If you are using multiple auth providers on your app you should handle linking
-                            // the user"s accounts here.
-                        } else {
-                            console.error(error);
-                        }
-                        // [END_EXCLUDE]
-                    });
-                // [END authwithcred]
+                var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
+                const evento = {
+                    nome: "usuario.novoOuAtualizacao",
+                    corpo: credential
+                };
+                dispararEvento(evento);
             } else {
                 // User is already signed-in Firebase with the correct user.
             }
@@ -90,18 +69,27 @@ function verificarLoginFacebook(event) {
  * Check that the given Facebook or Google user is equals to the  given Firebase user
  */
 // [START checksameuser]
-function isUserEqual(usuarioGoogleOuFacebook, firebaseUser) {
+function ehUsuarioFacebookIgualFirebase(usuarioFacebook, firebaseUser) {
+    if (firebaseUser) {
+        var providerData = firebaseUser.providerData;
+        for (var i = 0; i < providerData.length; i++) {
+            if (providerData[i].providerId === firebase.auth.FacebookAuthProvider.PROVIDER_ID &&
+                providerData[i].uid === usuarioFacebook.userID) {
+                // We don"t need to re-auth the Firebase connection.
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function ehUsuarioGoogleIgualFirebase(usuarioGoogle, firebaseUser) {
     if (firebaseUser) {
         var providerData = firebaseUser.providerData;
         for (var i = 0; i < providerData.length; i++) {
             if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-                providerData[i].uid === usuarioGoogleOuFacebook.getBasicProfile().getId()) {
+                providerData[i].uid === usuarioGoogle.getBasicProfile().getId()) {
                 // We don"t need to reauth the Firebase connection.
-                return true;
-            }
-            if (providerData[i].providerId === firebase.auth.FacebookAuthProvider.PROVIDER_ID &&
-                providerData[i].uid === usuarioGoogleOuFacebook.userID) {
-                // We don"t need to re-auth the Firebase connection.
                 return true;
             }
         }
@@ -112,44 +100,16 @@ function isUserEqual(usuarioGoogleOuFacebook, firebaseUser) {
 
 function verificarLoginGoogle(googleUser) {
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-    var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
+    var unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
         unsubscribe();
         // Check if we are already signed-in Firebase with the correct user.
-        if (!isUserEqual(googleUser, firebaseUser)) {
-            // Build Firebase credential with the Google ID token.
-            // [START googlecredential]
-            var credential = firebase.auth.GoogleAuthProvider.credential(
-                googleUser.getAuthResponse().id_token);
-            // [END googlecredential]
-            // Sign in with credential from the Google user.
-            // [START authwithcred]
-            firebase.auth().signInWithCredential(credential)
-                .then(function(usuario) {
-                    firebase.database().ref("usuarios/" + usuario.uid).set({
-                        nome: usuario.displayName,
-                        email: usuario.email,
-                        foto: usuario.photoURL
-                    });
-                })
-                .catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // The email of the user"s account used.
-                    var email = error.email;
-                    // The firebase.auth.AuthCredential type that was used.
-                    var credential = error.credential;
-                    // [START_EXCLUDE]
-                    if (errorCode === "auth/account-exists-with-different-credential") {
-                        alert("You have already signed up with a different auth provider for that email.");
-                        // If you are using multiple auth providers on your app you should handle linking
-                        // the user"s accounts here.
-                    } else {
-                        console.error(error);
-                    }
-                    // [END_EXCLUDE]
-                });
-            // [END authwithcred]
+        if (!ehUsuarioGoogleIgualFirebase(googleUser, firebaseUser)) {
+            var credential = firebase.auth.GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
+            const evento = {
+                nome: "usuario.novoOuAtualizacao",
+                corpo: credential
+            };
+            dispararEvento(evento);
         } else {
             console.log("User already signed-in Firebase.");
         }
@@ -164,15 +124,17 @@ export function initApp() {
     window.verificarLoginGoogle = verificarLoginGoogle;
     const $usuarioDiv = document.querySelector("#usuario-corrente");
     firebase.auth().onAuthStateChanged(function(user) {
+        user = user || {
+            photoURL: imagemPadrao,
+            displayName: "Deslogado"
+        };
         if (user) {
-            // $usuarioDiv.style.background = `background-image: url("${user.photoURL}")`;
             $usuarioDiv.style.backgroundImage = `url("${user.photoURL}")`;
             const primeiroNome = user.displayName.split(" ")[0]
-            const restoNome = user.displayName.split(" ")[1]
 
             $usuarioDiv.innerHTML = `
                 <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
-                // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
+            // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
         } else {}
     });
     // [END authstatelistener]

@@ -20,6 +20,41 @@ export default class UsuarioServico extends Servico {
     //     });
     // }
 
+    criarOuAtualizar(credential) {
+        return new Promise((resolve, reject) => {
+
+
+            firebase.auth().signInWithCredential(credential)
+                .then(usuario => {
+                    resolve(
+                        firebase.database().ref("usuarios/" + usuario.uid).set({
+                            nome: usuario.displayName,
+                            email: usuario.email,
+                            foto: usuario.photoURL
+                        })
+                    )
+                })
+                .catch(error => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user"s account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // [START_EXCLUDE]
+                    if (errorCode === "auth/account-exists-with-different-credential") {
+                        alert("You have already signed up with a different auth provider for that email.");
+                        // If you are using multiple auth providers on your app you should handle linking
+                        // the user"s accounts here.
+                    } else {
+                        console.error(error);
+                    }
+                    reject(error);
+                });
+        });
+    }
+
     buscarTodos() {
         let usuarios = firebase.database().ref("usuarios").orderByKey();
         return usuarios.once("value");

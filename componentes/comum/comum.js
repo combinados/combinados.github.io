@@ -22,8 +22,8 @@ export function formatarData(data, render) {
 })(XMLHttpRequest.prototype.open);
 
 export function dispararEvento(evento) {
-    qs("#parcial").dispatchEvent(new CustomEvent(evento.nome, {
-        "detail": evento
+    qs("#principal").dispatchEvent(new CustomEvent(evento.nome, {
+        "detail": evento.corpo
     }));
 }
 
