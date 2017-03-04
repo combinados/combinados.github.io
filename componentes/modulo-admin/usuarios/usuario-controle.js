@@ -18,12 +18,27 @@ export default class Usuario {
         }, opcoes);
 
         this.servico.buscarTodos()
-            .then(resposta => this.visao.emFormaDeCartao(resposta));
+            .then(resposta => {
+                this.visao.emFormaDeCartao(resposta)
+                this.visao.atacharEvento("alternarRodadas", e => this.alternarRodadas(e))
+            });
+    }
+
+    alternarRodadas($rodada) {
+        if (this.visao.criarRodadas($rodada)) {
+            this.visao.atacharEvento("abrirJogos", e => this.buscarJogos(e), $rodada);
+        }
+    }
+
+    buscarJogos(rodada) {
+        console.log(JSON.stringify(rodada));
+        this.servico.buscarJogos(rodada.rodadaId)
+            .then(resposta => this.visao.emFormaDeLista(resposta));
     }
 
     novoOuAtualizacao(credential) {
         this.servico.criarOuAtualizar(credential)
             .then(usuario => this.servico.buscarTodos())
-            .then(resposta => this.visao.emFormaDeCartao(resposta));;
+            .then(resposta => this.visao.emFormaDeCartao(resposta));
     }
 }

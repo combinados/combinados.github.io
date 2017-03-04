@@ -58,4 +58,7 @@ export default class UsuarioServico extends Servico {
     buscarTodos() {
         return firebase.database().ref("usuarios").orderByKey().once("value");
     }
+    buscarJogos(rodadaId) {
+        return firebase.database().ref("gabarito").orderByChild("rodada").equalTo(rodadaId).once("value");
+    }
 }
