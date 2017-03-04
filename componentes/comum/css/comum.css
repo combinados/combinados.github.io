@@ -2,9 +2,9 @@
   display: none!important;
 }
 
-.my-grid .mdc-layout-grid__cell {
+/*.my-grid .mdc-layout-grid__cell {
     margin: -5px;
-}
+}*/
 
 .login-card {
     height: 30px;
