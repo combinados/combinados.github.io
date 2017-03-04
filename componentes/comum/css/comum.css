@@ -1,23 +1,15 @@
+.ocultar {
+  display: none!important;
+}
+
+.my-grid .mdc-layout-grid__cell {
+    margin: -5px;
+}
+
 .login-card {
     height: 30px;
     width: 60px;
 }
-
-
-/*.login-card--with-avatar {
-    position: absolute;
-    background: #bdbdbd;
-    height: 2.5rem;
-
-    width: 2.5rem;
-
-    border-radius: 50%;
-}*/
-
-
-/*.login-card--small {
-    max-width: 10.938rem;
-}*/
 
 .login-card--small .mdc-card__media {
     background-size: 30px;

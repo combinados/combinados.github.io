@@ -24,10 +24,24 @@ export default class UsuarioVisao {
             case "novoOuAtualizacao":
                 $on(this.$principal, "usuario.novoOuAtualizacao", evento => controle(evento.detail));
                 break;
+            case "alternarRodadas":
+                $delegate(this.$conteiner, ".alternar-rodada-js", "click", e => self.alternarRodadas(e));
+                break;
         }
     }
     emFormaDeCartao(opcoes = {}) {
         opcoes["foto"] = foto;
         this.$conteiner.innerHTML = usuarioCard(opcoes);
+        this.atacharEvento("alternarRodadas", e => this.alternarRodadas(e))
+    }
+
+    alternarRodadas(evento) {
+      evento.preventDefault();
+      let usuarioId = evento.target.getAttribute("data-usuario-id"),
+      $rodada = qs(`#rodada-${usuarioId}`),
+      $classificacao = qs(`#classificacao-${usuarioId}`);
+      $rodada.classList.toggle("ocultar");
+      $classificacao.classList.toggle("ocultar");
+      // $rodada.style.display = "none";
     }
 }

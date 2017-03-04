@@ -56,7 +56,6 @@ export default class UsuarioServico extends Servico {
     }
 
     buscarTodos() {
-        let usuarios = firebase.database().ref("usuarios").orderByKey();
-        return usuarios.once("value");
+        return firebase.database().ref("usuarios").orderByKey().once("value");
     }
 }

@@ -1,14 +1,13 @@
 {
-  "orientation": "portrait",
-  "background_color": "#3f51b5",
-  "name": "Bolão dos Combinados",
-  "short_name": "Bolão",
-  "display": "fullscreen",
-  "icons": [
-    {
-      "src": "imagens/logo-e1b52da8cd053765900091230bb64671.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    }
-  ]
+    "orientation": "portrait",
+    "background_color": "#3f51b5",
+    "theme_color": "#3f51b5",
+    "name": "Bolão dos Combinados",
+    "short_name": "Bolão",
+    "display": "fullscreen",
+    "icons": [{
+        "src": "imagens/logo-e1b52da8cd053765900091230bb64671.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }]
 }

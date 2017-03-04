@@ -1,8 +1,8 @@
 import * as firebase from "firebase";
 import imagemPadrao from "componentes/comum/imagens/defaultprofile-300px.png"
 import {
-  qs,
-  dispararEvento
+    qs,
+    dispararEvento
 } from "componentes/comum/comum";
 // Firebase
 const CONFIG_FIREBASE = {
@@ -39,13 +39,10 @@ window.fbAsyncInit = function() {
 
 function verificarLoginFacebook(event) {
     if (event.authResponse) {
-        // User is signed-in Facebook.
         var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
             unsubscribe();
             // Check if we are already signed-in Firebase with the correct user.
             if (!ehUsuarioFacebookIgualFirebase(event.authResponse, firebaseUser)) {
-                // Build Firebase credential with the Facebook auth token.
-                // [START facebookcredential]
                 var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
                 const evento = {
                     nome: "usuario.novoOuAtualizacao",
@@ -58,17 +55,10 @@ function verificarLoginFacebook(event) {
         });
     } else {
         // User is signed-out of Facebook.
-        // [START signout]
         firebase.auth().signOut();
-        // [END signout]
     }
 }
-// [END facebookcallback]
 
-/**
- * Check that the given Facebook or Google user is equals to the  given Firebase user
- */
-// [START checksameuser]
 function ehUsuarioFacebookIgualFirebase(usuarioFacebook, firebaseUser) {
     if (firebaseUser) {
         var providerData = firebaseUser.providerData;
@@ -96,7 +86,6 @@ function ehUsuarioGoogleIgualFirebase(usuarioGoogle, firebaseUser) {
     }
     return false;
 }
-// [END checksameuser]
 
 function verificarLoginGoogle(googleUser) {
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
@@ -137,6 +126,5 @@ export function initApp() {
             // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
         } else {}
     });
-    // [END authstatelistener]
 }
 initApp();

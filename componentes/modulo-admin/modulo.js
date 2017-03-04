@@ -19,7 +19,7 @@ class ModuloAdministrativo {
     inicio() {
         const painel = new Painel("#principal");
         roteador
-            .rota("usuarios", opcoes => painel.abrirTelaPrincipal(opcoes))
+            .rota("classificacao", opcoes => painel.abrirTelaPrincipal(opcoes))
             .rota("outra_rota", opcoes => alert("outra rota"));
     }
 }
