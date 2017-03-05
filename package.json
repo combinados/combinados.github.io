@@ -17,6 +17,7 @@
     "@material/card": "^0.1.4",
     "@material/checkbox": "^0.2.1",
     "@material/drawer": "^0.1.4",
+    "@material/fab": "^0.3.2",
     "@material/form-field": "^0.2.0",
     "@material/icon-toggle": "^0.1.4",
     "@material/layout-grid": "^0.1.1",

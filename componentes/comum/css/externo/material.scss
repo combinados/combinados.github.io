@@ -11,6 +11,7 @@
 @import "@material/layout-grid/mdc-layout-grid";
 @import "@material/card/mdc-card";
 @import "@material/toolbar/mdc-toolbar";
+@import "@material/fab/mdc-fab";
 
 .demo-body {
     padding: 0;
@@ -45,17 +46,20 @@
 }
 
 .mdc-toolbar-demo {
-   margin: 0px;
- }
- .demo-paragraph {
-   margin: 0px;
-   padding: 20px 16px;
- }
- .material-icons {
-   text-decoration: none;
-   cursor: pointer;
-   padding-right: 8px;
- }
- [dir='rtl'] .material-icons {
-   padding-left: 8px;
- }
+    margin: 0;
+}
+
+.demo-paragraph {
+    margin: 0;
+    padding: 20px 16px;
+}
+
+.material-icons {
+    text-decoration: none;
+    cursor: pointer;
+    padding-right: 8px;
+}
+
+[dir='rtl'] .material-icons {
+    padding-left: 8px;
+}

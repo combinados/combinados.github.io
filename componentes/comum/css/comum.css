@@ -1,14 +1,16 @@
 .ocultar {
-  display: none!important;
+    display: none!important;
+}
+
+.bolao.mdc-fab {
+    align-items: center;
+    text-decoration: none;
+    background-color: #3f51b5;
 }
 
 .mdc-layout-grid__cell {
     text-align: center;
 }
-
-/*.my-grid .mdc-layout-grid__cell {
-    margin: -5px;
-}*/
 
 .login-card {
     height: 30px;
