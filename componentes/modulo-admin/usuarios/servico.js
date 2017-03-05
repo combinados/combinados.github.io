@@ -1,6 +1,6 @@
-import Servico from "componentes/comum/servico"
+import ServicoGenerico from "componentes/comum/servico"
 import firebase from "componentes/comum/seguranca";
-export default class UsuarioServico extends Servico {
+export default class Servico extends ServicoGenerico {
     constructor() {
         super();
     }

@@ -1,5 +1,5 @@
-import PainelVisao from "./painel-visao";
-import Usuario from "componentes/modulo-admin/usuarios/usuario-controle";
+import Visao from "./visao";
+import Usuario from "componentes/modulo-admin/usuarios/controle";
 
 import {
     mensagemUtil
@@ -8,7 +8,7 @@ import {
 export default class Painel {
 
     constructor(conteiner) {
-        this.visao = new PainelVisao(conteiner);
+        this.visao = new Visao(conteiner);
     }
     abrirTelaPrincipal(opcoes = {}) {
         this.visao.abrirTelaPrincipal(opcoes);

@@ -23,11 +23,18 @@ export default class Roteador {
     }
     navegar(hash) {
         const cabeca = hash.replace(/#([^&?]+)[?]?(.*)$/, "$1");
+        this.exibirPagina(cabeca);
         const queryString = hash.replace(/#([^&?]+)[?]?(.*)$/, "$2");
         if (queryString) {
             this.rotas[cabeca](queryStringParaJson(queryString));
         } else {
             this.rotas[cabeca]();
         }
+    }
+    exibirPagina(cabeca) {
+        Object.keys(this.rotas).map(rota => {
+            let $pagina = document.querySelector(`#${rota}-conteiner`);
+            rota === cabeca ? $pagina.classList.remove("ocultar") : $pagina.classList.add("ocultar");
+        });
     }
 }

@@ -2,6 +2,10 @@
   display: none!important;
 }
 
+.mdc-layout-grid__cell {
+    text-align: center;
+}
+
 /*.my-grid .mdc-layout-grid__cell {
     margin: -5px;
 }*/

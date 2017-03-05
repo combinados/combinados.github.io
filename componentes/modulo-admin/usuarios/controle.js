@@ -1,5 +1,5 @@
-import UsuarioVisao from "./usuario-visao";
-import UsuarioServico from "./usuario-servico";
+import Visao from "./visao";
+import Servico from "./servico";
 import {
     mensagemUtil
 } from "componentes/comum/mensagem/mensagem";
@@ -7,8 +7,8 @@ import {
 export default class Usuario {
 
     constructor(conteiner) {
-        this.servico = new UsuarioServico();
-        this.visao = new UsuarioVisao(conteiner);
+        this.servico = new Servico();
+        this.visao = new Visao(conteiner);
         this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
     }
     exibirEmFormaDeCartao(opcoes = {}) {
@@ -20,20 +20,7 @@ export default class Usuario {
         this.servico.buscarTodos()
             .then(resposta => {
                 this.visao.emFormaDeCartao(resposta)
-                this.visao.atacharEvento("alternarRodadas", e => this.alternarRodadas(e))
             });
-    }
-
-    alternarRodadas($rodada) {
-        if (this.visao.criarRodadas($rodada)) {
-            this.visao.atacharEvento("abrirJogos", e => this.buscarJogos(e), $rodada);
-        }
-    }
-
-    buscarJogos(rodada) {
-        console.log(JSON.stringify(rodada));
-        this.servico.buscarJogos(rodada.rodadaId)
-            .then(resposta => this.visao.emFormaDeLista(resposta));
     }
 
     novoOuAtualizacao(credential) {

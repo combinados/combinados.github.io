@@ -1,5 +1,6 @@
 import barraLateral from "./parcial/navegacao-barra-lateral.html";
 import navegacaoCabecalho from "./parcial/navegacao-cabecalho.html";
+import paginas from "./parcial/paginas.html";
 import base from "./base.html";
 import cabecalho from "./cabecalho.html";
 import rodape from "./rodape.html";
@@ -16,6 +17,7 @@ export default (plugin) => {
         cabecalho,
         barraLateral,
         navegacaoCabecalho,
+        paginas,
         rodape,
         logo,
         logoAnimado,

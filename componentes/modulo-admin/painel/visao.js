@@ -1,7 +1,7 @@
 import {
     qs
 } from "componentes/comum/comum";
-import painelTemplate from "./painel-template.html";
+import painelTemplate from "./tela-principal.html";
 
 export default class PainelVisao {
 

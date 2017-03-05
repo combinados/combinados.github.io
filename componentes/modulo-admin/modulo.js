@@ -1,5 +1,7 @@
 import comumCss from "componentes/comum/css/comum.css";
-import Painel from "./painel/painel-controle";
+import Painel from "./painel/controle";
+import Rodada from "./rodada/controle";
+
 import {
     qs,
     $on,
@@ -16,16 +18,18 @@ class ModuloAdministrativo {
         this.paginaPadrao = "#usuarios";
     }
 
-    inicio() {
-        const painel = new Painel("#principal");
+    iniciar() {
+        const painel = new Painel("#classificacao-conteiner");
+        const rodada = new Rodada("#rodada-conteiner");
         roteador
             .rota("classificacao", opcoes => painel.abrirTelaPrincipal(opcoes))
-            .rota("outra_rota", opcoes => alert("outra rota"));
+            // .rota("rodada", opcoes => alert("outra rota"));
+            .rota("rodada", opcoes => rodada.abrirTelaPrincipal(opcoes));
     }
 }
 
 const moduloAdmin = new ModuloAdministrativo("admin");
-moduloAdmin.inicio();
+moduloAdmin.iniciar();
 
 $on(window, "hashchange", e => roteador.atualizarPagina(e));
 $on(window, "load", e => roteador.atualizarPagina(e));
