@@ -21,8 +21,8 @@ let plugins = [
         title: "Módulo Administrativo",
         filename: 'admin.html',
         excludeChunks: ['relatorios'],
-        favicon: 'componentes/comum/imagens/comb-animado.gif',
-        template: 'componentes/comum/layout/template.js',
+        favicon: 'comum/imagens/comb-animado.gif',
+        template: 'comum/layout/template.js',
         producao,
         // minify: {},
         minify: {
@@ -44,8 +44,8 @@ let plugins = [
         title: "Módulo Relatórios",
         filename: 'relatorios.html',
         excludeChunks: ['admin'],
-        favicon: 'componentes/comum/imagens/favicon.ico',
-        template: 'componentes/comum/layout/template.js',
+        favicon: 'comum/imagens/favicon.ico',
+        template: 'comum/layout/template.js',
         producao,
         // minify: producao ? true : false,
         //		hash: true
@@ -57,7 +57,7 @@ let plugins = [
     }),
     new CopyWebpackPlugin([{
         from: path.resolve(__dirname, 'manifest.json')
-    }]),    
+    }]),
     // new CopyWebpackPlugin([{
     //     from: path.resolve(__dirname, 'html/index.html')
     // }]),
@@ -93,8 +93,8 @@ const config = {
     cache: true,
     entry: {
         "vendor": ["nodep-date-input-polyfill", "babel-polyfill"],
-        "admin": "./componentes/modulo-admin/modulo.js",
-        "relatorios": "./componentes/modulo-relatorios/modulo.js"
+        "admin": "./modulo-admin/modulo.js",
+        "relatorios": "./modulo-relatorios/modulo.js"
     },
     output: {
         path: path.resolve(__dirname, dir_build),
@@ -104,7 +104,9 @@ const config = {
     },
     resolve: {
         alias: {
-            "componentes": path.join(__dirname, "componentes")
+            "modulo-admin": path.join(__dirname, "modulo-admin"),
+            "modulo-relatorios": path.join(__dirname, "modulo-relatorios"),
+            "comum": path.join(__dirname, "comum")
         }
     },
     plugins: plugins,
