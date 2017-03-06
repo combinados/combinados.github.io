@@ -34,10 +34,9 @@ export default class Visao {
         return rodadaId;
     }
 
-    emFormaDeLista(jogos) {
+    emFormaDeLista(palpites) {
         let $rodada = qs("#rodada-conteiner");
-        $rodada.innerHTML = rodadaLista(jogos);
-        console.log(Object.keys(jogos.val()));
+        $rodada.innerHTML = rodadaLista(palpites);
     }
 
     alternarRodadas(evento) {

@@ -23,8 +23,15 @@ export default class Rodada {
     }
 
     buscarJogos(rodadaId) {
+        let jogos;
         this.opcoes.rodadaId = rodadaId;
-        this.servico.buscarJogos(this.opcoes)
-            .then(jogos => this.visao.emFormaDeLista(jogos));
+        this.servico.buscarJogosDoGabaritoPela(rodadaId)
+            .then(jogosBD => {
+                jogos = jogosBD;
+                return this.servico.mesclarJogosEPalpites(jogosBD, this.opcoes.usuario);
+            })
+            .then(palpites => {
+                this.visao.emFormaDeLista(palpites);
+            });
     }
 }

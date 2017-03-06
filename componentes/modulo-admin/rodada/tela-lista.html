@@ -1,13 +1,12 @@
-<!-- ${Object.keys(this.val()).map(id => {
-      let jogo = this.val()[id];
+<!-- ${this.map(palpite => {
     return `-->
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle mdc-layout-grid__cell--span-4-phone">
-    ${jogo["mandante-nome"]}
-    <img src="${jogo["mandante-escudo"]}">
-    <b>  ${jogo["mandante-gol"]}</b>
+    ${palpite["mandante-nome"]}
+    <img src="${palpite["mandante-escudo"]}">
+    <b>  ${palpite["mandante-gol"]}</b>
     <span>vs</span>
-    <b>  ${jogo["visitante-gol"]}</b>
-    <img src="${jogo["visitante-escudo"]}">
-    ${jogo["visitante-nome"]}
+    <b>  ${palpite["visitante-gol"]}</b>
+    <img src="${palpite["visitante-escudo"]}">
+    ${palpite["visitante-nome"]}
 </div>
 <!-- `}).join("")} -->
