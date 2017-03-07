@@ -1,9 +1,14 @@
 import {
     qs,
+    qsa,
     $on,
     $parent,
     $delegate
 } from "comum/comum";
+import {
+    MDCTextfield,
+    MDCTextfieldFoundation
+} from "@material/textfield";
 import Mensagem from "comum/mensagem/mensagem";
 import telaListaJogos from "./telas/lista.html";
 import telaPrincipal from "./telas/principal.html";
@@ -30,9 +35,10 @@ export default class Visao {
 
     emFormaDeLista(palpites) {
         this.$conteiner.innerHTML = telaListaJogos(palpites);
+        [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
     }
 
     abrirTelaPrincipal(opcoes) {
-            this.$conteiner.innerHTML = telaPrincipal(opcoes);
+        this.$conteiner.innerHTML = telaPrincipal(opcoes);
     }
 }

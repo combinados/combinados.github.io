@@ -1,12 +1,22 @@
-<!-- ${this.map(palpite => {
+<!-- ${this.map(jogo => {
     return `-->
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle mdc-layout-grid__cell--span-4-phone">
-    ${palpite["mandante-nome"]}
-    <img src="${palpite["mandante-escudo"]}">
-    <b>  ${palpite["mandante-gol"]}</b>
+    ${jogo["mandante-nome"]}
+    <img src="${jogo["mandante-escudo"]}">
+    ${jogo.palpite ? `<b>${jogo.palpite["mandante-gol"]}</b>` : `
+    <div class="bolao mdc-textfield">
+      <input type="text" id="mandante" class="mdc-textfield__input">
+      <label class="mdc-textfield__label" for="mandante">Gols</label>
+    </div>
+    `}
     <span>vs</span>
-    <b>  ${palpite["visitante-gol"]}</b>
-    <img src="${palpite["visitante-escudo"]}">
-    ${palpite["visitante-nome"]}
+    ${jogo.palpite ? `<b>${jogo.palpite["visitante-gol"]}</b>` : `
+    <div class="bolao mdc-textfield">
+      <input type="text" id="visitante" class="mdc-textfield__input">
+      <label class="mdc-textfield__label" for="visitante">Gols</label>
+    </div>
+    `}
+    <img src="${jogo["visitante-escudo"]}">
+    ${jogo["visitante-nome"]}
 </div>
 <!-- `}).join("")} -->

@@ -21,11 +21,43 @@ export default class Rodada {
         // this.visao.atacharEvento("abrirJogos", e => this.buscarJogos(e));
     }
 
+    // buscarJogos(rodadaId) {
+    //     let jogos;
+    //     this.opcoes.rodadaId = rodadaId;
+    //     this.servico.buscarJogosDoGabaritoPela(rodadaId)
+    //         .then(jogosGabaritoDeUmaRodadaSnap => {
+    //             jogos = Object.keys(jogosGabaritoDeUmaRodadaSnap.val())
+    //                 .map(jogoId => ({
+    //                     jogo: jogoId,
+    //                     ...jogosGabaritoDeUmaRodadaSnap.val()[jogoId]
+    //                 }));
+    //             return this.servico.mesclarJogosEPalpites(jogosGabaritoDeUmaRodadaSnap, this.opcoes.usuario);
+    //         })
+    //         .then(palpites => {
+    //             palpites = palpites
+    //                 .filter(palpite => palpite);
+    //             palpites
+    //                 .map(palpite => {
+    //                     jogos = jogos
+    //                         .filter(jogo => palpite.jogo !== jogo.jogo);
+    //                 });
+    //
+    //             palpites = [...jogos, ...palpites];
+    //             this.visao.emFormaDeLista(palpites);
+    //         });
+    // }
+
     buscarJogos(rodadaId) {
-        let jogos;
-        this.opcoes.rodadaId = rodadaId;
         this.servico.buscarJogosDoGabaritoPela(rodadaId)
-            .then(jogosGabaritoDeUmaRodada => this.servico.mesclarJogosEPalpites(jogosGabaritoDeUmaRodada, this.opcoes.usuario))
-            .then(palpites => this.visao.emFormaDeLista(palpites));
+            .then(jogosGabaritoDeUmaRodadaSnap => {
+                let jogos = Object.keys(jogosGabaritoDeUmaRodadaSnap.val())
+                    .map(jogoId => {
+                        let jogo = jogosGabaritoDeUmaRodadaSnap.val()[jogoId];
+                        jogo.palpite = jogo.palpites[this.opcoes.usuario];
+                        jogo.jogoId = jogoId;
+                        return jogo;
+                    });
+                this.visao.emFormaDeLista(jogos);
+            });
     }
 }

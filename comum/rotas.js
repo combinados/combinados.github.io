@@ -1,6 +1,6 @@
 import {
     queryStringParaJson
-} from "./comum";
+} from "comum/comum";
 export default class Roteador {
     static instance;
     constructor() {
@@ -21,7 +21,7 @@ export default class Roteador {
             this.navegar(hash);
         }
     }
-    navegar(hash) {
+    navegar = (hash) => {
         const cabeca = hash.replace(/#([^&?]+)[?]?(.*)$/, "$1");
         this.exibirPagina(cabeca);
         const queryString = hash.replace(/#([^&?]+)[?]?(.*)$/, "$2");
@@ -31,7 +31,7 @@ export default class Roteador {
             this.rotas[cabeca]();
         }
     }
-    exibirPagina(cabeca) {
+    exibirPagina = (cabeca) => {
         Object.keys(this.rotas).map(rota => {
             let $pagina = document.querySelector(`#${rota}-conteiner`);
             rota === cabeca ? $pagina.classList.remove("ocultar") : $pagina.classList.add("ocultar");

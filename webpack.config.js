@@ -121,7 +121,9 @@ const config = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [
-                    path.join(__dirname, 'componentes'),
+                    path.join(__dirname, 'comum'),
+                    path.join(__dirname, 'modulo-admin'),
+                    path.join(__dirname, 'modulo-relatorios'),
                     path.join(__dirname, 'node_modules', '@material')
                 ],
                 query: {
