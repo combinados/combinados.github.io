@@ -1,0 +1,109 @@
+<table>
+<thead>
+<tr>
+<th style="text-align:left;"><a href="./">Voltar</a></th>
+<th style="text-align:center;"></th>
+<th style="text-align:right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"></td>
+<td style="text-align:center;"><img src="imagens/LinuxLawyer.png" alt="Justiça Linux" width="20%" height="auto" /></td>
+<td style="text-align:right;"></td>
+</tr>
+<tr>
+<td style="text-align:left;"></td>
+<td style="text-align:center;">Gerenciador Judicial</td>
+<td style="text-align:right;"></td>
+</tr>
+</tbody>
+</table>
+<h1 id="bolodoscombinados">Bolão dos Combinados</h1>
+<h2 id="prrequisitos">Pré requisitos</h2>
+<ul>
+<li>nodejs 6.x</li>
+<li>npm 3.x</li>
+</ul>
+<blockquote>
+  <p>Instalação dos pre-requisitos no Ubuntu</p>
+</blockquote>
+<p>Rode o seguinte comando no terminal para instalar o repositório de fontes</p>
+<ul>
+<li><code>curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -</code></li>
+</ul>
+<p>Quando terminar, rode esse comando para instalar a última versão do nodejs e do npm.</p>
+<ul>
+<li><code>sudo apt-get install -y nodejs</code></li>
+<li><code>sudo apt-get install -y npm</code></li>
+</ul>
+<h2 id="instalaoeexecuodoreinaldo">Instalação e execução do reinaldo:</h2>
+<p>Entre na pasta onde baixou os fontes dos reinaldo-web</p>
+<ul>
+<li><code>cd reinaldo</code></li>
+</ul>
+<p>O comando abaixo irá baixar as dependências do projeto (pasta: node_modules), empacotar o projeto (pasta: build) e executar o sistema com um servidor embarcado.</p>
+<ul>
+<li><p><code>npm install</code></p>
+<blockquote>
+  <p>Vá para <code>http://localhost:9000</code>. Página atualizada automaticamente quando mudanças acontecem.</p>
+</blockquote></li>
+</ul>
+<h2 id="algumastarefaspreviamenteconfiguradas">Algumas tarefas previamente configuradas</h2>
+<ol>
+<li><p>Um servidor embarcado atualiza a página sem intervenção humanda (hot reload):</p>
+<ul>
+<li><code>npm start</code></li></ul>
+<blockquote>
+  <p>Vá para <code>http://localhost:9000/</code>, página atualizada automaticamente quando mudanças acontecem.</p>
+</blockquote></li>
+<li>Apagar a pasta build
+
+<ul>
+<li><code>npm run apagar</code></li></ul>
+
+</li>
+<li>Realiza o Empacotamento, ou seja, cria todos os artefatos da pasta build
+
+<ul>
+<li><code>npm run empacotar</code>    </li></ul>
+
+</li>
+<li>Realiza as duas operações acima, ou seja, apagar e empacotar.
+
+<ul>
+<li><code>npm run apagar &amp;&amp; npm run empacotar</code></li></ul>
+
+</li>
+<li><p>Observa mudanças contínuas nos arquivos, reconstroi incrementalmente, sempre que eles mudam:</p>
+<ul>
+<li><code>npm run observar</code></li></ul>
+<blockquote>
+  <p>manualmente atualiza a página no navegador para ver os reflexos das mudanças</p>
+</blockquote></li>
+<li>Realiza o Empacotamento com arquivos minificados
+
+<ul>
+<li><code>npm run empacotar-producao</code></li></ul>
+
+</li>
+<li><p>Publicar no ambiente de desenvolvimento</p>
+<ul>
+<li><code>npm run publicar</code></li></ul>
+<blockquote>
+  <p>Esta operação apagará a pasta build, empacotará a aplicação com a variável produção setada e copiará todos os artefatos gerados para o servidor do Autenkus em desenvolvimento.</p>
+</blockquote></li>
+<li><p>Atalho para os comandos definidos respectivamente em 2, 3 e 9.</p>
+<ul>
+<li><code>npm run redefinir</code></li></ul>
+<blockquote>
+  <p>Execute esse comando quando alterar arquivos que não são carregados pelo webpack, por exemplo: base.ejs    </p>
+</blockquote></li>
+<li><p>Gerar a documentação</p>
+<ul>
+<li><code>npm run documentar</code></li></ul>
+<blockquote>
+  <p>Gerar o html desse arquivo, acessível na url http[s]://host[:porta]/ajuda.html</p>
+</blockquote></li>
+</ol>
+<p><a href="./">Voltar</a></p>
