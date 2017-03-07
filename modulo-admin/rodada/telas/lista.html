@@ -13,7 +13,7 @@
       <span>vs</span>
       ${jogo.palpite ? `<b>${jogo.palpite["visitante-gol"]}</b>` : `
       <label class="bolao mdc-textfield">
-        <input type = "number" min="0" max="99" required class="mdc-textfield__input">
+        <input type = "number" min="0" max="99" pattern="^[\d]+$" required class="mdc-textfield__input">
         <span class="mdc-textfield__label">gols</span>
       </label>
       `}
