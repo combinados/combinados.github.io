@@ -22,8 +22,6 @@ export default class Servico extends ServicoGenerico {
 
     criarOuAtualizar(credential) {
         return new Promise((resolve, reject) => {
-
-
             firebase.auth().signInWithCredential(credential)
                 .then(usuario => {
                     resolve(

@@ -23,12 +23,51 @@ export default class Visao {
         const self = this;
         switch (comando) {
             case "salvarPalpites":
-                $delegate(this.$conteiner, ".salvar-palpites-js", "click", e => controle(self.pegarRodada(e)));
+                $on(qs("#palpites"), "submit", e => controle(this.fomularioParaJson(e)));
                 break;
             case "proximoFoco":
                 // $on("keyup", e => this.proximoFoco(e));
                 $delegate(this.$conteiner, "input", "keyup", e => this.proximoFoco(e));
                 break;
+        }
+    }
+
+    mapearElementoParaJson(elemento) {
+        let json = "";
+        switch (elemento.name) {
+            case "mandante-gol":
+            case "visitante-gol":
+                json = `{"${elemento.name}" : "${elemento.value}"}`;
+                break;
+        }
+        return json;
+    }
+
+    validarElemento(elemento) {
+        if (!/^fieldset|button|submit$/.test(elemento.type) && !elemento.disabled) {
+            let jsonString = this.mapearElementoParaJson(elemento);
+            if (jsonString) {
+                return JSON.parse(jsonString);
+            }
+        }
+    }
+
+    fomularioParaJson = evento => {
+        evento.preventDefault();
+        let $formulario = evento.target,
+            formularioJson = {};
+
+        [...$formulario.elements].map(elemento => {
+            let jogoId = $parent(elemento, "DIV").id;
+            if (jogoId) {
+                formularioJson[jogoId] ?
+                    Object.assign(formularioJson[jogoId], this.validarElemento(elemento)) :
+                    formularioJson[jogoId] = this.validarElemento(elemento);
+            }
+        });
+
+        if ($formulario.checkValidity()) {
+            return formularioJson;
         }
     }
 
@@ -38,19 +77,15 @@ export default class Visao {
             gols = parseInt($input.value);
         if (/^[\d]+$/.test(gols)) {
             let $inputs = [...document.querySelectorAll("input")],
-                $proximoInput;
-            $inputs.forEach((input, indice) => {
+                indice;
+
+            $inputs.find((input, i) => {
                 if (input === $input) {
-                    $proximoInput = $inputs[indice + 1];
-                    return false;
+                    indice = i + 1;
+                    return $inputs[indice + 1];
                 }
             });
-            $proximoInput.focus() || null;
-
-            // $inputs.find((input, indice) => {
-            //     if (input === $input) return $inputs[indice + 1];
-            // }).value;
-
+            if ($inputs[indice]) $inputs[indice].focus();
         }
     }
 

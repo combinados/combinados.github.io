@@ -17,35 +17,7 @@ export default class Rodada {
     abrirTelaPrincipal(opcoes = {}) {
         this.opcoes = Object.assign(this.opcoes, opcoes);
         opcoes.id ? this.buscarJogos(opcoes.id) : this.visao.abrirTelaPrincipal(opcoes);
-
-        // this.visao.atacharEvento("abrirJogos", e => this.buscarJogos(e));
     }
-
-    // buscarJogos(rodadaId) {
-    //     let jogos;
-    //     this.opcoes.rodadaId = rodadaId;
-    //     this.servico.buscarJogosDoGabaritoPela(rodadaId)
-    //         .then(jogosGabaritoDeUmaRodadaSnap => {
-    //             jogos = Object.keys(jogosGabaritoDeUmaRodadaSnap.val())
-    //                 .map(jogoId => ({
-    //                     jogo: jogoId,
-    //                     ...jogosGabaritoDeUmaRodadaSnap.val()[jogoId]
-    //                 }));
-    //             return this.servico.mesclarJogosEPalpites(jogosGabaritoDeUmaRodadaSnap, this.opcoes.usuario);
-    //         })
-    //         .then(palpites => {
-    //             palpites = palpites
-    //                 .filter(palpite => palpite);
-    //             palpites
-    //                 .map(palpite => {
-    //                     jogos = jogos
-    //                         .filter(jogo => palpite.jogo !== jogo.jogo);
-    //                 });
-    //
-    //             palpites = [...jogos, ...palpites];
-    //             this.visao.emFormaDeLista(palpites);
-    //         });
-    // }
 
     buscarJogos(rodadaId) {
         this.servico.buscarJogosDoGabaritoPela(rodadaId)
@@ -58,6 +30,16 @@ export default class Rodada {
                         return jogo;
                     });
                 this.visao.emFormaDeLista(jogos);
+                this.visao.atacharEvento("salvarPalpites", e => this.salvarPalpites(e))
             });
+    }
+
+    salvarPalpites = palpites => {
+        let atualizacoes = {};
+        Object.keys(palpites).map(jogoId => {
+            atualizacoes[`/gabarito/${jogoId}/palpites/${this.opcoes.usuario}`] = palpites[jogoId];
+        });
+        this.servico.salvar(atualizacoes)
+            .then(() => this.buscarJogos(this.opcoes.id));
     }
 }
