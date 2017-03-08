@@ -9,6 +9,9 @@ import {
     MDCTextfield,
     MDCTextfieldFoundation
 } from "@material/textfield";
+import {
+    MDCSnackbar
+} from "@material/snackbar";
 import Mensagem from "comum/mensagem/mensagem";
 import telaListaJogos from "./telas/lista.html";
 import telaPrincipal from "./telas/principal.html";
@@ -30,6 +33,14 @@ export default class Visao {
                 $delegate(this.$conteiner, "input", "keyup", e => this.proximoFoco(e));
                 break;
         }
+    }
+    exibirMensagem = (msg) => {
+        const snackbar = new MDCSnackbar(qs(".mdc-snackbar"));
+
+        let data =  {
+          message: msg.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+        };
+        snackbar.show(data);
     }
 
     mapearElementoParaJson(elemento) {

@@ -40,6 +40,7 @@ export default class Rodada {
             atualizacoes[`/gabarito/${jogoId}/palpites/${this.opcoes.usuario}`] = palpites[jogoId];
         });
         this.servico.salvar(atualizacoes)
-            .then(() => this.buscarJogos(this.opcoes.id));
+            .then(() => this.buscarJogos(this.opcoes.id))
+            .catch(error => this.visao.exibirMensagem(error));
     }
 }
