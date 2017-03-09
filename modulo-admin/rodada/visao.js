@@ -20,10 +20,10 @@ export default class Visao {
 
     constructor(conteiner) {
         this.$conteiner = qs(conteiner);
+        this.atacharEvento("proximoFoco");
     }
 
-    atacharEvento(comando, controle, elemento) {
-        const self = this;
+    atacharEvento(comando, controle) {
         switch (comando) {
             case "salvarPalpites":
                 $on(qs("#palpites"), "submit", e => controle(this.fomularioParaJson(e)));
@@ -37,8 +37,8 @@ export default class Visao {
     exibirMensagem = (msg) => {
         const snackbar = new MDCSnackbar(qs(".mdc-snackbar"));
 
-        let data =  {
-          message: msg.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+        let data = {
+            message: msg.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
         };
         snackbar.show(data);
     }
@@ -110,7 +110,6 @@ export default class Visao {
         this.$conteiner.innerHTML = telaListaJogos(palpites);
         [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
         // [...qsa("input")].map(input => $on(input, "keyup", e => this.proximoFoco(e)));
-        this.atacharEvento("proximoFoco");
     }
 
     abrirTelaPrincipal(opcoes) {

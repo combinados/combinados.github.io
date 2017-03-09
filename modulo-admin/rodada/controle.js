@@ -9,14 +9,11 @@ export default class Rodada {
     constructor(conteiner) {
         this.servico = new Servico();
         this.visao = new Visao(conteiner);
-        this.opcoes = {
-            "fotoUsuario": false,
-            "exibir": true
-        };
+        this.opcoes = {};
     }
-    abrirTelaPrincipal(opcoes = {}) {
-        this.opcoes = Object.assign(this.opcoes, opcoes);
-        opcoes.id ? this.buscarJogos(opcoes.id) : this.visao.abrirTelaPrincipal(opcoes);
+    iniciar(opcoes = {}) {
+        this.opcoes = opcoes;
+        this.opcoes.id ? this.buscarJogos(this.opcoes.id) : this.visao.abrirTelaPrincipal(this.opcoes);
     }
 
     buscarJogos(rodadaId) {

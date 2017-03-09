@@ -10,7 +10,7 @@ export default class Painel {
     constructor(conteiner) {
         this.visao = new Visao(conteiner);
     }
-    abrirTelaPrincipal(opcoes = {}) {
+    iniciar(opcoes = {}) {
         this.visao.abrirTelaPrincipal(opcoes);
         const usuario = new Usuario("#usuarios-cartao");
         usuario.exibirEmFormaDeCartao();

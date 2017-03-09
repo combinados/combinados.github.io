@@ -1,7 +1,5 @@
 import * as firebase from "firebase";
-import imagemPadrao from "comum/imagens/defaultprofile-300px.png"
 import {
-    qs,
     dispararEvento
 } from "comum/comum";
 // Firebase
@@ -44,11 +42,10 @@ function verificarLoginFacebook(event) {
             // Check if we are already signed-in Firebase with the correct user.
             if (!ehUsuarioFacebookIgualFirebase(event.authResponse, firebaseUser)) {
                 var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
-                const evento = {
+                dispararEvento({
                     nome: "usuario.novoOuAtualizacao",
                     corpo: credential
-                };
-                dispararEvento(evento);
+                });
             } else {
                 // User is already signed-in Firebase with the correct user.
             }
@@ -88,43 +85,50 @@ function ehUsuarioGoogleIgualFirebase(usuarioGoogle, firebaseUser) {
 }
 
 function verificarLoginGoogle(googleUser) {
-    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-    var unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
-        unsubscribe();
-        // Check if we are already signed-in Firebase with the correct user.
-        if (!ehUsuarioGoogleIgualFirebase(googleUser, firebaseUser)) {
-            var credential = firebase.auth.GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
-            const evento = {
-                nome: "usuario.novoOuAtualizacao",
-                corpo: credential
-            };
-            dispararEvento(evento);
-        } else {
-            console.log("User already signed-in Firebase.");
-        }
-    });
+    if (googleUser) {
+        // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+        var unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
+            unsubscribe();
+            // Check if we are already signed-in Firebase with the correct user.
+            if (!ehUsuarioGoogleIgualFirebase(googleUser, firebaseUser)) {
+                var credential = firebase.auth.GoogleAuthProvider.credential(googleUser.getAuthResponse().id_token);
+                const evento = {
+                    nome: "usuario.novoOuAtualizacao",
+                    corpo: credential
+                };
+                dispararEvento(evento);
+            } else {
+                console.log("User already signed-in Firebase.");
+            }
+        });
+    } else {
+        // User is signed-out of Google.
+        firebase.auth().signOut();
+    }
 }
+
+window.verificarLoginGoogle = verificarLoginGoogle;
+
 /**
  * initApp handles setting up UI event listeners and registering Firebase auth listeners:
  *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
  *    out, and that is where we update the UI.
  */
-export function initApp() {
-    window.verificarLoginGoogle = verificarLoginGoogle;
-    const $usuarioDiv = document.querySelector("#usuario-corrente");
-    firebase.auth().onAuthStateChanged(function(user) {
-        user = user || {
-            photoURL: imagemPadrao,
-            displayName: "Deslogado"
-        };
-        if (user) {
-            $usuarioDiv.style.backgroundImage = `url("${user.photoURL}")`;
-            const primeiroNome = user.displayName.split(" ")[0]
-
-            $usuarioDiv.innerHTML = `
-                <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
-            // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
-        } else {}
-    });
-}
-initApp();
+// export function initApp() {
+//     const $usuarioDiv = document.querySelector("#usuario-corrente");
+//     firebase.auth().onAuthStateChanged(function(user) {
+//         user = user || {
+//             photoURL: imagemPadrao,
+//             displayName: "Deslogado"
+//         };
+//         if (user) {
+//             $usuarioDiv.style.backgroundImage = `url("${user.photoURL}")`;
+//             const primeiroNome = user.displayName.split(" ")[0]
+//
+//             $usuarioDiv.innerHTML = `
+//                 <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
+//             // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
+//         } else {}
+//     });
+// }
+// initApp();

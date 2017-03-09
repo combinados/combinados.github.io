@@ -1,5 +1,6 @@
 import Visao from "./visao";
 import Servico from "./servico";
+import imagemPadrao from "comum/imagens/defaultprofile-300px.png"
 import {
     mensagemUtil
 } from "comum/mensagem/mensagem";
@@ -12,10 +13,6 @@ export default class Usuario {
         this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
     }
     exibirEmFormaDeCartao(opcoes = {}) {
-        opcoes = Object.assign({
-            "classificacao": false,
-            "exibir": true
-        }, opcoes);
 
         this.servico.buscarTodos()
             .then(resposta => {
@@ -25,7 +22,14 @@ export default class Usuario {
 
     novoOuAtualizacao(credential) {
         this.servico.criarOuAtualizar(credential)
-            .then(usuario => this.servico.buscarTodos())
+            .then(usuario => {
+                usuario = usuario || {
+                    foto: imagemPadrao,
+                    nome: "Deslogado"
+                };
+                this.visao.exibirLogado(usuario);
+                return this.servico.buscarTodos();
+            })
             .then(resposta => this.visao.emFormaDeCartao(resposta));
     }
 }

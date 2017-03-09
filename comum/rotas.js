@@ -1,5 +1,6 @@
 import {
-    queryStringParaJson
+    queryStringParaJson,
+    $on
 } from "comum/comum";
 export default class Roteador {
     static instance;
@@ -9,6 +10,10 @@ export default class Roteador {
         }
         this.rotas = {};
         this.instance = this;
+
+        $on(window, "hashchange", e => this.atualizarPagina(e));
+        $on(window, "load", e => this.atualizarPagina(e));
+        // $on(document, "DOMContentLoaded", e => paginaPronta(e, moduloAdmin.paginaPadrao));
     }
     rota = (url, ancora) => {
         this.rotas[url] = ancora;

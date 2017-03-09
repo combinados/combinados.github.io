@@ -4,33 +4,18 @@ export default class Servico extends ServicoGenerico {
     constructor() {
         super();
     }
-    // buscarTodos() {
-    //     return new Promise((resolve, reject) => {
-    //         resolve({
-    //             usuarios: [{
-    //                 nome: "Reinaldo Vale",
-    //                 classificacao: "1º",
-    //                 foto: "../../../imagens/logo.png"
-    //             }, {
-    //                 nome: "Patriolino",
-    //                 classificacao: "2º",
-    //                 foto: "../../../imagens/justice.gif"
-    //             }]
-    //         });
-    //     });
-    // }
 
     criarOuAtualizar(credential) {
         return new Promise((resolve, reject) => {
             firebase.auth().signInWithCredential(credential)
                 .then(usuario => {
-                    resolve(
-                        firebase.database().ref("usuarios/" + usuario.uid).set({
-                            nome: usuario.displayName,
-                            email: usuario.email,
-                            foto: usuario.photoURL
-                        })
-                    )
+                    usuario = {
+                        nome: usuario.providerData[0].displayName,
+                        email: usuario.providerData[0].email,
+                        foto: usuario.providerData[0].photoURL
+                    }
+                    firebase.database().ref("usuarios/" + usuario.uid).set(usuario)
+                        .then(confimacao => resolve(usuario));
                 })
                 .catch(error => {
                     // Handle Errors here.
