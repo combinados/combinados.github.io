@@ -1,6 +1,7 @@
 import Visao from "./visao";
 import Servico from "./servico";
 import imagemPadrao from "comum/imagens/defaultprofile-300px.png"
+import painelTemplate from "./tela-principal.html";
 import {
     mensagemUtil
 } from "comum/mensagem/mensagem";
@@ -11,6 +12,10 @@ export default class Usuario {
         this.servico = new Servico();
         this.visao = new Visao(conteiner);
         this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
+    }
+    iniciar(opcoes = {}) {
+        this.visao.abrirTelaPrincipal(opcoes);
+        this.exibirEmFormaDeCartao();
     }
     exibirEmFormaDeCartao(opcoes = {}) {
 

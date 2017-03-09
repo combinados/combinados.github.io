@@ -1,5 +1,5 @@
 import Visao from "./visao";
-import Usuario from "modulo-admin/usuarios/controle";
+import Usuario from "modulo-admin/usuario/controle";
 
 import {
     mensagemUtil

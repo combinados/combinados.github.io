@@ -5,28 +5,34 @@ import {
     $delegate
 } from "comum/comum";
 import Mensagem from "comum/mensagem/mensagem";
-import usuarioCard from "./cartao.html";
+import telaCartao from "./cartao.html";
+import telaPrincipal from "./tela-principal.html";
+
 import foto from "comum/imagens/justice.gif";
 
 export default class Visao {
 
     constructor(conteiner) {
         this.$conteiner = qs(conteiner);
-        this.$principal = qs("#principal");
     }
 
-    atacharEvento(comando, controle, elemento) {
+    atacharEvento(comando, controle) {
         const self = this;
         switch (comando) {
             case "novoOuAtualizacao":
-                $on(this.$principal, "usuario.novoOuAtualizacao", evento => controle(evento.detail));
+                $on(qs("#principal"), "usuario.novoOuAtualizacao", evento => controle(this.abrirTelaPrincipal(evento.detail)));
                 break;
         }
     }
 
+    abrirTelaPrincipal(usuarioLogado = {}) {
+        this.$conteiner.innerHTML = telaPrincipal();
+        return usuarioLogado;
+    }
+
     emFormaDeCartao(opcoes = {}) {
         opcoes["foto"] = foto;
-        this.$conteiner.innerHTML = usuarioCard(opcoes);
+        qs("#usuarios-cartao", this.$conteiner).innerHTML = telaCartao(opcoes);
     }
 
     exibirLogado = usuario => {
