@@ -4,16 +4,17 @@ import Rodada from "./rodada/controle";
 import Usuario from "./usuario/controle";
 import Roteador from "comum/rotas";
 
+import {initApp} from "comum/seguranca";
+
 const roteador = new Roteador();
 
 class ModuloAdministrativo {
-    constructor(modulo) {
-        this.titulo = "Módulo Administrativo";
-        this.seletor = "a[href^='processo']";
-        this.paginaPadrao = "#usuarios";
+    constructor(opcoes) {
+        this.opcoes = opcoes;
     }
 
     iniciar() {
+        initApp();
         const usuario = new Usuario("#usuario-conteiner");
         const painel = new Painel("#classificacao-conteiner");
         const rodada = new Rodada("#rodada-conteiner");
@@ -24,5 +25,8 @@ class ModuloAdministrativo {
     }
 }
 
-const moduloAdmin = new ModuloAdministrativo("admin");
+const moduloAdmin = new ModuloAdministrativo({
+    titulo: "Módulo Administrativo",
+    "paginaPadrao": "#usuario"
+});
 moduloAdmin.iniciar();

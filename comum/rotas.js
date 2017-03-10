@@ -22,14 +22,18 @@ export default class Roteador {
     atualizarPagina = (evento) => {
         let hash = window.location.hash;
         if (evento && /^load|hashchange$/.test(evento.type)) {
+            evento.preventDefault();
             hash = hash ? hash : "/";
             this.navegar(hash);
         }
     }
     navegar = (hash) => {
-        const cabeca = hash.replace(/#([^&?]+)[?]?(.*)$/, "$1");
+        // Separa a cabeça e queryString do fragmento da url
+        const regex = /#([^&?]+)[?]?(.*)$/,
+            cabeca = hash.replace(regex, "$1"),
+            queryString = hash.replace(regex, "$2");
+
         this.exibirPagina(cabeca);
-        const queryString = hash.replace(/#([^&?]+)[?]?(.*)$/, "$2");
         if (queryString) {
             this.rotas[cabeca](queryStringParaJson(queryString));
         } else {

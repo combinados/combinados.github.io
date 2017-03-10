@@ -1,6 +1,5 @@
 import Visao from "./visao";
 import Servico from "./servico";
-import imagemPadrao from "comum/imagens/defaultprofile-300px.png"
 import painelTemplate from "./tela-principal.html";
 import {
     mensagemUtil
@@ -11,7 +10,7 @@ export default class Usuario {
     constructor(conteiner) {
         this.servico = new Servico();
         this.visao = new Visao(conteiner);
-        this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
+        // this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
     }
     iniciar(opcoes = {}) {
         this.visao.abrirTelaPrincipal(opcoes);
@@ -26,15 +25,15 @@ export default class Usuario {
     }
 
     novoOuAtualizacao(credential) {
-        this.servico.criarOuAtualizar(credential)
-            .then(usuario => {
-                usuario = usuario || {
-                    foto: imagemPadrao,
-                    nome: "Deslogado"
-                };
-                this.visao.exibirLogado(usuario);
-                return this.servico.buscarTodos();
-            })
-            .then(resposta => this.visao.emFormaDeCartao(resposta));
+        // this.servico.criarOuAtualizar(credential)
+        //     .then(usuario => {
+        //         usuario = usuario || {
+        //             foto: imagemPadrao,
+        //             nome: "Deslogado"
+        //         };
+        //         this.visao.exibirLogado(usuario);
+        //         return this.servico.buscarTodos();
+        //     })
+        //     .then(resposta => this.visao.emFormaDeCartao(resposta));
     }
 }

@@ -1,8 +1,8 @@
-import * as seguranca from "./seguranca";
 import material from "comum/css/externo/material.scss";
 import {
     MDCTemporaryDrawer
 } from "@material/drawer";
+
 let drawer = new MDCTemporaryDrawer(qs(".mdc-temporary-drawer"));
 document.querySelector("#menu").addEventListener("click", () => drawer.open = true);
 

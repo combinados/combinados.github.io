@@ -8,8 +8,6 @@ import Mensagem from "comum/mensagem/mensagem";
 import telaCartao from "./cartao.html";
 import telaPrincipal from "./tela-principal.html";
 
-import foto from "comum/imagens/justice.gif";
-
 export default class Visao {
 
     constructor(conteiner) {
@@ -31,16 +29,16 @@ export default class Visao {
     }
 
     emFormaDeCartao(opcoes = {}) {
-        opcoes["foto"] = foto;
+        // opcoes["foto"] = foto;
         qs("#usuarios-cartao", this.$conteiner).innerHTML = telaCartao(opcoes);
     }
 
     exibirLogado = usuario => {
-        const $usuarioDiv = document.querySelector("#usuario-corrente");
-        $usuarioDiv.style.backgroundImage = `url("${usuario.foto}")`;
-        const primeiroNome = usuario.nome.split(" ")[0];
-        $usuarioDiv.innerHTML = `
-                  <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
-        // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
+        // const $usuarioDiv = document.querySelector("#usuario-corrente");
+        // $usuarioDiv.style.backgroundImage = `url("${usuario.foto}")`;
+        // const primeiroNome = usuario.nome.split(" ")[0];
+        // $usuarioDiv.innerHTML = `
+        //           <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
+        // // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
     }
 }
