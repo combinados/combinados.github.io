@@ -34,6 +34,8 @@ const CONFIG_FACEBOOK = {
 window.fbAsyncInit = function() {
     FB.init(CONFIG_FACEBOOK);
     FB.Event.subscribe("auth.authResponseChange", verificarLoginFacebook);
+    // FB.Event.subscribe('auth.login', login_event);
+    // FB.Event.subscribe('auth.logout', deslogarFacebook);
 };
 
 function criarOuAtualizarUsuario(credential) {
@@ -83,10 +85,10 @@ function verificarLoginFacebook(event) {
             // Check if we are already signed-in Firebase with the correct user.
             if (!ehUsuarioFacebookIgualFirebase(event.authResponse, firebaseUser)) {
                 var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
-                dispararEvento({
-                    nome: "usuario.novoOuAtualizacao",
-                    corpo: credential
-                });
+                criarOuAtualizarUsuario(credential)
+                    .then(t => {
+                        console.log(t);
+                    });
             } else {
                 // User is already signed-in Firebase with the correct user.
             }
@@ -149,11 +151,17 @@ function verificarLoginGoogle(googleUser) {
     }
 }
 
-function handleSignOut() {
+function deslogarGoogle() {
     var googleAuth = gapi.auth2.getAuthInstance();
     googleAuth.signOut().then(function() {
         firebase.auth().signOut();
     });
+}
+
+function deslogarFacebook() {
+    FB.logout();
+
+    firebase.auth().signOut();
 }
 
 /**
@@ -175,7 +183,10 @@ export function initApp() {
             $usuarioDiv.innerHTML = `
             <h1 class="mdc-card__title">${primeiroNome}</h1>
             <div id="sair" class="mdc-card__subtitle"><i class="material-icons">exit_to_app</i></div>`;
-            document.getElementById("sair").addEventListener("click", handleSignOut, false);
+            if (usuario.providerData) {
+                let sair = usuario.providerData[0].providerId === "google.com" ? deslogarGoogle : deslogarFacebook;
+                document.getElementById("sair").addEventListener("click", sair, false);
+            }
         } else {}
     });
 }
