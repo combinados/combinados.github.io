@@ -164,6 +164,16 @@ function deslogarFacebook() {
     firebase.auth().signOut();
 }
 
+function deslogar() {
+    var googleAuth = gapi.auth2.getAuthInstance();
+    googleAuth.signOut().then(function() {
+        firebase.auth().signOut();
+    });
+
+    FB.logout();
+    firebase.auth().signOut();
+}
+
 /**
  * initApp handles setting up UI event listeners and registering Firebase auth listeners:
  *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
@@ -185,7 +195,7 @@ export function initApp() {
             <div id="sair" class="mdc-card__subtitle"><i class="material-icons">exit_to_app</i></div>`;
             if (usuario.providerData) {
                 let sair = usuario.providerData[0].providerId === "google.com" ? deslogarGoogle : deslogarFacebook;
-                document.getElementById("sair").addEventListener("click", sair, false);
+                document.getElementById("sair").addEventListener("click", deslogar, false);
             }
         } else {}
     });
