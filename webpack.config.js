@@ -92,7 +92,7 @@ if (producao) {
 const config = {
     cache: true,
     entry: {
-        "vendor": ["nodep-date-input-polyfill", "babel-polyfill"],
+        "vendor": ["babel-polyfill"],
         "admin": "./modulo-admin/modulo.js",
         "relatorios": "./modulo-relatorios/modulo.js"
     },
