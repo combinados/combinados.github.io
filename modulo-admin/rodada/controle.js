@@ -32,9 +32,18 @@ export default class Rodada {
     }
 
     salvarPalpites = palpites => {
-        let atualizacoes = {};
+        let atualizacoes = {},
+        ehGabarito = palpites.ehGabarito;
+
+        delete palpites["ehGabarito"];
+
         Object.keys(palpites).map(jogoId => {
+          if(ehGabarito) {
+            atualizacoes[`/gabarito/${jogoId}`] = palpites[jogoId];
+          }
+          else {
             atualizacoes[`/gabarito/${jogoId}/palpites/${this.opcoes.usuario}`] = palpites[jogoId];
+          }
         });
         this.servico.salvar(atualizacoes)
             .then(() => this.buscarJogos(this.opcoes.id))

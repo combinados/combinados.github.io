@@ -1,41 +1,35 @@
-<form id="palpites">
-    <div class="mdc-layout-grid">
-        <!-- ${this.map(jogo => {
-    return `-->
-        <div id="${jogo.jogoId}"class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle">
-            ${jogo["mandante-nome"]}
-            <img src="${jogo["mandante-escudo"]}">
-            <!-- ${jogo.palpite ? ` -->
-            <b>${jogo.palpite["mandante-gol"]}</b>
-            <!-- ` : ` -->
-            <label class="bolao mdc-textfield">
-              <input name="mandante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input">
-              <span class="mdc-textfield__label">gols</span>
-            </label>
-            <!-- `} -->
-            <span>vs</span>
-            <!-- ${jogo.palpite ? ` -->
-            <b>${jogo.palpite["visitante-gol"]}</b>
-            <!-- ` : ` -->
-            <label class="bolao mdc-textfield">
-              <input name="visitante-gol" type ="number" min="0" max="99" pattern="^[\d]+$" required class="mdc-textfield__input">
-              <span class="mdc-textfield__label">gols</span>
-            </label>
-            <!-- `} -->
-            <img src="${jogo["visitante-escudo"]}"> ${jogo["visitante-nome"]}
-        </div>
-        <!-- `}).join("")} -->
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-12">
-            <button type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Salvar</button>
-        </div>
-    </div>
-</form>
-<div class="mdc-snackbar"
-     aria-live="assertive"
-     aria-atomic="true"
-     aria-hidden="true">
-  <div class="mdc-snackbar__text"></div>
-  <div class="mdc-snackbar__action-wrapper">
-    <button type="button" class="mdc-button mdc-snackbar__action-button"></button>
-  </div>
+<!-- ${this.map(jogo => {
+return `-->
+<div id="${jogo.jogoId}"class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle">
+    ${jogo["mandante-nome"]}
+    <img src="${jogo["mandante-escudo"]}">
+    ${jogo.ehGabarito ? `
+      <label class="bolao mdc-textfield">
+        <input name="mandante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input" value="${jogo["mandante-gol"]}">
+        <span class="mdc-textfield__label">gols</span>
+      </label>
+      ` : jogo.palpite ? `
+          <b>${jogo.palpite["mandante-gol"]}</b>
+          ` : `
+    <label class="bolao mdc-textfield">
+      <input name="mandante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input">
+      <span class="mdc-textfield__label">gols</span>
+    </label>
+    `}
+    <span>vs</span>
+    ${jogo.ehGabarito ? `
+      <label class="bolao mdc-textfield">
+        <input name="visitante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input" value="${jogo["visitante-gol"]}">
+        <span class="mdc-textfield__label">gols</span>
+      </label>
+      ` : jogo.palpite ? `
+          <b>${jogo.palpite["visitante-gol"]}</b>
+          ` : `
+    <label class="bolao mdc-textfield">
+      <input name="visitante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input">
+      <span class="mdc-textfield__label">gols</span>
+    </label>
+    `}
+    <img src="${jogo["visitante-escudo"]}"> ${jogo["visitante-nome"]}
 </div>
+<!-- `}).join("")} -->

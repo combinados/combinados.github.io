@@ -179,7 +179,7 @@ function deslogar() {
  *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
  *    out, and that is where we update the UI.
  */
-export function initApp() {
+export function autenticacao() {
   window.verificarLoginGoogle = verificarLoginGoogle;
   firebase.auth().onAuthStateChanged(function(usuario) {
     usuario = usuario || {
