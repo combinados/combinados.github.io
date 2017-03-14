@@ -13,10 +13,10 @@ import {
   MDCSnackbar
 } from "@material/snackbar";
 import Mensagem from "comum/mensagem/mensagem";
-import telaListaJogos from "./telas/lista.html";
-import telaLista from "./telas/listaP.html";
+import telaListaJogos from "./telas/jogos.html";
+import telaJogosConteiner from "./telas/jogosConteiner.html";
 
-import telaPrincipal from "./telas/principal.html";
+import telaRodadas from "./telas/rodadas.html";
 
 export default class Visao {
 
@@ -52,8 +52,18 @@ export default class Visao {
     let json = "";
     switch (elemento.name) {
       case "mandante-gol":
+        json = `{
+          "mandante" : {
+            "gol": "${elemento.value}"
+          }
+        }`;
+        break;
       case "visitante-gol":
-        json = `{"${elemento.name}" : "${elemento.value}"}`;
+        json = `{
+            "visitante" : {
+              "gol": "${elemento.value}"
+            }
+          }`;
         break;
       case "ehGabarito":
         json = `{"${elemento.name}" : ${elemento.checked}}`;
@@ -77,9 +87,13 @@ export default class Visao {
       formularioJson = {};
 
     [...$formulario.elements].map(elemento => {
-      let jogoId = $parent(elemento, "div").id,
+      let $jogoConteiner = $parent(elemento, "div"),
+        jogoId,
         elementoEmJson = this.validarElemento(elemento);
 
+      if ($jogoConteiner) {
+        jogoId = $jogoConteiner.getAttribute("data-jogo-id");
+      }
       if (jogoId) {
         formularioJson[jogoId] ? Object.assign(formularioJson[jogoId], elementoEmJson) : formularioJson[jogoId] = elementoEmJson;
       } else {
@@ -118,24 +132,25 @@ export default class Visao {
 
   alternarGabarito(evento) {
     let ehGabarito = evento.target.checked;
-    this.jogos = this.jogos.map(jogo => ({...jogo,ehGabarito}));
-    this.lista();
+    this.jogos = this.jogos.map(jogo => ({ ...jogo,
+      ehGabarito
+    }));
+    this.atualizarJogos();
   }
 
-  lista() {
-    qs("#jogos",this.$conteiner).innerHTML = telaListaJogos(this.jogos);
+  atualizarJogos() {
+    qs("#jogos", this.$conteiner).innerHTML = telaListaJogos(this.jogos);
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
   emFormaDeLista(jogos) {
     this.jogos = jogos;
-    this.$conteiner.innerHTML = telaLista();
-    this.lista();
-    // this.$conteiner.innerHTML = telaListaJogos({jogos: this.jogos, ehGabarito: this.jogos[0].ehGabarito});
+    this.$conteiner.innerHTML = telaJogosConteiner();
+    this.atualizarJogos();
     this.atacharEvento("alternarGabarito");
   }
 
   abrirTelaPrincipal(opcoes) {
-    this.$conteiner.innerHTML = telaPrincipal(opcoes);
+    this.$conteiner.innerHTML = telaRodadas(opcoes);
   }
 }

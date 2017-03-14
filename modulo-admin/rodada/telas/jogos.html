@@ -1,15 +1,15 @@
 <!-- ${this.map(jogo => {
 return `-->
-<div id="${jogo.jogoId}"class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle">
-    ${jogo["mandante-nome"]}
-    <img src="${jogo["mandante-escudo"]}">
+<div data-jogo-id="${jogo.jogoId}" class="mdc-layout-grid__cell mdc-layout-grid__cell--align-middle">
+    ${jogo.mandante.nome}
+    <img src="${jogo.mandante.escudo}">
     ${jogo.ehGabarito ? `
       <label class="bolao mdc-textfield">
-        <input name="mandante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input" value="${jogo["mandante-gol"]}">
+        <input name="mandante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input" value="${jogo.mandante.gol}">
         <span class="mdc-textfield__label">gols</span>
       </label>
       ` : jogo.palpite ? `
-          <b>${jogo.palpite["mandante-gol"]}</b>
+          <b>${jogo.palpite.mandante.gol}</b>
           ` : `
     <label class="bolao mdc-textfield">
       <input name="mandante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input">
@@ -19,17 +19,18 @@ return `-->
     <span>vs</span>
     ${jogo.ehGabarito ? `
       <label class="bolao mdc-textfield">
-        <input name="visitante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input" value="${jogo["visitante-gol"]}">
+        <input name="visitante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input" value="${jogo.visitante.gol}">
         <span class="mdc-textfield__label">gols</span>
       </label>
       ` : jogo.palpite ? `
-          <b>${jogo.palpite["visitante-gol"]}</b>
+          <b>${jogo.palpite.visitante.gol}</b>
           ` : `
     <label class="bolao mdc-textfield">
       <input name="visitante-gol" type ="number" min="0" max="99" required class="mdc-textfield__input">
       <span class="mdc-textfield__label">gols</span>
     </label>
     `}
-    <img src="${jogo["visitante-escudo"]}"> ${jogo["visitante-nome"]}
+    <img src="${jogo.visitante.escudo}">
+    ${jogo.visitante.nome}
 </div>
 <!-- `}).join("")} -->

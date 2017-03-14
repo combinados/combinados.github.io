@@ -22,7 +22,9 @@ export default class Rodada {
                 let jogos = Object.keys(jogosGabaritoDeUmaRodadaSnap.val())
                     .map(jogoId => {
                         let jogo = jogosGabaritoDeUmaRodadaSnap.val()[jogoId];
-                        jogo.palpite = jogo.palpites[this.opcoes.usuario];
+                        if(jogo.palpites) {
+                          jogo.palpite = jogo.palpites[this.opcoes.usuario];
+                        }
                         jogo.jogoId = jogoId;
                         return jogo;
                     });
@@ -39,7 +41,8 @@ export default class Rodada {
 
         Object.keys(palpites).map(jogoId => {
           if(ehGabarito) {
-            atualizacoes[`/gabarito/${jogoId}`] = palpites[jogoId];
+            atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = palpites[jogoId].mandante.gol;
+            atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = palpites[jogoId].visitante.gol;
           }
           else {
             atualizacoes[`/gabarito/${jogoId}/palpites/${this.opcoes.usuario}`] = palpites[jogoId];
