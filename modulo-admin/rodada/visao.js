@@ -13,7 +13,8 @@ import {
   MDCSnackbar
 } from "@material/snackbar";
 import Mensagem from "comum/mensagem/mensagem";
-import telaListaJogos from "./telas/jogos.html";
+import telaJogosPalpites from "./telas/jogosPalpites.html";
+import telaJogosGabarito from "./telas/jogosGabarito.html";
 import telaJogosConteiner from "./telas/jogosConteiner.html";
 
 import telaRodadas from "./telas/rodadas.html";
@@ -29,7 +30,10 @@ export default class Visao {
   atacharEvento(comando, controle) {
     switch (comando) {
       case "salvarPalpites":
-        $on(qs("#palpites"), "submit", e => controle(this.fomularioParaJson(e)));
+        $on(qs("#btnSalvarPalpite"), "click", e => controle(this.fomularioParaJson(e)));
+        break;
+      case "salvarGabarito":
+        $on(qs("#btnSalvarGabarito"), "click", e => controle(this.fomularioParaJson(e)));
         break;
       case "alternarGabarito":
         $on(qs("#ehGabarito"), "change", e => this.alternarGabarito(e));
@@ -65,39 +69,31 @@ export default class Visao {
             }
           }`;
         break;
-      case "ehGabarito":
-        json = `{"${elemento.name}" : ${elemento.checked}}`;
-        break;
+      // case "ehGabarito":
+      //   json = `{"${elemento.name}" : ${elemento.checked}}`;
+      //   break;
     }
     return json;
   }
 
   validarElemento(elemento) {
-    if (!/^fieldset|button|submit$/.test(elemento.type) && !elemento.disabled) {
-      let jsonString = this.mapearElementoParaJson(elemento);
-      if (jsonString) {
-        return JSON.parse(jsonString);
-      }
+    let jsonString = this.mapearElementoParaJson(elemento);
+    if (jsonString) {
+      return JSON.parse(jsonString);
     }
   }
 
   fomularioParaJson = evento => {
     evento.preventDefault();
-    let $formulario = evento.target,
+    let $formulario = $parent(evento.target, "form"),
       formularioJson = {};
 
     [...$formulario.elements].map(elemento => {
-      let $jogoConteiner = $parent(elemento, "div"),
-        jogoId,
-        elementoEmJson = this.validarElemento(elemento);
+      if (/^number$/.test(elemento.type) && !elemento.disabled) {
+        let elementoEmJson = this.validarElemento(elemento),
+          jogoId = $parent(elemento, "div").getAttribute("data-jogo-id");
 
-      if ($jogoConteiner) {
-        jogoId = $jogoConteiner.getAttribute("data-jogo-id");
-      }
-      if (jogoId) {
         formularioJson[jogoId] ? Object.assign(formularioJson[jogoId], elementoEmJson) : formularioJson[jogoId] = elementoEmJson;
-      } else {
-        Object.assign(formularioJson, elementoEmJson)
       }
     });
 
@@ -132,22 +128,26 @@ export default class Visao {
 
   alternarGabarito(evento) {
     let ehGabarito = evento.target.checked;
-    this.jogos = this.jogos.map(jogo => ({ ...jogo,
-      ehGabarito
-    }));
-    this.atualizarJogos();
+    qs("#btnSalvarPalpite").classList.toggle("ocultar");
+    qs("#btnSalvarGabarito").classList.toggle("ocultar");
+    ehGabarito ? this.exibirGabarito(this.jogos) : this.exibirPalpites(this.jogos);
   }
 
-  atualizarJogos() {
-    qs("#jogos", this.$conteiner).innerHTML = telaListaJogos(this.jogos);
+  exibirPalpites(jogos) {
+    qs("#jogos", this.$conteiner).innerHTML = telaJogosPalpites(jogos);
+    [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
+  }
+
+  exibirGabarito(jogos) {
+    qs("#jogos", this.$conteiner).innerHTML = telaJogosGabarito(jogos);
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
   emFormaDeLista(jogos) {
-    this.jogos = jogos;
+    this.jogos = Object.assign({}, jogos);
     this.$conteiner.innerHTML = telaJogosConteiner();
-    this.atualizarJogos();
     this.atacharEvento("alternarGabarito");
+    this.exibirPalpites(jogos);
   }
 
   abrirTelaPrincipal(opcoes) {
