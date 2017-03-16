@@ -128,8 +128,8 @@ export default class Visao {
 
   alternarGabarito(evento) {
     let ehGabarito = evento.target.checked;
-    qs("#btnSalvarPalpite").classList.toggle("ocultar");
-    qs("#btnSalvarGabarito").classList.toggle("ocultar");
+
+    [...qsa("button", qs("#btnBotoes"))].map(botao => botao.classList.toggle("ocultar"));
     ehGabarito ? this.exibirGabarito(this.jogos) : this.exibirPalpites(this.jogos);
   }
 
