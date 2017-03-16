@@ -47,7 +47,7 @@ export default class Visao {
     const snackbar = new MDCSnackbar(qs(".mdc-snackbar"));
 
     let data = {
-      message: msg.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+      message: msg
     };
     snackbar.show(data);
   }
@@ -58,14 +58,14 @@ export default class Visao {
       case "mandante-gol":
         json = `{
           "mandante" : {
-            "gol": "${elemento.value}"
+            "gol": ${elemento.value}
           }
         }`;
         break;
       case "visitante-gol":
         json = `{
             "visitante" : {
-              "gol": "${elemento.value}"
+              "gol": ${elemento.value}
             }
           }`;
         break;

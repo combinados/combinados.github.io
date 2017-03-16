@@ -34,51 +34,52 @@ export default class Rodada {
     });
     this.servico.salvar(atualizacoes)
       .then(resposta => {
-        return this.buscarJogos(this.opcoes.id)
+        this.buscarJogos(this.opcoes.id);
+        this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
+        message = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
         this.visao.exibirMensagem(error)
       });
   }
 
-  salvarGabarito = gabarito => {
+  salvarGabarito = gabaritos => {
     let atualizacoes = {};
-    Object.keys(gabarito).map(jogoId => {
-      atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = gabarito[jogoId].mandante.gol;
-      atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = gabarito[jogoId].visitante.gol;
+    Object.keys(gabaritos).map(jogoId => {
+      atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = gabaritos[jogoId].mandante.gol;
+      atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = gabaritos[jogoId].visitante.gol;
+
+      Object.keys(this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites).map(usuarioId => {
+        let palpite = this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites[usuarioId],
+          gabarito = gabaritos[jogoId];
+          // pontos = palpite.pontos ? palpite.pontos : 0;
+        atualizacoes[`/gabarito/${jogoId}/palpites/${usuarioId}/pontos`] = this.calcularPontos(gabarito, palpite);
+        atualizacoes[`/usuarios/${usuarioId}/classificacao`] = this.calcularPontos(gabarito, palpite);
+      });
     });
     this.servico.salvar(atualizacoes)
       .then(resposta => {
-        return this.buscarJogos(this.opcoes.id)
+        this.buscarJogos(this.opcoes.id)
+        this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
+        message = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
         this.visao.exibirMensagem(error)
       });
   }
 
-  calcularPontos = (jogo) => {
-    let gm = parseInt(jogo.mandante.gol),
-      gv = parseInt(jogo.visitante.gol);
-    Object.keys(jogo.palpites).map(usuarioId => {
-      let pm = jogo.palpites[usuarioId].mandante.gol,
-        pv = jogo.palpites[usuarioId].visitante.gol;
-      if (gm === pm && gv === pv) return 3;
-    });
-  }
-  simularPontos = (palpite, palpiteSimulado) => {
-    let pm = palpite.placar_mandante,
-      pv = palpite.placar_visitante;
-    if (palpiteSimulado.placar_mandante === "" || palpiteSimulado.placar_visitante === "" || palpite.placar_mandante === "" || palpite.placar_visitante === "") {
-      return 0;
-    } else if (palpiteSimulado.placar_mandante === palpite.placar_mandante && palpiteSimulado.placar_visitante === palpite.placar_visitante) {
-      return 3;
-    } else if (
-      (palpiteSimulado.placar_mandante === palpiteSimulado.placar_visitante && palpite.placar_mandante === palpite.placar_visitante) ||
-      (palpiteSimulado.placar_mandante < palpiteSimulado.placar_visitante && palpite.placar_mandante < palpite.placar_visitante) ||
-      (palpiteSimulado.placar_mandante > palpiteSimulado.placar_visitante && palpite.placar_mandante > palpite.placar_visitante)) {
-      return 1;
-    } else {
-      return 0;
-    }
+  calcularPontos = (gabarito, palpite) => {
+    let gm = gabarito.mandante.gol,
+      gv = gabarito.mandante.gol,
+      pm = palpite.mandante.gol,
+      pv = palpite.mandante.gol,
+      gEmpate = gm === gv,
+      pEmpate = pm === pv,
+      tresPontos = gm === pm && gv === pv,
+      umPonto = (gm > gv && pm > pv) || (gm < gv && pm < pv) || (gEmpate && pEmpate);
+
+    if (tresPontos) return 3;
+    if (umPonto) return 1;
+    return 0;
   }
 }

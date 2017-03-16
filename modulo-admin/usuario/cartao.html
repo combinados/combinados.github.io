@@ -1,11 +1,12 @@
 <!-- ${Object.keys(this.val()).map(id => {
       let usuario = this.val()[id];
+      usuario.classificacao = usuario.classificacao ? usuario.classificacao : 0;
     return `-->
 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
     <div class="mdc-card">
         <div id="classificacao-${id}" class="mdc-card__horizontal-block">
             <section class="mdc-card__primary">
-                <h1 class="mdc-card__title mdc-card__title--large">Classificação: 1º</h1>
+                <h1 class="mdc-card__title mdc-card__title--large">Classificação: ${usuario.classificacao}</h1>
                 <h2 class="mdc-card__subtitle">${usuario.nome}</h2>
             </section>
             <img class="mdc-card__media-item" src="${usuario.foto}">
