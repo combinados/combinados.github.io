@@ -22,11 +22,18 @@ export default class Rodada {
       .then(jogosGabaritoDeUmaRodadaSnap => {
         this.opcoes.jogosGabaritoDeUmaRodada = Object.assign({}, jogosGabaritoDeUmaRodadaSnap.val());
         this.visao.emFormaDeLista(this.opcoes);
-        this.visao.atacharEvento("salvarPalpites", e => this.salvarPalpites(e));
-        this.visao.atacharEvento("salvarGabarito", e => this.salvarGabarito(e));
+        this.visao.atacharEvento("salvarPalpitesOuGabarito", e => this.salvarPalpitesOuGabarito(e));
       });
   }
-
+  salvarPalpitesOuGabarito = (palpitesOrGabarito) => {
+    if (palpitesOrGabarito.ehGabarito) {
+      delete palpitesOrGabarito["ehGabarito"];
+      this.salvarGabarito(palpitesOrGabarito);
+    } else {
+      delete palpitesOrGabarito["ehGabarito"];
+      this.salvarPalpites(palpitesOrGabarito);
+    }
+  }
   salvarPalpites = palpites => {
     let atualizacoes = {};
 

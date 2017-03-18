@@ -29,11 +29,8 @@ export default class Visao {
 
   atacharEvento(comando, controle) {
     switch (comando) {
-      case "salvarPalpites":
-        $on(qs("#btnSalvarPalpite"), "click", e => controle(this.fomularioParaJson(e)));
-        break;
-      case "salvarGabarito":
-        $on(qs("#btnSalvarGabarito"), "click", e => controle(this.fomularioParaJson(e)));
+      case "salvarPalpitesOuGabarito":
+        $on(qs("#frmPalptesEGabarito"), "submit", e => controle(this.formularioParaJson(e)));
         break;
       case "alternarGabarito":
         $on(qs("#ehGabarito"), "change", e => this.alternarGabarito(e));
@@ -43,6 +40,7 @@ export default class Visao {
         break;
     }
   }
+
   exibirMensagem = (msg) => {
     const snackbar = new MDCSnackbar(qs(".mdc-snackbar"));
 
@@ -69,9 +67,9 @@ export default class Visao {
             }
           }`;
         break;
-      // case "ehGabarito":
-      //   json = `{"${elemento.name}" : ${elemento.checked}}`;
-      //   break;
+      case "ehGabarito":
+        json = `{"${elemento.name}" : ${elemento.checked}}`;
+        break;
     }
     return json;
   }
@@ -83,17 +81,25 @@ export default class Visao {
     }
   }
 
-  fomularioParaJson = evento => {
-    evento.preventDefault();
-    let $formulario = $parent(evento.target, "form"),
+  formularioParaJson = evento => {
+    let $formulario,
       formularioJson = {};
+    if (evento.id === "frmPalptesEGabarito") {
+      $formulario = evento;
+    } else {
+      evento.preventDefault();
+      $formulario = evento.target;
+    }
 
     [...$formulario.elements].map(elemento => {
-      if (/^number$/.test(elemento.type) && !elemento.disabled) {
+      if (/^number|checkbox$/.test(elemento.type) && !elemento.disabled) {
         let elementoEmJson = this.validarElemento(elemento),
           jogoId = $parent(elemento, "div").getAttribute("data-jogo-id");
-
-        formularioJson[jogoId] ? Object.assign(formularioJson[jogoId], elementoEmJson) : formularioJson[jogoId] = elementoEmJson;
+        if (jogoId) {
+          formularioJson[jogoId] ? Object.assign(formularioJson[jogoId], elementoEmJson) : formularioJson[jogoId] = elementoEmJson;
+        } else {
+          Object.assign(formularioJson, elementoEmJson);
+        }
       }
     });
 
@@ -104,19 +110,24 @@ export default class Visao {
 
   proximoFoco = evento => {
     evento.preventDefault();
-    let $input = evento.target,
-      gols = parseInt($input.value);
-    if (/^[\d]+$/.test(gols)) {
-      let $inputs = [...qsa("input", $parent("form"))],
-        indice;
+    let $formulario = qs("#frmPalptesEGabarito")
+    if ($formulario.checkValidity() && evento.keyCode === 13) {
+      this.formularioParaJson($formulario);
+    } else {
+      let $input = evento.target,
+        gols = parseInt($input.value);
+      if (/^[\d]+$/.test(gols)) {
+        let $inputs = [...qsa("input", $parent("form"))],
+          indice;
 
-      $inputs.find((input, i) => {
-        if (input === $input) {
-          indice = i + 1;
-          return $inputs[indice + 1];
-        }
-      });
-      if ($inputs[indice]) $inputs[indice].focus();
+        $inputs.find((input, i) => {
+          if (input === $input) {
+            indice = i + 1;
+            return $inputs[indice + 1];
+          }
+        });
+        if ($inputs[indice]) $inputs[indice].focus();
+      }
     }
   }
 
@@ -127,10 +138,15 @@ export default class Visao {
   }
 
   alternarGabarito(evento) {
-    let ehGabarito = evento.target.checked;
-
-    [...qsa("button", qs("#btnBotoes"))].map(botao => botao.classList.toggle("ocultar"));
-    ehGabarito ? this.exibirGabarito(this.jogos) : this.exibirPalpites(this.jogos);
+    let ehGabarito = evento.target.checked,
+      $btnSalvar = qs("#btnSalvar");
+    if (ehGabarito) {
+      $btnSalvar.textContent = "Salvar Gabarito";
+      this.exibirGabarito(this.jogos);
+    } else {
+      $btnSalvar.textContent = "Salvar Palpites";
+      this.exibirPalpites(this.jogos);
+    }
   }
 
   exibirPalpites(jogos) {
