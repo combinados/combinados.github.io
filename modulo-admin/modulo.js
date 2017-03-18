@@ -1,5 +1,6 @@
 import comumCss from "comum/css/comum.css";
-// import Painel from "./painel/controle";
+import telaRegras from "modulo-admin/regras.html";
+import {qs} from "comum/comum";
 import Rodada from "./rodada/controle";
 import Usuario from "./usuario/controle";
 import Roteador from "comum/rotas";
@@ -19,9 +20,9 @@ class ModuloAdministrativo {
         // const painel = new Painel("#classificacao-conteiner");
         const rodada = new Rodada("#rodada-conteiner");
         roteador
-            // .rota("classificacao", opcoes => painel.iniciar(opcoes))
             .rota("usuario", opcoes => usuario.iniciar(opcoes))
-            .rota("rodada", opcoes => rodada.iniciar(opcoes));
+            .rota("rodada", opcoes => rodada.iniciar(opcoes))
+            .rota("regras", opcoes => qs("#regras-conteiner").innerHTML = telaRegras());
     }
 }
 

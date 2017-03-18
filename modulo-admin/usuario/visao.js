@@ -5,8 +5,8 @@ import {
     $delegate
 } from "comum/comum";
 import Mensagem from "comum/mensagem/mensagem";
-import telaCartao from "./cartao.html";
-import telaPrincipal from "./tela-principal.html";
+import telaCartao from "./telas/cartao.html";
+import telaPrincipal from "./telas/tela-principal.html";
 
 export default class Visao {
 

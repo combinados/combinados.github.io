@@ -1,5 +1,6 @@
 import Visao from "./visao";
 import Servico from "./servico";
+import usuarioServico from "modulo-admin/usuario/servico";
 import {
   mensagemUtil
 } from "comum/mensagem/mensagem";
@@ -38,41 +39,53 @@ export default class Rodada {
         this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
-        message = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
-        this.visao.exibirMensagem(error)
+        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+        this.visao.exibirMensagem(mensagem)
       });
   }
 
   salvarGabarito = gabaritos => {
-    let atualizacoes = {};
+    let atualizacoes = {},
+      classificacao = {};
     Object.keys(gabaritos).map(jogoId => {
       atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = gabaritos[jogoId].mandante.gol;
       atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = gabaritos[jogoId].visitante.gol;
 
       Object.keys(this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites).map(usuarioId => {
         let palpite = this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites[usuarioId],
-          gabarito = gabaritos[jogoId];
-          // pontos = palpite.pontos ? palpite.pontos : 0;
-        atualizacoes[`/gabarito/${jogoId}/palpites/${usuarioId}/pontos`] = this.calcularPontos(gabarito, palpite);
-        atualizacoes[`/usuarios/${usuarioId}/classificacao`] = this.calcularPontos(gabarito, palpite);
+          gabarito = gabaritos[jogoId],
+          ponto = this.calcularPontos(gabarito, palpite);
+
+        if (!classificacao[usuarioId]) {
+          classificacao[usuarioId] = {};
+        }
+
+        classificacao[usuarioId].pontos = classificacao[usuarioId].pontos ? classificacao[usuarioId].pontos + ponto : ponto;
+
+        atualizacoes[`/gabarito/${jogoId}/palpites/${usuarioId}/pontos`] = ponto;
       });
     });
+
+    Object.keys(classificacao).map(usuarioId => {
+      atualizacoes[`/usuarios/${usuarioId}/classificacao`] = classificacao[usuarioId].pontos;
+    });
+
     this.servico.salvar(atualizacoes)
       .then(resposta => {
         this.buscarJogos(this.opcoes.id)
         this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
-        message = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
-        this.visao.exibirMensagem(error)
+        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+        this.visao.exibirMensagem(mensagem)
       });
   }
 
   calcularPontos = (gabarito, palpite) => {
     let gm = gabarito.mandante.gol,
-      gv = gabarito.mandante.gol,
+      gv = gabarito.visitante.gol,
       pm = palpite.mandante.gol,
-      pv = palpite.mandante.gol,
+      pv = palpite.visitante.gol,
       gEmpate = gm === gv,
       pEmpate = pm === pv,
       tresPontos = gm === pm && gv === pv,
