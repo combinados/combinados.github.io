@@ -54,7 +54,7 @@ function criarOuAtualizarUsuario(credential) {
                     corpo: confimacao
                 };
                 dispararEvento(evento);
-                ok(evento)
+                ok(evento);
             })
             .catch(error => {
                 // Handle Errors here.
