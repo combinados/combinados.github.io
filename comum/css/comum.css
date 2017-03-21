@@ -1,3 +1,11 @@
+/* Estilo do cursor durante um requisição ajax*/
+.ocupado * {
+  cursor: progress;
+}
+.desocupado * {
+  cursor: auto;
+}
+
 .ocultar {
     display: none!important;
 }
