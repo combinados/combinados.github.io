@@ -4,12 +4,12 @@ return `-->
   <span>${this.jogosGabaritoDeUmaRodada[jogoId].mandante.nome}</span>
   <img src="${this.jogosGabaritoDeUmaRodada[jogoId].mandante.escudo}"/>
   <label class="bolao mdc-textfield">
-    <input name="mandante-gol" value="${this.jogosGabaritoDeUmaRodada[jogoId].mandante.gol}" type="number" min="0" max="10" required class="mdc-textfield__input"/>
+    <input name="mandante-gol" value="${this.jogosGabaritoDeUmaRodada[jogoId].mandante.simulacao}" type="number" min="0" max="10" required class="mdc-textfield__input"/>
     <span class="mdc-textfield__label">gols</span>
   </label>
   <span>vs</span>
   <label class="bolao mdc-textfield">
-    <input name="visitante-gol" value="${this.jogosGabaritoDeUmaRodada[jogoId].visitante.gol}" type="number" min="0" max="10" required class="mdc-textfield__input"/>
+    <input name="visitante-gol" value="${this.jogosGabaritoDeUmaRodada[jogoId].visitante.simulacao}" type="number" min="0" max="10" required class="mdc-textfield__input"/>
     <span class="mdc-textfield__label">gols</span>
   </label>
   <img src="${this.jogosGabaritoDeUmaRodada[jogoId].visitante.escudo}" />

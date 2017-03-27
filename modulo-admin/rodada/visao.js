@@ -15,6 +15,7 @@ import {
 import Mensagem from "comum/mensagem/mensagem";
 import telaJogosPalpites from "./telas/jogosPalpites.html";
 import telaJogosGabarito from "./telas/jogosGabarito.html";
+import telaJogosSimulador from "./telas/jogosSimulador.html";
 import telaJogosConteiner from "./telas/jogosConteiner.html";
 
 import telaRodadas from "./telas/rodadas.html";
@@ -29,11 +30,11 @@ export default class Visao {
 
   atacharEvento(comando, controle) {
     switch (comando) {
-      case "salvarPalpitesOuGabarito":
-        $on(qs("#frmPalptesEGabarito"), "submit", e => controle(this.formularioParaJson(e)));
+      case "salvarPalpitesOuGabaritoOuSimulador":
+        $on(qs("#frmPalptes"), "submit", e => controle(this.formularioParaJson(e)));
         break;
       case "alternarGabarito":
-        $on(qs("#ehGabarito"), "change", e => this.alternarGabarito(e));
+        $delegate(this.$conteiner, "input[type='radio']", "change", e => this.alternarGabarito(e));
         break;
       case "proximoFoco":
         $delegate(this.$conteiner, "input", "keyup", e => this.proximoFoco(e));
@@ -67,8 +68,8 @@ export default class Visao {
             }
           }`;
         break;
-      case "ehGabarito":
-        json = `{"${elemento.name}" : ${elemento.checked}}`;
+      case "tipo-tabela":
+        json = `{"${elemento.id}" : ${elemento.checked}}`;
         break;
     }
     return json;
@@ -84,7 +85,7 @@ export default class Visao {
   formularioParaJson = evento => {
     let $formulario,
       formularioJson = {};
-    if (evento.id === "frmPalptesEGabarito") {
+    if (evento.id === "frmPalptes") {
       $formulario = evento;
     } else {
       evento.preventDefault();
@@ -92,7 +93,7 @@ export default class Visao {
     }
 
     [...$formulario.elements].map(elemento => {
-      if (/^number|checkbox$/.test(elemento.type) && !elemento.disabled) {
+      if (/^number|radio$/.test(elemento.type) && !elemento.disabled) {
         let elementoEmJson = this.validarElemento(elemento),
           jogoId = $parent(elemento, "div").getAttribute("data-jogo-id");
         if (jogoId) {
@@ -110,7 +111,7 @@ export default class Visao {
 
   proximoFoco = evento => {
     evento.preventDefault();
-    let $formulario = qs("#frmPalptesEGabarito")
+    let $formulario = qs("#frmPalptes")
     if ($formulario.checkValidity() && evento.keyCode === 13) {
       this.formularioParaJson($formulario);
     } else {
@@ -138,15 +139,27 @@ export default class Visao {
   }
 
   alternarGabarito(evento) {
-    let ehGabarito = evento.target.checked,
+    let ehGabarito = evento.target.checked && evento.target.id === "ehGabarito",
+      ehPalpite = evento.target.checked && evento.target.id === "ehPalpite",
+      ehSimulador = evento.target.checked && evento.target.id === "ehSimulador",
       $btnSalvar = qs("#btnSalvar");
-    if (ehGabarito) {
-      $btnSalvar.textContent = "Salvar Gabarito";
-      this.exibirGabarito(this.jogos);
-    } else {
-      $btnSalvar.textContent = "Salvar Palpites";
-      this.exibirPalpites(this.jogos);
+    switch (true) {
+      case ehGabarito:
+        $btnSalvar.textContent = "Salvar Gabarito";
+        this.exibirGabarito(this.jogos);
+        break;
+      case ehPalpite:
+        $btnSalvar.textContent = "Salvar Palpites";
+        this.exibirPalpites(this.jogos);
+        break;
+      case ehSimulador:
+        $btnSalvar.textContent = "Salvar Simulador";
+        this.exibirSimulador(this.jogos);
+        break;
+      default:
+
     }
+
   }
 
   exibirPalpites(jogos) {
@@ -156,6 +169,11 @@ export default class Visao {
 
   exibirGabarito(jogos) {
     qs("#jogos", this.$conteiner).innerHTML = telaJogosGabarito(jogos);
+    [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
+  }
+
+  exibirSimulador(jogos) {
+    qs("#jogos", this.$conteiner).innerHTML = telaJogosSimulador(jogos);
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
