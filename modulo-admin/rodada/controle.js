@@ -4,6 +4,10 @@ import usuarioServico from "modulo-admin/usuario/servico";
 import {
   mensagemUtil
 } from "comum/mensagem/mensagem";
+import {
+  qs,
+  dispararEvento
+} from "comum/comum";
 
 export default class Rodada {
 
@@ -17,42 +21,39 @@ export default class Rodada {
     this.opcoes.id ? this.buscarJogos(this.opcoes.id) : this.visao.abrirTelaPrincipal(this.opcoes);
   }
 
-  buscarJogos(rodadaId) {
-    this.servico.buscarJogosDoGabaritoPela(rodadaId)
-      .then(jogosGabaritoDeUmaRodadaSnap => {
-        this.opcoes.jogosGabaritoDeUmaRodada = Object.assign({}, jogosGabaritoDeUmaRodadaSnap.val());
-        this.visao.emFormaDeLista(this.opcoes);
-        this.visao.atacharEvento("salvarPalpitesOuGabaritoOuSimulador", e => this.salvarPalpitesOuGabaritoOuSimulador(e));
-      });
+  buscarJogos = (rodadaId, tipoTabela = {
+    ehPalpite: true
+  }) => {
+    return new Promise((resolve, reject) => {
+      this.servico.buscarJogosDoGabaritoPela(rodadaId)
+        .then(jogosGabaritoDeUmaRodadaSnap => {
+          this.opcoes.jogosGabaritoDeUmaRodada = Object.assign({}, jogosGabaritoDeUmaRodadaSnap.val());
+          this.visao.emFormaDeLista(this.opcoes, tipoTabela);
+          this.visao.atacharEvento("salvarPalpitesOuGabaritoOuSimulador", e => this.salvarPalpitesOuGabaritoOuSimulador(e));
+          resolve();
+        });
+    });
   }
   salvarPalpitesOuGabaritoOuSimulador = (palpites) => {
-    if (palpites.ehSimulador) {
-      delete palpites["ehPalpite"];
-      delete palpites["ehGabarito"];
-      delete palpites["ehSimulador"];
+    if (palpites.tipoTabela.ehSimulador) {
       this.salvarSimulador(palpites);
-    } else if(palpites.ehGabarito) {
-      delete palpites["ehPalpite"];
-      delete palpites["ehGabarito"];
-      delete palpites["ehSimulador"];
+    } else if (palpites.tipoTabela.ehGabarito) {
       this.salvarGabarito(palpites);
-    }
-    else {
-      delete palpites["ehPalpite"];
-      delete palpites["ehGabarito"];
-      delete palpites["ehSimulador"];
+    } else {
       this.salvarPalpites(palpites);
     }
   }
   salvarPalpites = palpites => {
-    let atualizacoes = {};
+    let atualizacoes = {},
+      tipoTabela = Object.assign({}, palpites.tipoTabela);
+    delete palpites["tipoTabela"];
 
     Object.keys(palpites).map(jogoId => {
       atualizacoes[`/gabarito/${jogoId}/palpites/${this.opcoes.usuario}`] = palpites[jogoId];
     });
     this.servico.salvar(atualizacoes)
       .then(resposta => {
-        this.buscarJogos(this.opcoes.id);
+        this.buscarJogos(this.opcoes.id, tipoTabela);
         this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
@@ -63,7 +64,9 @@ export default class Rodada {
 
   salvarSimulador = palpites => {
     let atualizacoes = {},
-      simulacao = {};
+      simulacao = {},
+      tipoTabela = Object.assign({}, palpites.tipoTabela);
+    delete palpites["tipoTabela"];
     Object.keys(palpites).map(jogoId => {
       atualizacoes[`/gabarito/${jogoId}/mandante/simulacao`] = palpites[jogoId].mandante.gol;
       atualizacoes[`/gabarito/${jogoId}/visitante/simulacao`] = palpites[jogoId].visitante.gol;
@@ -87,8 +90,18 @@ export default class Rodada {
 
     this.servico.salvar(atualizacoes)
       .then(resposta => {
-        this.buscarJogos(this.opcoes.id)
-        this.visao.exibirMensagem("Atualização Realizada com sucesso");
+        this.buscarJogos(this.opcoes.id, tipoTabela)
+          .then(nada => {
+            const evento = {
+              nome: "usuario.novoOuAtualizacao",
+              corpo: {
+                simulacao: true,
+                $conteiner: qs("#simulacao-usuarios-conteiner")
+              }
+            };
+            dispararEvento(evento);
+            this.visao.exibirMensagem("Atualização Realizada com sucesso");
+          });
       })
       .catch(error => {
         let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
@@ -96,16 +109,18 @@ export default class Rodada {
       });
   }
 
-  salvarGabarito = gabaritos => {
+  salvarGabarito = palpites => {
     let atualizacoes = {},
-      classificacao = {};
-    Object.keys(gabaritos).map(jogoId => {
-      atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = gabaritos[jogoId].mandante.gol;
-      atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = gabaritos[jogoId].visitante.gol;
+      classificacao = {},
+      tipoTabela = Object.assign({}, palpites.tipoTabela);
+    delete palpites["tipoTabela"];
+    Object.keys(palpites).map(jogoId => {
+      atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = palpites[jogoId].mandante.gol;
+      atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = palpites[jogoId].visitante.gol;
 
       Object.keys(this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites).map(usuarioId => {
         let palpite = this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites[usuarioId],
-          gabarito = gabaritos[jogoId],
+          gabarito = palpites[jogoId],
           ponto = this.calcularPontos(gabarito, palpite);
 
         if (!classificacao[usuarioId]) {
@@ -124,7 +139,7 @@ export default class Rodada {
 
     this.servico.salvar(atualizacoes)
       .then(resposta => {
-        this.buscarJogos(this.opcoes.id)
+        this.buscarJogos(this.opcoes.id, tipoTabela)
         this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {

@@ -19,17 +19,29 @@ export default class Usuario {
 
     this.servico.buscarTodos()
       .then(resposta => {
-        let usuarios = Object.keys(resposta.val())
+        if(opcoes.ehSimulacao) {
+          opcoes["usuarios"] = Object.keys(resposta.val())
+          .map(usuarioId => ({ ...resposta.val()[usuarioId],
+            id: usuarioId,
+            simulacao: resposta.val()[usuarioId].simulacao || 0
+          }))
+          .sort((a, b) => b.simulacao - a.simulacao);
+        }
+        else {
+          opcoes["usuarios"] = Object.keys(resposta.val())
           .map(usuarioId => ({ ...resposta.val()[usuarioId],
             id: usuarioId,
             classificacao: resposta.val()[usuarioId].classificacao || 0
           }))
           .sort((a, b) => b.classificacao - a.classificacao);
-        this.visao.emFormaDeCartao(usuarios)
+        }
+        this.visao.emFormaDeCartao(opcoes)
       });
   }
 
-  novoOuAtualizacao(credential) {
-    this.exibirEmFormaDeCartao();
+  novoOuAtualizacao(simulacao) {
+    this.exibirEmFormaDeCartao({
+      ehSimulacao: simulacao
+    });
   }
 }

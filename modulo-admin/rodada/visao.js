@@ -28,13 +28,13 @@ export default class Visao {
     this.atacharEvento("proximoFoco");
   }
 
-  atacharEvento(comando, controle) {
+  atacharEvento = (comando, controle) => {
     switch (comando) {
       case "salvarPalpitesOuGabaritoOuSimulador":
         $on(qs("#frmPalptes"), "submit", e => controle(this.formularioParaJson(e)));
         break;
-      case "alternarGabarito":
-        $delegate(this.$conteiner, "input[type='radio']", "change", e => this.alternarGabarito(e));
+      case "alternarTipoTabela":
+        $delegate(this.$conteiner, "input[type='radio']", "change", e => this.alternarTipoTabela(e));
         break;
       case "proximoFoco":
         $delegate(this.$conteiner, "input", "keyup", e => this.proximoFoco(e));
@@ -69,7 +69,7 @@ export default class Visao {
           }`;
         break;
       case "tipo-tabela":
-        json = `{"${elemento.id}" : ${elemento.checked}}`;
+        json = `{"tipoTabela": {"${elemento.id}" : ${elemento.checked}}}`;
         break;
     }
     return json;
@@ -84,7 +84,8 @@ export default class Visao {
 
   formularioParaJson = evento => {
     let $formulario,
-      formularioJson = {};
+      formularioJson = {},
+      elementoEmJson = {};
     if (evento.id === "frmPalptes") {
       $formulario = evento;
     } else {
@@ -94,8 +95,16 @@ export default class Visao {
 
     [...$formulario.elements].map(elemento => {
       if (/^number|radio$/.test(elemento.type) && !elemento.disabled) {
-        let elementoEmJson = this.validarElemento(elemento),
+        let elementoJson = this.validarElemento(elemento),
           jogoId = $parent(elemento, "div").getAttribute("data-jogo-id");
+        if (elementoJson.tipoTabela) {
+          elementoEmJson.tipoTabela = elementoEmJson.tipoTabela ?
+            Object.assign(elementoEmJson.tipoTabela, elementoJson.tipoTabela) :
+            elementoEmJson.tipoTabela = elementoJson.tipoTabela;
+        } else {
+          elementoEmJson = elementoJson;
+        }
+
         if (jogoId) {
           formularioJson[jogoId] ? Object.assign(formularioJson[jogoId], elementoEmJson) : formularioJson[jogoId] = elementoEmJson;
         } else {
@@ -138,50 +147,53 @@ export default class Visao {
     return rodadaId;
   }
 
-  alternarGabarito(evento) {
-    let ehGabarito = evento.target.checked && evento.target.id === "ehGabarito",
-      ehPalpite = evento.target.checked && evento.target.id === "ehPalpite",
-      ehSimulador = evento.target.checked && evento.target.id === "ehSimulador",
-      $btnSalvar = qs("#btnSalvar");
+  alternarTipoTabela(evento) {
+    let {ehGabarito, ehPalpite, ehSimulador} = evento;
+    if (evento.target) {
+      ehGabarito = evento.target.checked && evento.target.id === "ehGabarito";
+      ehPalpite = evento.target.checked && evento.target.id === "ehPalpite";
+      ehSimulador = evento.target.checked && evento.target.id === "ehSimulador";
+    }
     switch (true) {
       case ehGabarito:
-        $btnSalvar.textContent = "Salvar Gabarito";
         this.exibirGabarito(this.jogos);
         break;
       case ehPalpite:
-        $btnSalvar.textContent = "Salvar Palpites";
         this.exibirPalpites(this.jogos);
         break;
       case ehSimulador:
-        $btnSalvar.textContent = "Salvar Simulador";
         this.exibirSimulador(this.jogos);
         break;
       default:
-
     }
-
   }
 
   exibirPalpites(jogos) {
+    qs("#btnSalvar").textContent = "Salvar Palpites";
+    qs("#ehPalpite").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = telaJogosPalpites(jogos);
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
   exibirGabarito(jogos) {
+    qs("#btnSalvar").textContent = "Salvar Gabarito";
+    qs("#ehGabarito").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = telaJogosGabarito(jogos);
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
   exibirSimulador(jogos) {
+    qs("#btnSalvar").textContent = "Salvar Simulador";
+    qs("#ehSimulador").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = telaJogosSimulador(jogos);
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
-  emFormaDeLista(jogos) {
+  emFormaDeLista(jogos, tipoTabela = {}) {
     this.jogos = Object.assign({}, jogos);
     this.$conteiner.innerHTML = telaJogosConteiner();
-    this.atacharEvento("alternarGabarito");
-    this.exibirPalpites(jogos);
+    this.atacharEvento("alternarTipoTabela");
+    this.alternarTipoTabela(tipoTabela);
   }
 
   abrirTelaPrincipal(opcoes) {

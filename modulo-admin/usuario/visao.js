@@ -23,14 +23,20 @@ export default class Visao {
         }
     }
 
-    abrirTelaPrincipal(usuarioLogado = {}) {
+    abrirTelaPrincipal(evento = {}) {
+      if(evento.simulacao) {
+        evento.$conteiner.innerHTML = telaPrincipal();
+        return true;
+      }
+      else {
         this.$conteiner.innerHTML = telaPrincipal();
-        return usuarioLogado;
+        return false;
+      }
     }
 
     emFormaDeCartao(opcoes = {}) {
         // opcoes["foto"] = foto;
-        qs("#usuarios-cartao", this.$conteiner).innerHTML = telaCartao(opcoes);
+        qs("#usuarios-cartao").innerHTML = telaCartao(opcoes);
     }
 
     exibirLogado = usuario => {
