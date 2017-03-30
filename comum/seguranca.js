@@ -44,11 +44,13 @@ function criarOuAtualizarUsuario(credential) {
   return new Promise((ok, erro) => {
     firebase.auth().signInWithCredential(credential)
       .then(usuario => {
-        return firebase.database().ref("usuarios/" + usuario.uid).update({
-          nome: usuario.providerData[0].displayName,
-          email: usuario.providerData[0].email,
-          foto: usuario.providerData[0].photoURL
-        });
+        return firebase.database().ref("usuarios/" + usuario.uid)
+          .update({
+            nome: usuario.providerData[0].displayName,
+            email: usuario.providerData[0].email,
+            foto: usuario.providerData[0].photoURL,
+            timestamp: firebase.database.ServerValue.TIMESTAMP            
+          });
       })
       .then(confimacao => {
         const evento = {

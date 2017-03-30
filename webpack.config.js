@@ -89,8 +89,6 @@ if (producao) {
   ]);
 }
 
-console.log(plugins);
-
 const config = {
   cache: true,
   entry: {
@@ -174,11 +172,7 @@ const config = {
         }
       }
     ]
-  },
-  stats: {
-    // Nice colored output
-    colors: true
-  },
+  },  
   // Create Sourcemaps for the bundle
   // devtool: producao ? false : 'inline-source-map',
   devtool: producao ? false : 'source-map',
@@ -193,7 +187,11 @@ const config = {
       }
     },
     port: 9000,
-    quiet: true
+    stats: {
+      color: true,
+      chunks:false,
+      warnings: false
+    }
   }
 };
 
