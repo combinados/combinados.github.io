@@ -23,7 +23,7 @@ export default class Usuario {
           opcoes["usuarios"] = Object.keys(resposta.val())
           .map(usuarioId => ({ ...resposta.val()[usuarioId],
             id: usuarioId,
-            simulacao: resposta.val()[usuarioId].simulacao || 0
+            simulacao: resposta.val()[usuarioId].simulacao + resposta.val()[usuarioId].classificacao || 0
           }))
           .sort((a, b) => b.simulacao - a.simulacao);
         }
