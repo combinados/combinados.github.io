@@ -49,13 +49,13 @@ function criarOuAtualizarUsuario(credential) {
             nome: usuario.providerData[0].displayName,
             email: usuario.providerData[0].email,
             foto: usuario.providerData[0].photoURL,
-            timestamp: firebase.database.ServerValue.TIMESTAMP            
+            timestamp: firebase.database.ServerValue.TIMESTAMP
           });
       })
       .then(confimacao => {
         const evento = {
           nome: "usuario.novoOuAtualizacao",
-          corpo: confimacao
+          corpo: confimacao || {}
         };
         dispararEvento(evento);
         ok(evento);

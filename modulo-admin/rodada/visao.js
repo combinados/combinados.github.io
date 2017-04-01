@@ -194,6 +194,7 @@ export default class Visao {
       ehSimulador
     } = evento;
     if (evento.target) {
+      evento.preventDefault();
       ehGabarito = evento.target.checked && evento.target.id === "ehGabarito";
       ehPalpite = evento.target.checked && evento.target.id === "ehPalpite";
       ehSimulador = evento.target.checked && evento.target.id === "ehSimulador";
