@@ -9,7 +9,7 @@ export default class Servico extends ServicoGenerico {
         return firebase
             .database()
             .ref("gabarito")
-            .orderByChild("rodada")
+            .orderByChild("rodada/id")
             .equalTo(rodadaId)
             .once("value");
     }

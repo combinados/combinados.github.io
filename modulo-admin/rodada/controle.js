@@ -26,8 +26,8 @@ export default class Rodada {
   }) => {
     return new Promise((resolve, reject) => {
       this.servico.buscarJogosDoGabaritoPela(rodadaId)
-        .then(jogosGabaritoDeUmaRodadaSnap => {
-          this.opcoes.jogosGabaritoDeUmaRodada = Object.assign({}, jogosGabaritoDeUmaRodadaSnap.val());
+        .then(jogosDeUmaRodadaSnap => {
+          this.opcoes.jogosDeUmaRodada = jogosDeUmaRodadaSnap.val();
           this.visao.emFormaDeLista(this.opcoes, tipoTabela);
           this.visao.atacharEvento("salvarPalpitesOuGabaritoOuSimulador", e => this.salvarPalpitesOuGabaritoOuSimulador(e));
           resolve();
@@ -71,8 +71,8 @@ export default class Rodada {
       atualizacoes[`/gabarito/${jogoId}/mandante/simulacao`] = palpites[jogoId].mandante.gol;
       atualizacoes[`/gabarito/${jogoId}/visitante/simulacao`] = palpites[jogoId].visitante.gol;
 
-      Object.keys(this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites).map(usuarioId => {
-        let palpite = this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites[usuarioId],
+      Object.keys(this.opcoes.jogosDeUmaRodada[jogoId].palpites).map(usuarioId => {
+        let palpite = this.opcoes.jogosDeUmaRodada[jogoId].palpites[usuarioId],
           simulador = palpites[jogoId],
           ponto = this.calcularPontos(simulador, palpite);
 
@@ -89,19 +89,17 @@ export default class Rodada {
     });
 
     this.servico.salvar(atualizacoes)
-      .then(resposta => {
-        this.buscarJogos(this.opcoes.id, tipoTabela)
-          .then(nada => {
-            const evento = {
-              nome: "usuario.novoOuAtualizacao",
-              corpo: {
-                simulacao: true,
-                $conteiner: qs("#simulacao-usuarios-conteiner")
-              }
-            };
-            dispararEvento(evento);
-            this.visao.exibirMensagem("Atualização Realizada com sucesso");
-          });
+      .then(resposta => this.buscarJogos(this.opcoes.id, tipoTabela))
+      .then(nada => {
+        const evento = {
+          nome: "usuario.novoOuAtualizacao",
+          corpo: {
+            simulacao: true,
+            $conteiner: qs("#simulacao-usuarios-conteiner")
+          }
+        };
+        dispararEvento(evento);
+        this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
         let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
@@ -118,8 +116,8 @@ export default class Rodada {
       atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = palpites[jogoId].mandante.gol;
       atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = palpites[jogoId].visitante.gol;
 
-      Object.keys(this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites).map(usuarioId => {
-        let palpite = this.opcoes.jogosGabaritoDeUmaRodada[jogoId].palpites[usuarioId],
+      Object.keys(this.opcoes.jogosDeUmaRodada[jogoId].palpites).map(usuarioId => {
+        let palpite = this.opcoes.jogosDeUmaRodada[jogoId].palpites[usuarioId],
           gabarito = palpites[jogoId],
           ponto = this.calcularPontos(gabarito, palpite);
 
