@@ -217,6 +217,12 @@ export default class Visao {
     qs("#btnSalvar").textContent = "Salvar Palpites";
     qs("#ehPalpite").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = telaJogosPalpites(jogos);
+    // qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
+    //   jogos.jogosDeUmaRodada[jogoId].palpites = this.jogosDeUmaRodada[jogoId].palpites || {};
+    //   jogos["mandante"] = this.jogosDeUmaRodada[jogoId].palpites[this.usuario] ? this.jogosDeUmaRodada[jogoId].palpites[this.usuario].mandante.gol : "",
+    //     jogos["visitante"] = this.jogosDeUmaRodada[jogoId].palpites[this.usuario] ? this.jogosDeUmaRodada[jogoId].palpites[this.usuario].visitante.gol : "";
+    //   return telaJogosPalpites(jogos);
+    // }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
