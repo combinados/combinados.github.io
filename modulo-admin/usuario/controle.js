@@ -12,37 +12,26 @@ export default class Usuario {
     this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
   }
   iniciar(opcoes = {}) {
-    this.visao.abrirTelaPrincipal(opcoes);
-    this.exibirEmFormaDeCartao();
+    this.exibirEmFormaDeCartao(this.visao.abrirTelaPrincipal(opcoes));
   }
   exibirEmFormaDeCartao(opcoes = {}) {
 
     this.servico.buscarTodos()
       .then(resposta => {
-        if(opcoes.ehSimulacao) {
-          opcoes["usuarios"] = Object.keys(resposta.val())
+
+        opcoes["usuarios"] = Object.keys(resposta.val())
           .map(usuarioId => ({ ...resposta.val()[usuarioId],
             id: usuarioId,
             simulacao: (resposta.val()[usuarioId].simulacao || 0) + (resposta.val()[usuarioId].classificacao || 0),
             classificacao: (resposta.val()[usuarioId].classificacao || 0)
-          }))
-          .sort((a, b) => b.simulacao - a.simulacao);
-        }
-        else {
-          opcoes["usuarios"] = Object.keys(resposta.val())
-          .map(usuarioId => ({ ...resposta.val()[usuarioId],
-            id: usuarioId,
-            classificacao: resposta.val()[usuarioId].classificacao || 0
-          }))
-          .sort((a, b) => b.classificacao - a.classificacao);
-        }
+          }));
+        opcoes["usuarios"] = opcoes.ehSimulacao ? opcoes.usuarios.sort((a, b) => b.simulacao - a.simulacao) : opcoes.usuarios.sort((a, b) => b.classificacao - a.classificacao);
+
         this.visao.emFormaDeCartao(opcoes)
       });
   }
 
-  novoOuAtualizacao(simulacao) {
-    this.exibirEmFormaDeCartao({
-      ehSimulacao: simulacao
-    });
+  novoOuAtualizacao(opcoes) {
+    this.exibirEmFormaDeCartao(opcoes);
   }
 }
