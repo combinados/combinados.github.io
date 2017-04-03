@@ -45,21 +45,40 @@ export default class Rodada {
   }
   salvarPalpites = palpites => {
     let atualizacoes = {},
-      tipoTabela = Object.assign({}, palpites.tipoTabela);
+      tipoTabela = Object.assign({}, palpites.tipoTabela),
+      dadosValido = true,
+      repetidos = {};
     delete palpites["tipoTabela"];
 
     Object.keys(palpites).map(jogoId => {
+      let mg = palpites[jogoId].mandante.gol,
+        vg = palpites[jogoId].visitante.gol;
+
+      repetidos[mg + "_" + vg] = repetidos[mg + "_" + vg] ? repetidos[mg + "_" + vg] + 1 : 1;
+
       atualizacoes[`/gabarito/${jogoId}/palpites/${this.opcoes.usuario}`] = palpites[jogoId];
     });
-    this.servico.salvar(atualizacoes)
-      .then(resposta => {
-        this.buscarJogos(this.opcoes.id, tipoTabela);
-        this.visao.exibirMensagem("Atualização Realizada com sucesso");
-      })
-      .catch(error => {
-        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
-        this.visao.exibirMensagem(mensagem)
-      });
+
+    Object.keys(repetidos).map(placar => {
+      if (repetidos[placar] > 3) {
+        dadosValido = false;
+      }
+    });
+
+    if (dadosValido) {
+      this.servico.salvar(atualizacoes)
+        .then(resposta => {
+          this.buscarJogos(this.opcoes.id, tipoTabela);
+          this.visao.exibirMensagem("Atualização Realizada com sucesso");
+        })
+        .catch(error => {
+          let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+          this.visao.exibirMensagem(mensagem)
+        });
+    } else {
+      let mensagem = "Palpites repetidos mais de 3 vezes";
+      this.visao.exibirMensagem(mensagem);
+    }
   }
 
   salvarSimulador = palpites => {
@@ -71,17 +90,20 @@ export default class Rodada {
       atualizacoes[`/gabarito/${jogoId}/mandante/simulacao`] = palpites[jogoId].mandante.gol;
       atualizacoes[`/gabarito/${jogoId}/visitante/simulacao`] = palpites[jogoId].visitante.gol;
 
-      Object.keys(this.opcoes.jogosDeUmaRodada[jogoId].palpites).map(usuarioId => {
-        let palpite = this.opcoes.jogosDeUmaRodada[jogoId].palpites[usuarioId],
-          simulador = palpites[jogoId],
-          ponto = this.calcularPontos(simulador, palpite);
+      if (this.opcoes.jogosDeUmaRodada[jogoId].palpites) {
 
-        if (!simulacao[usuarioId]) {
-          simulacao[usuarioId] = {};
-        }
+        Object.keys(this.opcoes.jogosDeUmaRodada[jogoId].palpites).map(usuarioId => {
+          let palpite = this.opcoes.jogosDeUmaRodada[jogoId].palpites[usuarioId],
+            simulador = palpites[jogoId],
+            ponto = this.calcularPontos(simulador, palpite);
 
-        simulacao[usuarioId].pontos = simulacao[usuarioId].pontos ? simulacao[usuarioId].pontos + ponto : ponto;
-      });
+          if (!simulacao[usuarioId]) {
+            simulacao[usuarioId] = {};
+          }
+
+          simulacao[usuarioId].pontos = simulacao[usuarioId].pontos ? simulacao[usuarioId].pontos + ponto : ponto;
+        });
+      }
     });
 
     Object.keys(simulacao).map(usuarioId => {
@@ -116,23 +138,29 @@ export default class Rodada {
       atualizacoes[`/gabarito/${jogoId}/mandante/gol`] = palpites[jogoId].mandante.gol;
       atualizacoes[`/gabarito/${jogoId}/visitante/gol`] = palpites[jogoId].visitante.gol;
 
-      Object.keys(this.opcoes.jogosDeUmaRodada[jogoId].palpites).map(usuarioId => {
-        let palpite = this.opcoes.jogosDeUmaRodada[jogoId].palpites[usuarioId],
-          gabarito = palpites[jogoId],
-          ponto = this.calcularPontos(gabarito, palpite);
+      if (this.opcoes.jogosDeUmaRodada[jogoId].palpites) {
 
-        if (!classificacao[usuarioId]) {
-          classificacao[usuarioId] = {};
-        }
+        Object.keys(this.opcoes.jogosDeUmaRodada[jogoId].palpites).map(usuarioId => {
+          let palpite = this.opcoes.jogosDeUmaRodada[jogoId].palpites[usuarioId],
+            gabarito = palpites[jogoId],
+            ponto = this.calcularPontos(gabarito, palpite),
+            placar = ponto === 3 ? 1 : 0;
 
-        classificacao[usuarioId].pontos = classificacao[usuarioId].pontos ? classificacao[usuarioId].pontos + ponto : ponto;
+          if (!classificacao[usuarioId]) {
+            classificacao[usuarioId] = {};
+          }
 
-        atualizacoes[`/gabarito/${jogoId}/palpites/${usuarioId}/pontos`] = ponto;
-      });
+          classificacao[usuarioId].pontos = classificacao[usuarioId].pontos ? classificacao[usuarioId].pontos + ponto : ponto;
+          classificacao[usuarioId].placares = classificacao[usuarioId].placares ? classificacao[usuarioId].placares + placar : placar;
+
+          atualizacoes[`/gabarito/${jogoId}/palpites/${usuarioId}/pontos`] = ponto;
+        });
+      }
     });
 
     Object.keys(classificacao).map(usuarioId => {
-      atualizacoes[`/usuarios/${usuarioId}/classificacao`] = classificacao[usuarioId].pontos;
+      atualizacoes[`/usuarios/${usuarioId}/rodadas/${this.opcoes.id}/pontos`] = classificacao[usuarioId].pontos;
+      atualizacoes[`/usuarios/${usuarioId}/rodadas/${this.opcoes.id}/placares`] = classificacao[usuarioId].placares;
     });
 
     this.servico.salvar(atualizacoes)

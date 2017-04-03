@@ -20,12 +20,29 @@ export default class Usuario {
       .then(resposta => {
 
         opcoes["usuarios"] = Object.keys(resposta.val())
-          .map(usuarioId => ({ ...resposta.val()[usuarioId],
-            id: usuarioId,
-            simulacao: (resposta.val()[usuarioId].simulacao || 0) + (resposta.val()[usuarioId].classificacao || 0),
-            classificacao: (resposta.val()[usuarioId].classificacao || 0)
-          }));
-        opcoes["usuarios"] = opcoes.ehSimulacao ? opcoes.usuarios.sort((a, b) => b.simulacao - a.simulacao) : opcoes.usuarios.sort((a, b) => b.classificacao - a.classificacao);
+          .map(usuarioId => {
+            const rodadas = resposta.val()[usuarioId].rodadas || {};
+            const pontos = Object.keys(rodadas)
+              .map(rodadaId => rodadas[rodadaId].pontos)
+              .reduce((a, b) => a + b);
+
+            const placares = Object.keys(rodadas)
+              .map(rodadaId => rodadas[rodadaId].placares)
+              .reduce((a, b) => a + b);
+
+            return { ...resposta.val()[usuarioId],
+              id: usuarioId,
+              simulacao: (resposta.val()[usuarioId].simulacao || 0) + pontos,
+              pontos: pontos,
+              placares: placares
+            };
+          });
+        if (opcoes.ehSimulacao) {
+          opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.simulacao - a.simulacao);
+        } else {
+          opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.placares - a.placares);
+          opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.pontos - a.pontos);
+        }
 
         this.visao.emFormaDeCartao(opcoes)
       });

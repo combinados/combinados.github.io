@@ -1,6 +1,6 @@
 <div data-jogo-id="${this.jogoId}" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
   <span>${this.mandante.nome.substring(0,3)}</span>
-  <img src="${this.mandante.escudo}" style="max-height: 40px; max-width: 40px;" />
+  <img src="${this.mandante.escudo}" style="max-height: 50px; max-width: 50px;" />
   <label class="bolao mdc-textfield">
     <input name="mandante-gol" value="${this.mandante.gol}" type="number" min="0" max="9" required class="mdc-textfield__input"/>
     <span class="mdc-textfield__label">gols</span>
@@ -10,6 +10,6 @@
     <input name="visitante-gol" value="${this.visitante.gol}" type="number" min="0" max="9" required class="mdc-textfield__input"/>
     <span class="mdc-textfield__label">gols</span>
   </label>
-  <img src="${this.visitante.escudo}" style="max-height: 40px; max-width: 40px;" />
+  <img src="${this.visitante.escudo}" style="max-height: 50px; max-width: 50px;" />
   <span>${this.visitante.nome.substring(0,3)}</span>
 </div>

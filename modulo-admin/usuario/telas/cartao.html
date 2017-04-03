@@ -6,9 +6,9 @@
       <section class="mdc-card__primary">
         <!-- ${this.ehSimulacao ? ` -->
         <h1 class="mdc-card__title mdc-card__title--large">${usuario.simulacao} pontos (simulação)</h1>
-        <h2 class="mdc-card__subtitle">${usuario.nome}: ${usuario.classificacao} pontos</h2>
+        <h2 class="mdc-card__subtitle">${usuario.nome}: ${usuario.pontos} pontos</h2>
         <!-- `:` -->
-        <h1 class="mdc-card__title mdc-card__title--large">${usuario.classificacao} pontos</h1>
+        <h1 class="mdc-card__title mdc-card__title--large">${usuario.pontos} ${usuario.pontos === 1 ? "ponto" : "pontos"}  <--> ${usuario.placares} ${usuario.placares === 1 ? "placar" : "placares"}</h1>        
         <h2 class="mdc-card__subtitle">${usuario.nome}</h2>
         <!-- `} -->
       </section>

@@ -218,7 +218,17 @@ export default class Visao {
     qs("#ehPalpite").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
       const palpites = jogos.jogosDeUmaRodada[jogoId].palpites || {};
-      const palpite = palpites[jogos.usuario] || {};
+      let palpite = palpites[jogos.usuario];
+      if (!palpite) {
+        palpite = {
+          "mandante": {
+            "gol": ""
+          },
+          "visitante": {
+            "gol": ""
+          }
+        }
+      }
       const jogo = {
         "mandante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].mandante),
         "visitante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].visitante),
@@ -271,7 +281,6 @@ export default class Visao {
 
   emFormaDeLista(jogos, tipoTabela = {}) {
     this.jogos = jogos;
-    this.jogos.imagens = imagens;
     this.$conteiner.innerHTML = telaJogosConteiner();
     this.atacharEvento("alternarTipoTabela");
     this.alternarTipoTabela(tipoTabela);
