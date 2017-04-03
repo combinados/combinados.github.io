@@ -3,7 +3,7 @@ import {
   $on,
   $parent,
   $delegate
-} from "comum/comum";
+} from "comum/util";
 import Mensagem from "comum/mensagem/mensagem";
 import telaCartao from "./telas/cartao.html";
 import telaPrincipal from "./telas/tela-principal.html";

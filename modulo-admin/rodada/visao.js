@@ -4,7 +4,7 @@ import {
   $on,
   $parent,
   $delegate
-} from "comum/comum";
+} from "comum/util";
 import {
   MDCTextfield,
   MDCTextfieldFoundation
@@ -13,9 +13,7 @@ import {
   MDCSnackbar
 } from "@material/snackbar";
 import Mensagem from "comum/mensagem/mensagem";
-import telaJogosPalpites from "./telas/jogosPalpites.html";
-import telaJogosGabarito from "./telas/jogosGabarito.html";
-import telaJogosSimulador from "./telas/jogosSimulador.html";
+import telaJogos from "./telas/jogos.html";
 import telaJogosConteiner from "./telas/jogosConteiner.html";
 import telaRodadas from "./telas/rodadas.html";
 import Palmeiras_SP from "comum/imagens/times/Palmeiras_SP.jpg";
@@ -35,6 +33,7 @@ import Sport_PE from "comum/imagens/times/Sport_PE.jpg";
 import Avaí_SC from "comum/imagens/times/Avaí_SC.jpg";
 import Vitória_BA from "comum/imagens/times/Vitória_BA.jpg";
 import Atlético_GO from "comum/imagens/times/Atlético_GO.jpg";
+import Atlético_MG from "comum/imagens/times/Atlético_MG.jpg";
 import Santos_SP from "comum/imagens/times/Santos_SP.jpg";
 import Fluminense_RJ from "comum/imagens/times/Fluminense_RJ.jpg";
 
@@ -52,6 +51,7 @@ const imagens = {
   Bahia_BA,
   Atlético_PR,
   Atlético_GO,
+  Atlético_MG,
   Ponte_Preta_SP,
   Sport_PE,
   Avaí_SC,
@@ -216,27 +216,56 @@ export default class Visao {
   exibirPalpites(jogos) {
     qs("#btnSalvar").textContent = "Salvar Palpites";
     qs("#ehPalpite").checked = true;
-    qs("#jogos", this.$conteiner).innerHTML = telaJogosPalpites(jogos);
-    // qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
-    //   jogos.jogosDeUmaRodada[jogoId].palpites = this.jogosDeUmaRodada[jogoId].palpites || {};
-    //   jogos["mandante"] = this.jogosDeUmaRodada[jogoId].palpites[this.usuario] ? this.jogosDeUmaRodada[jogoId].palpites[this.usuario].mandante.gol : "",
-    //     jogos["visitante"] = this.jogosDeUmaRodada[jogoId].palpites[this.usuario] ? this.jogosDeUmaRodada[jogoId].palpites[this.usuario].visitante.gol : "";
-    //   return telaJogosPalpites(jogos);
-    // }).join("");
+    qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
+      const palpites = jogos.jogosDeUmaRodada[jogoId].palpites || {};
+      const palpite = palpites[jogos.usuario] || {};
+      const jogo = {
+        "mandante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].mandante),
+        "visitante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].visitante),
+        "jogoId": jogoId
+      };
+      jogo.mandante.gol = palpite.mandante.gol;
+      jogo.mandante.escudo = imagens[jogo.mandante.nome];
+      jogo.visitante.escudo = imagens[jogo.visitante.nome];
+      jogo.visitante.gol = palpite.visitante.gol;
+      return telaJogos(jogo);
+    }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
   exibirGabarito(jogos) {
     qs("#btnSalvar").textContent = "Salvar Gabarito";
     qs("#ehGabarito").checked = true;
-    qs("#jogos", this.$conteiner).innerHTML = telaJogosGabarito(jogos);
+    qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
+      const jogo = {
+        "mandante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].mandante),
+        "visitante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].visitante),
+        "jogoId": jogoId
+      };
+      jogo.mandante.escudo = imagens[jogo.mandante.nome];
+      jogo.visitante.escudo = imagens[jogo.visitante.nome];
+      return telaJogos(jogo);
+    }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 
   exibirSimulador(jogos) {
     qs("#btnSalvar").textContent = "Salvar Simulador";
     qs("#ehSimulador").checked = true;
-    qs("#jogos", this.$conteiner).innerHTML = telaJogosSimulador(jogos);
+    qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
+      const palpites = jogos.jogosDeUmaRodada[jogoId].palpites || {};
+      const palpite = palpites[jogos.usuario] || {};
+      const jogo = {
+        "mandante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].mandante),
+        "visitante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].visitante),
+        "jogoId": jogoId
+      };
+      jogo.mandante.gol = jogo.mandante.simulacao;
+      jogo.mandante.escudo = imagens[jogo.mandante.nome];
+      jogo.visitante.escudo = imagens[jogo.visitante.nome];
+      jogo.visitante.gol = jogo.visitante.simulacao;
+      return telaJogos(jogo);
+    }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
 

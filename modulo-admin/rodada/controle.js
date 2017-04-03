@@ -7,7 +7,7 @@ import {
 import {
   qs,
   dispararEvento
-} from "comum/comum";
+} from "comum/util";
 
 export default class Rodada {
 

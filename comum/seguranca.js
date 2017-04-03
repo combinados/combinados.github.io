@@ -3,7 +3,7 @@ import imagemPadrao from "comum/imagens/defaultprofile-300px.png"
 import {
   qs,
   dispararEvento
-} from "comum/comum";
+} from "comum/util";
 
 // Firebase
 const CONFIG_FIREBASE = {
