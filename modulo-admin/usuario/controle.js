@@ -22,13 +22,15 @@ export default class Usuario {
         opcoes["usuarios"] = Object.keys(resposta.val())
           .map(usuarioId => {
             const rodadas = resposta.val()[usuarioId].rodadas || {};
-            const pontos = Object.keys(rodadas)
-              .map(rodadaId => rodadas[rodadaId].pontos)
-              .reduce((a, b) => a + b);
+            let pontos = Object.keys(rodadas).map(rodadaId => rodadas[rodadaId].pontos);
+            if (pontos.length > 0) {
+              pontos = pontos.reduce((a, b) => a + b);
+            }
 
-            const placares = Object.keys(rodadas)
-              .map(rodadaId => rodadas[rodadaId].placares)
-              .reduce((a, b) => a + b);
+            let placares = Object.keys(rodadas).map(rodadaId => rodadas[rodadaId].placares);
+            if (placares.length > 0) {
+              placares = placares.reduce((a, b) => a + b);
+            }
 
             return { ...resposta.val()[usuarioId],
               id: usuarioId,
