@@ -1,3 +1,4 @@
+import firebase from "comum/seguranca";
 import {
   qs,
   qsa,
@@ -16,26 +17,26 @@ import Mensagem from "comum/mensagem/mensagem";
 import telaJogos from "./telas/jogos.html";
 import telaJogosConteiner from "./telas/jogosConteiner.html";
 import telaRodadas from "./telas/rodadas.html";
-import Palmeiras_SP from "comum/imagens/times/Palmeiras_SP.jpg";
-import Corinthians_SP from "comum/imagens/times/Corinthians_SP.jpg";
-import Flamengo_RJ from "comum/imagens/times/Flamengo_RJ.jpg";
-import Vasco_da_Gama_RJ from "comum/imagens/times/Vasco_da_Gama_RJ.jpg";
-import Chapecoense_SC from "comum/imagens/times/Chapecoense_SC.jpg";
-import Cruzeiro_MG from "comum/imagens/times/Cruzeiro_MG.jpg";
-import São_Paulo_SP from "comum/imagens/times/São_Paulo_SP.jpg";
-import Coritiba_PR from "comum/imagens/times/Coritiba_PR.jpg";
-import Grêmio_RS from "comum/imagens/times/Grêmio_RS.jpg";
-import Botafogo_RJ from "comum/imagens/times/Botafogo_RJ.jpg";
-import Bahia_BA from "comum/imagens/times/Bahia_BA.jpg";
-import Atlético_PR from "comum/imagens/times/Atlético_PR.jpg";
-import Ponte_Preta_SP from "comum/imagens/times/Ponte_Preta_SP.jpg";
-import Sport_PE from "comum/imagens/times/Sport_PE.jpg";
-import Avaí_SC from "comum/imagens/times/Avaí_SC.jpg";
-import Vitória_BA from "comum/imagens/times/Vitória_BA.jpg";
-import Atlético_GO from "comum/imagens/times/Atlético_GO.jpg";
-import Atlético_MG from "comum/imagens/times/Atlético_MG.jpg";
-import Santos_SP from "comum/imagens/times/Santos_SP.jpg";
-import Fluminense_RJ from "comum/imagens/times/Fluminense_RJ.jpg";
+import Palmeiras_SP from "comum/imagens/times/Palmeiras_SP.png";
+import Corinthians_SP from "comum/imagens/times/Corinthians_SP.png";
+import Flamengo_RJ from "comum/imagens/times/Flamengo_RJ.png";
+import Vasco_da_Gama_RJ from "comum/imagens/times/Vasco_da_Gama_RJ.png";
+import Chapecoense_SC from "comum/imagens/times/Chapecoense_SC.png";
+import Cruzeiro_MG from "comum/imagens/times/Cruzeiro_MG.png";
+import São_Paulo_SP from "comum/imagens/times/São_Paulo_SP.png";
+import Coritiba_PR from "comum/imagens/times/Coritiba_PR.png";
+import Grêmio_RS from "comum/imagens/times/Grêmio_RS.png";
+import Botafogo_RJ from "comum/imagens/times/Botafogo_RJ.png";
+import Bahia_BA from "comum/imagens/times/Bahia_BA.png";
+import Atlético_PR from "comum/imagens/times/Atlético_PR.png";
+import Ponte_Preta_SP from "comum/imagens/times/Ponte_Preta_SP.png";
+import Sport_PE from "comum/imagens/times/Sport_PE.png";
+import Avaí_SC from "comum/imagens/times/Avaí_SC.png";
+import Vitória_BA from "comum/imagens/times/Vitória_BA.png";
+import Atlético_GO from "comum/imagens/times/Atlético_GO.png";
+import Atlético_MG from "comum/imagens/times/Atlético_MG.png";
+import Santos_SP from "comum/imagens/times/Santos_SP.png";
+import Fluminense_RJ from "comum/imagens/times/Fluminense_RJ.png";
 
 const imagens = {
   Palmeiras_SP,
@@ -217,6 +218,12 @@ export default class Visao {
     qs("#btnSalvar").textContent = "Salvar Palpites";
     qs("#ehPalpite").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
+      let faltando2DiasParaInicioDaRodada = (jogos.jogosDeUmaRodada[jogoId].rodada.data - new Date().getTime()) > 173000000,
+        mascarar = false;
+
+      if (jogos.usuario !== USUARIO_LOGADO.uid && faltando2DiasParaInicioDaRodada) {
+        mascarar = true;
+      }
       const palpites = jogos.jogosDeUmaRodada[jogoId].palpites || {};
       let palpite = palpites[jogos.usuario];
       if (!palpite) {
@@ -234,10 +241,10 @@ export default class Visao {
         "visitante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].visitante),
         "jogoId": jogoId
       };
-      jogo.mandante.gol = palpite.mandante.gol;
+      jogo.mandante.gol = mascarar ? "?" : palpite.mandante.gol;
       jogo.mandante.escudo = imagens[jogo.mandante.nome];
       jogo.visitante.escudo = imagens[jogo.visitante.nome];
-      jogo.visitante.gol = palpite.visitante.gol;
+      jogo.visitante.gol = mascarar ? "?" : palpite.visitante.gol;
       return telaJogos(jogo);
     }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));

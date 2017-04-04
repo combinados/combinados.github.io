@@ -190,6 +190,7 @@ export function autenticacao() {
       displayName: "Deslogado"
     };
     if (usuario) {
+      window.USUARIO_LOGADO = usuario;
       const $usuarioDiv = document.querySelector("#usuario-corrente");
       $usuarioDiv.style.backgroundImage = `url("${usuario.photoURL}")`;
       const primeiroNome = usuario.displayName.split(" ")[0];
