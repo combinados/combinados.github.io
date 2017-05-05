@@ -1,9 +1,11 @@
 /* Estilo do cursor durante um requisição ajax*/
+
 .ocupado * {
-  cursor: progress;
+    cursor: progress;
 }
+
 .desocupado * {
-  cursor: auto;
+    cursor: auto;
 }
 
 .ocultar {
@@ -23,6 +25,13 @@
 
 .mdc-layout-grid__cell {
     text-align: center;
+}
+
+
+/* Cartão*/
+
+.esquerda.mdc-card__supporting-text {
+    text-align: left;
 }
 
 
