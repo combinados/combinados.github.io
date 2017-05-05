@@ -72,7 +72,7 @@ export default class Rodada {
           this.visao.exibirMensagem("Atualização Realizada com sucesso");
         })
         .catch(error => {
-          let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+          let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : error.code
           this.visao.exibirMensagem(mensagem)
         });
     } else {
@@ -124,7 +124,7 @@ export default class Rodada {
         this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
-        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : error.code
         this.visao.exibirMensagem(mensagem)
       });
   }
@@ -169,7 +169,7 @@ export default class Rodada {
         this.visao.exibirMensagem("Atualização Realizada com sucesso");
       })
       .catch(error => {
-        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : msg.code
+        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : error.code
         this.visao.exibirMensagem(mensagem)
       });
   }
