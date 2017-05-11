@@ -218,7 +218,7 @@ export default class Visao {
     qs("#btnSalvar").textContent = "Salvar Palpites";
     qs("#ehPalpite").checked = true;
     qs("#jogos", this.$conteiner).innerHTML = Object.keys(jogos.jogosDeUmaRodada).map(jogoId => {
-      let faltando2DiasParaInicioDaRodada = (jogos.jogosDeUmaRodada[jogoId].rodada.data - new Date().getTime()) > 1730000000,
+      let faltando2DiasParaInicioDaRodada = (jogos.jogosDeUmaRodada[jogoId].rodada.data - new Date().getTime()) > 17300,
         mascarar = false;
 
       if (jogos.usuario !== USUARIO_LOGADO.uid && faltando2DiasParaInicioDaRodada) {
