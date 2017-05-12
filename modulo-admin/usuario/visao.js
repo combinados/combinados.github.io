@@ -15,10 +15,12 @@ export default class Visao {
   }
 
   atacharEvento(comando, controle) {
-    const self = this;
     switch (comando) {
       case "novoOuAtualizacao":
         $on(qs("#principal"), "usuario.novoOuAtualizacao", evento => controle(this.abrirTelaPrincipal(evento.detail)));
+        break;
+      case "remover":
+        $delegate(this.$conteiner, ".js-remover", "click", e => controle(this.pegarId(e)));
         break;
     }
   }
@@ -37,6 +39,11 @@ export default class Visao {
         "ehSimulacao": false
       };
     }
+  }
+
+  pegarId = (evento, controle) => {
+    evento.preventDefault();
+    return evento.target.dataset.id;
   }
 
   emFormaDeCartao(opcoes = {}) {

@@ -1,19 +1,39 @@
 import Visao from "./visao";
 import Servico from "./servico";
 import {
+  qs
+} from "comum/util";
+import {
   mensagemUtil
 } from "comum/mensagem/mensagem";
-
+import {
+  MDCDialog,
+  MDCDialogFoundation,
+  util
+} from "@material/dialog";
 export default class Usuario {
 
   constructor(conteiner) {
     this.servico = new Servico();
     this.visao = new Visao(conteiner);
+    this.usuarioId = "";
+    this.dialog = null;
     this.visao.atacharEvento("novoOuAtualizacao", e => this.novoOuAtualizacao(e));
+    this.visao.atacharEvento("remover", id => {
+      this.usuarioId = id;
+      this.dialog.show();
+    });
   }
   iniciar(opcoes = {}) {
     this.exibirEmFormaDeCartao(this.visao.abrirTelaPrincipal(opcoes));
+    this.dialog = new MDCDialog(qs("#dialogo-excluir"));
+    this.dialog.listen("MDCDialog:accept", this.remover);
   }
+
+  remover = () => {
+    console.log(this.usuarioId);
+  }
+
   exibirEmFormaDeCartao(opcoes = {}) {
 
     this.servico.buscarTodos()
