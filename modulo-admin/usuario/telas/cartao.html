@@ -15,13 +15,16 @@
       </section>
       <img class="mdc-card__media-item" src="${usuario.foto}">
     </div>
-    <!-- ${this.ehSimulacao ? "" : ` -->
-    <div id="rodada-${usuario.id}" class="ocultar mdc-layout-grid my-grid"></div>
     <section class="mdc-card__actions">
+      <!-- ${this.ehSimulacao ? "" : ` -->
+      <div id="rodada-${usuario.id}" class="ocultar mdc-layout-grid my-grid"></div>
       <a href="admin.html#rodada?usuario=${usuario.id}" class="mdc-button mdc-button--raised mdc-button--primary mdc-ripple-upgraded" style="--mdc-ripple-surface-width:191.917px; --mdc-ripple-surface-height:36px; --mdc-ripple-fg-size:115.15px; --mdc-ripple-fg-unbounded-transform-duration:447.72ms; --mdc-ripple-fg-scale:1.78258;">Rodada</a>
+      <!-- `} -->
+
+      <!-- ${this.permitirRemover ? ` -->
       <a href="admin.html#usuario" data-id="${usuario.id}" class="mdc-button mdc-button--raised mdc-ripple-upgraded js-remover">Remover</a>
+      <!-- ` : ""} -->
     </section>
-    <!-- `} -->
   </div>
 </div>
 <!-- `}).join("")} -->

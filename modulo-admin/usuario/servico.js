@@ -7,4 +7,7 @@ export default class Servico extends ServicoGenerico {
     buscarTodos() {
         return firebase.database().ref("usuarios").once("value");
     }
+    salvar(atualizacoes) {
+      return firebase.database().ref().update(atualizacoes);
+    }
 }

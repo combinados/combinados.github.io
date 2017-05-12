@@ -31,7 +31,23 @@ export default class Usuario {
   }
 
   remover = () => {
-    console.log(this.usuarioId);
+    let remocoes = {};
+    remocoes[`/usuarios/${this.usuarioId}`] = null;
+    [...Array(380)].map((_, i) => remocoes[`/gabarito/${i+1}/palpites/${this.usuarioId}`] = null);
+
+    this.servico.salvar(remocoes)
+      .then(resposta => {
+        this.exibirEmFormaDeCartao();
+      })
+      .catch(error => {
+        let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : error.code
+        this.visao.exibirMensagem(mensagem)
+      });
+
+    // this.servico.buscarJogosDoGabaritoPela(this.usuarioId)
+    //   .then(jogosDoUsuario => {
+    //     console.log(jogosDoUsuario.val());
+    //   });
   }
 
   exibirEmFormaDeCartao(opcoes = {}) {
@@ -65,7 +81,7 @@ export default class Usuario {
           opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.placares - a.placares);
           opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.pontos - a.pontos);
         }
-
+        opcoes.permitirRemover = USUARIO_LOGADO.uid === "54YN3SAdb7RckPCw5uYiiCNKjsH3"
         this.visao.emFormaDeCartao(opcoes)
       });
   }

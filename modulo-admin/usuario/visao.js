@@ -58,4 +58,12 @@ export default class Visao {
     //           <h1 class="mdc-card__title login-card__title">${primeiroNome}</h1>`;
     // // <h2 class="mdc-card__subtitle">${restoNome}</h2>`;
   }
+  exibirMensagem = (msg) => {
+    const snackbar = new MDCSnackbar(qs(".mdc-snackbar"));
+
+    let data = {
+      message: msg
+    };
+    snackbar.show(data);
+  }
 }
