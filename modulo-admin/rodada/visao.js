@@ -246,7 +246,8 @@ export default class Visao {
 
   emFormaDeLista(jogos, tipoTabela = {}) {
     this.jogos = jogos;
-    this.$conteiner.innerHTML = telaJogosConteiner();
+    this.jogos["exibirBotoes"] = USUARIO_LOGADO.uid === this.jogos.usuario ? "visible" : "hidden";
+    this.$conteiner.innerHTML = telaJogosConteiner(this.jogos);
     this.atacharEvento("alternarTipoTabela");
     this.alternarTipoTabela(tipoTabela);
   }

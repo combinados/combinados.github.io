@@ -1,9 +1,15 @@
 @media print {
-    #relatorio-impressao img {
-        display: block;
+    .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12 {
+        page-break-inside: avoid;
     }
-    h4 {
-        page-break-before: always;
+    img {
+        display: block;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+    ul, li {
+        display: block;
+        page-break-inside: avoid;
     }
     header {
         display: none !important;
