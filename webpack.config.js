@@ -44,11 +44,24 @@ let plugins = [
     title: "Módulo Relatórios",
     filename: 'relatorios.html',
     excludeChunks: ['admin'],
-    favicon: 'comum/imagens/favicon.ico',
+    favicon: 'comum/imagens/comb-animado.gif',
     template: 'comum/layout/template.js',
     producao,
-    // minify: producao ? true : false,
-    //		hash: true
+    // minify: {},
+    minify: {
+      removeComments: true,
+      removeCommentsFromCDATA: true,
+      removeCDATASectionsFromCDATA: true,
+      collapseWhitespace: true,
+      conservativeCollapse: true,
+      removeAttributeQuotes: true,
+      useShortDoctype: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      removeScriptTypeAttributes: true,
+      removeStyleTypeAttributes: true,
+    },
   }),
   new CommonsChunkPlugin({
     name: "comum",
@@ -172,7 +185,7 @@ const config = {
         }
       }
     ]
-  },  
+  },
   // Create Sourcemaps for the bundle
   // devtool: producao ? false : 'inline-source-map',
   devtool: producao ? false : 'source-map',

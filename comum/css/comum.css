@@ -1,3 +1,22 @@
+@media print {
+    #relatorio-impressao img {
+        display: block;
+    }
+    h4 {
+        page-break-before: always;
+    }
+    header {
+        display: none !important;
+    }
+    aside {
+        display: none;
+    }
+    footer {
+        display: none;
+    }
+}
+
+
 /* Estilo do cursor durante um requisição ajax*/
 
 .ocupado * {

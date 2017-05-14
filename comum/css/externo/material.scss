@@ -15,7 +15,18 @@
 @import "@material/textfield/mdc-textfield";
 @import "@material/switch/mdc-switch";
 @import "@material/dialog/mdc-dialog";
-// @import "@material/grid-list/mdc-grid-list";
+@import "@material/grid-list/mdc-grid-list";
+
+.mdc-grid-tile {
+    width: 60px;
+    font-size: 0.7em;
+    padding: 0;
+    height: 30px;
+}
+
+.relatorio-grid {
+    padding: 0;
+}
 
 .demo-body {
     padding: 0;
