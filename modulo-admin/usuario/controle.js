@@ -78,7 +78,7 @@ export default class Usuario {
         if (opcoes.ehSimulacao) {
           opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.simulacao - a.simulacao);
         } else {
-          opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => (b.pontos - a.pontos) || (b.placares - a.placares) || (a.nome - b.nome));
+          opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => (b.pontos - a.pontos) || (b.placares - a.placares) || (a.nome === b.nome ? 0 : a.nome < b.nome ? -1 : 1));
           // opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.placares - a.placares);
         }
         opcoes.permitirRemover = USUARIO_LOGADO.uid === "54YN3SAdb7RckPCw5uYiiCNKjsH3"
