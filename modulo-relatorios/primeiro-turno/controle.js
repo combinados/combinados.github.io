@@ -43,25 +43,34 @@ export default class Usuario {
         //   .map(usuarioId => {
         //     let entries = Object.entries(usuarios[usuarioId]);
         //     let sorted = entries.sort((a, b) => b[1] - a[1]);
-        //     return {
+        //     let retorno = {
         //       usuarioId,
-        //       time: sorted[0][0],
-        //       pontos: sorted[0][1]
+        //       timesCampeoes: [sorted[0][0]],
+        //       timesRebaixados: [sorted[sorted.length - 1][0]],
+        //       pontosCampeoes: sorted[0][1],
+        //       pontosRebaixados: sorted[sorted.length - 1][1]
+        //     };
+        //     for (let i = 1; i < sorted.length - 1; i++) {
+        //       if (sorted[i][1] === retorno.pontosCampeoes) {
+        //         retorno.timesCampeoes.push(sorted[i][0]);
+        //       }
+        //       if (sorted[i][1] === retorno.pontosRebaixados) {
+        //         retorno.timesRebaixados.push(sorted[i][0]);
+        //       }
         //     }
+        //     return retorno;
         //   })
         //   .map(campeao => {
-        //     atualizacoes[`/usuarios/${campeao.usuarioId}/campeao`] = {
-        //       time: campeao.time,
-        //       pontos: campeao.pontos
-        //     }
-        //
+        //     let usuarioId = campeao.usuarioId;
+        //     delete campeao["usuarioId"];
+        //     atualizacoes[`/usuarios/${usuarioId}/campeao`] = campeao;
         //   });
         //
         // // console.log(atualizacoes);
         //
         // this.servico.salvar(atualizacoes)
         //   .then(resposta => {
-        //     this.visao.exibirMensagem("Capeão dos Participantes Atualizado");
+        //     this.visao.exibirMensagem("Capeões dos Participantes Atualizado");
         //   })
         //   .catch(error => {
         //     let mensagem = error.code === "PERMISSION_DENIED" ? "Permissão Negada" : error.code

@@ -12,7 +12,23 @@
         <h2 class="mdc-card__subtitle">${usuario.placares} ${usuario.placares === 1 ? "placar" : "placares"}</h1>
         <h2 class="mdc-card__subtitle">${usuario.nome}</h2>
         <!-- `} -->
+
+        <span>Meus Campeões do 1º Turno,
+
+          <!-- ${usuario.campeao.timesCampeoes.map(time => {
+              return `-->
+          <img src="${this.imagens[time]}" style="max-height: 30px; max-width: 30px;" />
+          <!-- `}).join("")} -->
+        ${usuario.campeao.pontosCampeoes} pontos</span>
+
+        <span>Meus Rebaixados do 1º Turno,
+          <!-- ${usuario.campeao.timesRebaixados.map(time => {
+                return `-->
+          <img src="${this.imagens[time]}" style="max-height: 30px; max-width: 30px;" />
+          <!-- `}).join("")} -->
+        ${usuario.campeao.pontosRebaixados} pontos</span>
       </section>
+
       <img class="mdc-card__media-item" src="${usuario.foto}">
     </div>
     <section class="mdc-card__actions">
@@ -24,7 +40,7 @@
       <!-- ${this.permitirRemover ? ` -->
       <a href="admin.html#usuario" data-id="${usuario.id}" class="mdc-button mdc-button--raised mdc-ripple-upgraded js-remover">Remover</a>
       <!-- ` : ""} -->
-      <span>Meu Campeão do 1º Turno</span> <img src="${this.imagens[usuario.campeao.time]}" style="max-height: 30px; max-width: 30px;" /> </section>
+    </section>
   </div>
 </div>
 <!-- `}).join("")} -->
