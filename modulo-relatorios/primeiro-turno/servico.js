@@ -14,4 +14,8 @@ export default class Servico extends ServicoGenerico {
       .once("value")
     ]);
   }
+
+  salvar(atualizacoes) {
+    return firebase.database().ref().update(atualizacoes);
+  }
 }

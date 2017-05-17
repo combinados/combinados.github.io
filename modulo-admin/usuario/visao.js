@@ -2,7 +2,8 @@ import {
   qs,
   $on,
   $parent,
-  $delegate
+  $delegate,
+  imagens
 } from "comum/util";
 import Mensagem from "comum/mensagem/mensagem";
 import telaCartao from "./telas/cartao.html";
@@ -47,6 +48,7 @@ export default class Visao {
   }
 
   emFormaDeCartao(opcoes = {}) {
+    opcoes = {...opcoes, imagens}
     qs("#usuarios-cartao", opcoes.$conteiner).innerHTML = telaCartao(opcoes);
   }
 
