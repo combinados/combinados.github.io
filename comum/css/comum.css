@@ -11,15 +11,9 @@
         display: block;
         page-break-inside: avoid;
     }
-    header {
+    header, aside, footer, .mdc-snackbar {
         display: none !important;
-    }
-    aside {
-        display: none;
-    }
-    footer {
-        display: none;
-    }
+    }    
 }
 
 
