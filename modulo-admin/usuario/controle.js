@@ -59,18 +59,14 @@ export default class Usuario {
           .map(usuarioId => {
             const rodadas = resposta.val()[usuarioId].rodadas || {};
             let pontos = Object.keys(rodadas).map(rodadaId => rodadas[rodadaId].pontos);
-            if (pontos.length > 0) {
-              pontos = pontos.reduce((a, b) => a + b);
-            }
+            pontos = pontos && pontos.length > 0 ? pontos.reduce((a, b) => a + b) : 0;
 
             let placares = Object.keys(rodadas).map(rodadaId => rodadas[rodadaId].placares);
-            if (placares.length > 0) {
-              placares = placares.reduce((a, b) => a + b);
-            }
+            placares = placares && placares.length > 0 ? placares.reduce((a, b) => a + b) : 0;
 
             return { ...resposta.val()[usuarioId],
               id: usuarioId,
-              simulacao: (resposta.val()[usuarioId].simulacao || 0) + pontos,
+              simulacao: parseInt((resposta.val()[usuarioId].simulacao || 0)) + parseInt(pontos),
               pontos,
               placares
             };
