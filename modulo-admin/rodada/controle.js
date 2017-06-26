@@ -179,11 +179,13 @@ export default class Rodada {
       gv = gabarito.visitante.gol,
       pm = palpite.mandante.gol,
       pv = palpite.visitante.gol,
+      vazio = gm === null || gv === null,
       gEmpate = gm === gv,
       pEmpate = pm === pv,
       tresPontos = gm === pm && gv === pv,
       umPonto = (gm > gv && pm > pv) || (gm < gv && pm < pv) || (gEmpate && pEmpate);
 
+    if(vazio) return 0;
     if (tresPontos) return 3;
     if (umPonto) return 1;
     return 0;

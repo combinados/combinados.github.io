@@ -16,6 +16,7 @@ import {
 } from "@material/snackbar";
 import Mensagem from "comum/mensagem/mensagem";
 import telaJogos from "./telas/jogos.html";
+import telaJogosSimulador from "./telas/jogosSimulador.html";
 import telaJogosConteiner from "./telas/jogosConteiner.html";
 import telaRodadas from "./telas/rodadas.html";
 
@@ -56,14 +57,14 @@ export default class Visao {
       case "mandante-gol":
         json = `{
           "mandante" : {
-            "gol": ${elemento.value}
+            "gol": ${elemento.value ? elemento.value : null}
           }
         }`;
         break;
       case "visitante-gol":
         json = `{
             "visitante" : {
-              "gol": ${elemento.value}
+              "gol": ${elemento.value ? elemento.value : null}
             }
           }`;
         break;
@@ -239,7 +240,7 @@ export default class Visao {
       jogo.mandante.escudo = imagens[jogo.mandante.nome];
       jogo.visitante.escudo = imagens[jogo.visitante.nome];
       jogo.visitante.gol = jogo.visitante.simulacao;
-      return telaJogos(jogo);
+      return telaJogosSimulador(jogo);
     }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
