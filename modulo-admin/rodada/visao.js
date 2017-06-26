@@ -187,6 +187,7 @@ export default class Visao {
       let palpite = palpites[jogos.usuario];
       if (!palpite) {
         palpite = {
+          "pontos": 0,
           "mandante": {
             "gol": ""
           },
@@ -198,7 +199,8 @@ export default class Visao {
       const jogo = {
         "mandante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].mandante),
         "visitante": Object.assign({}, jogos.jogosDeUmaRodada[jogoId].visitante),
-        "jogoId": jogoId
+        "jogoId": jogoId,
+        "pontos": palpite.pontos || 0
       };
       jogo.mandante.gol = mascarar ? "?" : palpite.mandante.gol;
       jogo.mandante.escudo = imagens[jogo.mandante.nome];

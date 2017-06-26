@@ -1,6 +1,10 @@
 <div data-jogo-id="${this.jogoId}" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--align-middle">
+  ${this.pontos === undefined ? `
   <span>${this.mandante.nome.substring(0,3)}</span>
-  <img src="${this.mandante.escudo}" style="max-height: 50px; max-width: 50px;" />
+  ` : `
+  <span>${this.pontos} ${this.mandante.nome.substring(0,3)}</span>
+  `}
+  <img src="${this.mandante.escudo}" style="max-height: 45px; max-width: 45px;" />
   <label class="bolao mdc-textfield">
     ${this.mandante.gol === "?" ? `
     <input name="mandante-gol" value="${this.mandante.gol}" type="text" class="mdc-textfield__input" disabled/>
@@ -20,6 +24,6 @@
     <span class="mdc-textfield__label">gols</span>
     `}
   </label>
-  <img src="${this.visitante.escudo}" style="max-height: 50px; max-width: 50px;" />
+  <img src="${this.visitante.escudo}" style="max-height: 45px; max-width: 45px;" />
   <span>${this.visitante.nome.substring(0,3)}</span>
 </div>
