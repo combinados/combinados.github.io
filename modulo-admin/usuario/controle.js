@@ -73,6 +73,7 @@ export default class Usuario {
           });
         if (opcoes.ehSimulacao) {
           opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.simulacao - a.simulacao);
+          opcoes.compactado = true;
         } else {
           opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => (b.pontos - a.pontos) || (b.placares - a.placares) || (a.nome === b.nome ? 0 : a.nome < b.nome ? -1 : 1));
           // opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.placares - a.placares);
