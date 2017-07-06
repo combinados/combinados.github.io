@@ -28,7 +28,7 @@
     "@material/snackbar": "^0.1.4",
     "@material/switch": "^0.1.2",
     "@material/textfield": "^0.2.3",
-    "@material/theme": "^0.1.2",
+    "@material/theme": "^0.1.5",
     "@material/toolbar": "^0.1.1",
     "@material/typography": "^0.2.0",
     "firebase": "^3.6.10"

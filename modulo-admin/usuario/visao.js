@@ -7,6 +7,7 @@ import {
 } from "comum/util";
 import Mensagem from "comum/mensagem/mensagem";
 import telaCartao from "./telas/cartao.html";
+import telaLista from "./telas/lista.html";
 import telaPrincipal from "./telas/tela-principal.html";
 
 export default class Visao {
@@ -30,12 +31,14 @@ export default class Visao {
     if (evento.simulacao) {
       evento.$conteiner.innerHTML = telaPrincipal();
       return {
+        ...evento,
         "$conteiner": evento.$conteiner,
         "ehSimulacao": true
       };
     } else {
       this.$conteiner.innerHTML = telaPrincipal();
       return {
+        ...evento,
         "$conteiner": this.$conteiner,
         "ehSimulacao": false
       };
@@ -50,6 +53,12 @@ export default class Visao {
   emFormaDeCartao(opcoes = {}) {
     opcoes = {...opcoes, imagens}
     qs("#usuarios-cartao", opcoes.$conteiner).innerHTML = telaCartao(opcoes);
+  }
+
+  emFormaDeLista(opcoes = {}) {
+    let classificacao = 1;
+    opcoes = {...opcoes, imagens, classificacao};
+    qs("#usuarios-cartao", opcoes.$conteiner).innerHTML = telaLista(opcoes);
   }
 
   exibirLogado = usuario => {

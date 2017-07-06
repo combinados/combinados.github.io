@@ -17,6 +17,10 @@
 @import "@material/dialog/mdc-dialog";
 @import "@material/grid-list/mdc-grid-list";
 
+.mdc-theme--dark {
+  background: #303030;
+}
+
 .mdc-grid-tile {
     width: 60px;
     font-size: 0.7em;
@@ -77,4 +81,8 @@
 
 [dir='rtl'] .material-icons {
     padding-left: 8px;
+}
+
+.mdc-list--avatar-list .mdc-list-item {
+    height: 43px;
 }

@@ -78,7 +78,7 @@ export default class Usuario {
           // opcoes["usuarios"] = opcoes.usuarios.sort((a, b) => b.placares - a.placares);
         }
         opcoes.permitirRemover = USUARIO_LOGADO.uid === "54YN3SAdb7RckPCw5uYiiCNKjsH3"
-        this.visao.emFormaDeCartao(opcoes)
+        opcoes.compactado ? this.visao.emFormaDeLista(opcoes) : this.visao.emFormaDeCartao(opcoes);
       });
   }
 
