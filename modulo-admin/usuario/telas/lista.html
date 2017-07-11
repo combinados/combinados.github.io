@@ -6,7 +6,8 @@
     }
     return `-->
     <li class="mdc-list-item">
-      <img class="mdc-list-item__start-detail" src="${usuario.foto}" width="30px" height="30px"> ${usuario.nome.substr(0, 10)}, ${usuario.pontos} | ${usuario.placares}
+      <img class="mdc-list-item__start-detail" src="${usuario.foto}" width="30px" height="30px"> ${usuario.nome.substr(0, 10)}, ${usuario.pontos} |
+      ${this.ehSimulacao ? usuario.simulacao : usuario.placares}
       <span class="mdc-list-item__end-detail">
         ${this.classificacao < 10 ? `0${this.classificacao}º` : `${this.classificacao}º`}
       </span> ${this.classificacao
