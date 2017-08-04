@@ -1,34 +1,38 @@
-<form id="frmPalptes" class="mdc-layout-grid">
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <div class="mdc-switch">
-      <input type="radio" checked="true" id="ehPalpite" name="tipo-tabela" class="mdc-switch__native-control" />
-      <div class="mdc-switch__background">
-        <div class="mdc-switch__knob"></div>
+<form id="frmPalptes">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+      <div class="mdc-switch">
+        <input type="radio" checked="true" id="ehPalpite" name="tipo-tabela" class="mdc-switch__native-control" />
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
       </div>
-    </div>
-    <label for="ehPalpite" class="mdc-switch-label">Palpites</label>
+      <label for="ehPalpite" class="mdc-switch-label">Palpites</label>
 
-    <div class="mdc-switch">
-      <input type="radio" id="ehGabarito" name="tipo-tabela" class="mdc-switch__native-control" />
-      <div class="mdc-switch__background">
-        <div class="mdc-switch__knob"></div>
+      <div class="mdc-switch">
+        <input type="radio" id="ehGabarito" name="tipo-tabela" class="mdc-switch__native-control" />
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
       </div>
-    </div>
-    <label for="ehGabarito" class="mdc-switch-label">Gabarito</label>
+      <label for="ehGabarito" class="mdc-switch-label">Gabarito</label>
 
-    <div class="mdc-switch">
-      <input type="radio" id="ehSimulador" name="tipo-tabela" class="mdc-switch__native-control" />
-      <div class="mdc-switch__background">
-        <div class="mdc-switch__knob"></div>
+      <div class="mdc-switch">
+        <input type="radio" id="ehSimulador" name="tipo-tabela" class="mdc-switch__native-control" />
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
       </div>
+      <label for="ehSimulador" class="mdc-switch-label">Simulador</label>
     </div>
-    <label for="ehSimulador" class="mdc-switch-label">Simulador</label>
-  </div>
-  <div id="jogos" class="mdc-layout-grid mdc-layout-grid__cell mdc-layout-grid__cell--span-12"></div>
+    <div class="mdc-layout-grid__cell">
+      <div class="mdc-layout-grid__inner" id="jogos"></div>
+    </div>
 
-  <div id="btnBotoes" style="visibility:${this.exibirBotoes}" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <button id="btnSalvar" type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Salvar Palpites</button>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12" id="btnBotoes" style="visibility:${this.exibirBotoes}">
+      <button id="btnSalvar" type="submit" class="mdc-button mdc-button--raised mdc-button--primary">Salvar Palpites</button>
+    </div>
+
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12" id="simulacao-usuarios-conteiner"></div>
   </div>
 </form>
-
-<div id="simulacao-usuarios-conteiner"></div>

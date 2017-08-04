@@ -1,4 +1,4 @@
-<section class="mdc-theme--dark mdc-layout-grid__cell mdc-layout-grid__cell--span-12" dir="rtl">
+<div class="mdc-theme--dark" dir="rtl">
   <ul class="mdc-list mdc-list--dense mdc-list--avatar-list">
     <!-- ${this.usuarios.map((usuario, i) => {
     if (this.usuarios[i-1]) {
@@ -6,8 +6,7 @@
     }
     return `-->
     <li class="mdc-list-item">
-      <img class="mdc-list-item__start-detail" src="${usuario.foto}" width="30px" height="30px"> ${usuario.nome.substr(0, 10)}, ${usuario.pontos} |
-      ${this.ehSimulacao ? usuario.simulacao : usuario.placares}
+      <img class="mdc-list-item__start-detail" src="${usuario.foto}" width="30px" height="30px"> ${usuario.nome.substr(0, 10)}, ${usuario.pontos} | ${this.ehSimulacao ? usuario.simulacao : usuario.placares}
       <span class="mdc-list-item__end-detail">
         ${this.classificacao < 10 ? `0${this.classificacao}º` : `${this.classificacao}º`}
       </span> ${this.classificacao
@@ -15,4 +14,4 @@
     </li>
     <!-- `}).join("")} -->
   </ul>
-</section>
+</div>
