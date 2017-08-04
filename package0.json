@@ -1,24 +1,26 @@
 Atualiza com a última versão do pacote
 tail -n +4 package0.json |xargs npm install --save-dev
 
+@material/animation
 @material/base
+@material/card
 @material/checkbox
+@material/dialog
 @material/drawer
+@material/fab
 @material/form-field
+@material/grid-list
 @material/icon-toggle
-@material/ripple
-@material/snackbar
-@material/typography
 @material/layout-grid
 @material/list
-@material/theme
 @material/ripple
-@material/card
-@material/toolbar
-@material/fab
-@material/textfield
+@material/snackbar
 @material/switch
-@material/grid-list
+@material/textfield
+@material/theme
+@material/toolbar
+@material/typography
+firebase
 
 autoprefixer
 babel-core
@@ -29,6 +31,7 @@ babel-runtime
 copy-webpack-plugin
 eslint
 file-loader
+es6-template-string-loader
 html-webpack-plugin
 node-sass
 nodep-date-input-polyfill

@@ -13,7 +13,7 @@ class ModuloRelatorio {
 
     iniciar() {
         autenticacao();
-        const primeiroTurno = new PrimeiroTurno("#primeiroTurno-conteiner");
+        const primeiroTurno = new PrimeiroTurno("#primeiro-turno-conteiner");
         this.roteador
             .rota("primeiroTurno", opcoes => primeiroTurno.iniciar(opcoes));
     }

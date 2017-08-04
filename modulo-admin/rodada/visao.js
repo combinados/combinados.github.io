@@ -15,7 +15,8 @@ import {
   MDCSnackbar
 } from "@material/snackbar";
 import Mensagem from "comum/mensagem/mensagem";
-import telaJogos from "./telas/jogos.html";
+import telaJogosPalpites from "./telas/jogosPalpites.html";
+import telaJogosGabarito from "./telas/jogosGabarito.html";
 import telaJogosSimulador from "./telas/jogosSimulador.html";
 import telaJogosConteiner from "./telas/jogosConteiner.html";
 import telaRodadas from "./telas/rodadas.html";
@@ -206,7 +207,7 @@ export default class Visao {
       jogo.mandante.escudo = imagens[jogo.mandante.nome];
       jogo.visitante.escudo = imagens[jogo.visitante.nome];
       jogo.visitante.gol = mascarar ? "?" : palpite.visitante.gol;
-      return telaJogos(jogo);
+      return telaJogosPalpites(jogo);
     }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }
@@ -222,7 +223,7 @@ export default class Visao {
       };
       jogo.mandante.escudo = imagens[jogo.mandante.nome];
       jogo.visitante.escudo = imagens[jogo.visitante.nome];
-      return telaJogos(jogo);
+      return telaJogosGabarito(jogo);
     }).join("");
     [...qsa(".mdc-textfield")].map(textfield => new MDCTextfield(textfield));
   }

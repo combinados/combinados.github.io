@@ -21,7 +21,7 @@ class ModuloAdministrativo {
         this.roteador
             .rota("usuario", opcoes => usuario.iniciar(opcoes))
             .rota("rodada", opcoes => rodada.iniciar(opcoes))
-            .rota("regras", opcoes => qs("#regras-conteiner").innerHTML = telaRegras());
+            .rota("regras", opcoes => qs("#regras-conteiner").innerHTML = telaRegras({}));
     }
 }
 
