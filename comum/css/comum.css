@@ -1,87 +1,95 @@
 @media print {
-    .mdc-layout-grid__cell.mdc-layout-grid__cell--span-12 {
-        page-break-inside: avoid;
-    }
-    img {
-        display: block;
-        page-break-after: avoid;
-        page-break-inside: avoid;
-    }
-    ul, li {
-        display: block;
-        page-break-inside: avoid;
-    }
-    header, aside, footer, .mdc-snackbar {
-        display: none !important;
-    }
+  section, span {
+    page-break-inside: avoid;
+  }
+  /*span, .mdc-layout-grid__cell--span-11 {
+    page-break-inside: avoid;
+  }*/
+  /*.mdc-layout-grid__cell--span-11 {
+    page-break-inside: avoid;
+  }*/
+  /*img {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }*/
+  header, aside, footer, .mdc-snackbar {
+    display: none !important;
+  }
 }
+
+
+/*.mdc-layout-grid__inner {
+  border: red groove 1px;
+}*/
 
 
 /* Estilo do cursor durante um requisição ajax*/
 
 .ocupado * {
-    cursor: progress;
+  cursor: progress;
 }
 
 .desocupado * {
-    cursor: auto;
+  cursor: auto;
 }
 
 .ocultar {
-    display: none!important;
+  display: none!important;
 }
 
 .bolao .mdc-textfield__input {
-    width: 40px;
-    text-align: center;
+  width: 40px;
+  text-align: center;
 }
 
 .bolao.mdc-fab {
-    align-items: center;
-    text-decoration: none;
-    background-color: #3f51b5;
+  align-items: center;
+  text-decoration: none;
+  background-color: #3f51b5;
 }
 
 .mdc-layout-grid__cell {
-    text-align: center;
+  text-align: center;
 }
 
 
 /* Cartão*/
 
 .esquerda.mdc-card__supporting-text {
-    text-align: left;
+  text-align: left;
 }
 
 
 /* Cartão do Usuário Logado*/
 
 .bolao-login-card {
-    height: 30px;
-    width: 60px;
+  height: 30px;
+  width: 60px;
 }
 
 .bolao-login-card .mdc-card__media {
-    background-size: 30px;
-    background-repeat: no-repeat
+  background-size: 30px;
+  background-repeat: no-repeat
 }
 
 .bolao-login-card .mdc-card__title {
-    font-size: .75rem !important;
-    margin: -22px -7px !important;
+  font-size: .75rem !important;
+  margin: -22px -7px !important;
 }
 
 .bolao-login-card .mdc-card__subtitle {
-    position: absolute;
-    right: -10px;
-    top: -1px;
+  position: absolute;
+  right: -10px;
+  top: -1px;
 }
 
 main {
-    margin-top: 55px !important;
+  margin-top: 55px !important;
 }
 
+
 /*Rodapé*/
+
 
 /*
 .logo {

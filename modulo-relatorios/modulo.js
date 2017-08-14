@@ -15,7 +15,7 @@ class ModuloRelatorio {
         autenticacao();
         const primeiroTurno = new PrimeiroTurno("#primeiro-turno-conteiner");
         this.roteador
-            .rota("primeiroTurno", opcoes => primeiroTurno.iniciar(opcoes));
+            .rota("primeiro-turno", opcoes => primeiroTurno.iniciar(opcoes));
     }
 }
 

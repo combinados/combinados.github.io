@@ -1,38 +1,34 @@
-<section id="relatorio-impressao" style="padding-top:10px">
-  <h3>Relatório para Auditoria do Primeiro Turno</h3>
-  <div class="mdc-layout-grid relatorio-grid">
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <h3>Relatório para Auditoria</h3>
+  </div>
 
-    <!-- ${this.jogos.map(jogo => {
+  <!-- ${this.jogos.map(jogo => {
     this.contador++;
   return `-->
-    <!-- ${this.contador % 10 === 0 ?` -->
-    <section class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <h4>${jogo.rodada.id} Rodada</h4>
-      <hr class="mdc-list-divider">
-    </section>
-    <!-- `: ""} -->
+  <!-- ${this.contador % 10 === 0 ?` -->
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <h4>${jogo.rodada.id} Rodada</h4>
+    <hr class="mdc-list-divider">
+  </div>
+  <!-- `: ""} -->
 
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <div class="mdc-layout-grid relatorio-grid">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--align-middle">
-          <img src="${this.escudos[jogo.mandante.nome]}" style="max-height: 30px; max-width: 30px;" />
-          <img src="${this.escudos[jogo.visitante.nome]}" style="max-height: 30px; max-width: 30px;" />
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-11">
-          <div class="mdc-grid-list">
-            <ul class="mdc-grid-list__tiles">
-              <!-- ${jogo.palpites.map(usuario => {return `-->
-              <li class="mdc-grid-tile">
-                <div class="mdc-grid-tile__primary">${usuario.nome.substring(0,8)} <br> ${usuario.mandante.gol} a ${usuario.visitante.gol}
-                </div>
-              </li>
-              <!-- `}).join("")} -->
-            </ul>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <section class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-middle">
+        <img src="${this.escudos[jogo.mandante.nome]}" style="max-height: 30px; max-width: 30px;" />
+        <img src="${this.escudos[jogo.visitante.nome]}" style="max-height: 30px; max-width: 30px;" />
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+        <div class="mdc-layout-grid__inner">
+          <!-- ${jogo.palpites.map(usuario => {return `-->
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
+            <span>${usuario.nome.substring(0,8)}<br>${usuario.mandante.gol} a ${usuario.visitante.gol}</span>
           </div>
+          <!-- `}).join("")} -->
         </div>
       </div>
-
-    </div>
-    <!-- `}).join("")} -->
+    </section>
   </div>
-</section>
+  <!-- `}).join("")} -->
+</div>
