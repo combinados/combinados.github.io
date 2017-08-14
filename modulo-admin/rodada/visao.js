@@ -181,9 +181,9 @@ export default class Visao {
       let faltandoUmDiaParaInicioDoReturno = jogos.jogosDeUmaRodada[jogoId].rodada.data > (1502550000000 - 86400000),
         mascarar = false;
 
-      if (jogos.usuario !== USUARIO_LOGADO.uid && faltandoUmDiaParaInicioDoReturno) {
-        mascarar = true;
-      }
+      // if (jogos.usuario !== USUARIO_LOGADO.uid && faltandoUmDiaParaInicioDoReturno) {
+      //   mascarar = true;
+      // }
       const palpites = jogos.jogosDeUmaRodada[jogoId].palpites || {};
       let palpite = palpites[jogos.usuario];
       if (!palpite) {
