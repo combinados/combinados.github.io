@@ -64,11 +64,14 @@ export default class Usuario {
             let placares = Object.keys(rodadas).map(rodadaId => rodadas[rodadaId].placares);
             placares = placares && placares.length > 0 ? placares.reduce((a, b) => a + b) : 0;
 
+            let rodadaAtual = Math.max(...Object.keys(rodadas).map(rodadaNumeral => parseInt(rodadaNumeral)));
+
             return { ...resposta.val()[usuarioId],
               id: usuarioId,
               simulacao: parseInt((resposta.val()[usuarioId].simulacao || 0)) + parseInt(pontos),
               pontos,
-              placares
+              placares,
+              rodadaAtual
             };
           });
         if (opcoes.ehSimulacao) {
