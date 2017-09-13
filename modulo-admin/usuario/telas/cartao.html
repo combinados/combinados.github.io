@@ -9,16 +9,23 @@
           <h1 class="mdc-card__title mdc-card__title--large">${usuario.simulacao} pontos (simulação)</h1>
           <h2 class="mdc-card__subtitle">${usuario.nome}: ${usuario.pontos} pontos</h2>
           <!-- `:` -->
-          <h1 class="mdc-card__title mdc-card__title--large">${usuario.pontos} ${usuario.pontos === 1 ? "ponto" : "pontos"}</h1>
+          <h1 class="mdc-card__title mdc-card__title--large">
+            <span class="mdc-list-item__end-detail">
+              ${usuario.classificacao < 10 ? `0${usuario.classificacao}º` : `${usuario.classificacao}º`}
+            </span> ${usuario.classificacao < 4 ? `<i class="material-icons" style="color: #216C2A;">monetization_on</i>` : ""}
+          </h1>
           <h2 class="mdc-card__subtitle">
+            ${usuario.pontos} ${usuario.pontos === 1 ? "ponto" : "pontos"}<br>
             ${usuario.placares} ${usuario.placares === 1 ? "placar" : "placares"}<br>
-            ${usuario.rodadaAtual}ª Rodada Atual <br>
-            ${usuario.nome}
+            ${usuario.rodadaAtual}ª Rodada Atual
           </h2>
           <!-- `} -->
         </section>
 
-        <img class="mdc-card__media-item" src="${usuario.foto}">
+        <figure>
+          <img class="mdc-card__media-item" src="${usuario.foto}">
+          <figcaption style="font-size:0.7em">${usuario.nome}</figcaption>
+        </figure>
       </div>
       <section class="mdc-card__actions">
         <!-- ${this.ehSimulacao ? "" : ` -->

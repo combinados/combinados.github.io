@@ -1,16 +1,12 @@
 <div class="mdc-theme--dark" dir="rtl">
   <ul class="mdc-list mdc-list--dense mdc-list--avatar-list">
-    <!-- ${this.usuarios.map((usuario, i) => {
-    if (this.usuarios[i-1]) {
-      this.classificacao = this.usuarios[i-1].pontos === usuario.pontos && this.usuarios[i-1].placares === usuario.placares ? this.classificacao : ++this.classificacao;
-    }
+    <!-- ${this.usuarios.map((usuario) => {
     return `-->
     <li class="mdc-list-item">
       <img class="mdc-list-item__start-detail" src="${usuario.foto}" width="30px" height="30px"> ${usuario.nome.substr(0, 10)}, ${usuario.pontos} | ${this.ehSimulacao ? usuario.simulacao : usuario.placares}
       <span class="mdc-list-item__end-detail">
-        ${this.classificacao < 10 ? `0${this.classificacao}º` : `${this.classificacao}º`}
-      </span> ${this.classificacao
-      < 4 ? `<i class="material-icons" style="color: #216C2A;">monetization_on</i>` : ""}
+        ${usuario.classificacao < 10 ? `0${usuario.classificacao}º` : `${usuario.classificacao}º`}
+      </span> ${usuario.classificacao < 4 ? `<i class="material-icons" style="color: #216C2A;">monetization_on</i>` : ""}
     </li>
     <!-- `}).join("")} -->
   </ul>

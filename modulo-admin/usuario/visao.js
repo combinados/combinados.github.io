@@ -56,8 +56,7 @@ export default class Visao {
   }
 
   emFormaDeLista(opcoes = {}) {
-    let classificacao = 1;
-    opcoes = {...opcoes, imagens, classificacao};
+    opcoes = {...opcoes, imagens};
     qs("#usuarios-cartao", opcoes.$conteiner).innerHTML = telaLista(opcoes);
   }
 
