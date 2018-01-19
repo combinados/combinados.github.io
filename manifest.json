@@ -5,11 +5,11 @@
   "name": "Bolão dos Combinados",
   "short_name": "Bolão",
   "display": "fullscreen",
-  "start_url": "./index.html",
+  "start_url": ".",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "192x192 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
   ]
