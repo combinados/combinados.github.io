@@ -1,5 +1,6 @@
-(({ navigator }) => {
-  console.log("navigator;", navigator);
+(() => {
+  console.log("window;", window);
+  console.log("self;", self);
   self.addEventListener("activate", (e) => {
     self.registration.unregister()
       .then(() => {
@@ -9,4 +10,4 @@
         clients.forEach(client => client.navigate(client.url));
       });
   });
-})(window);
+})();
