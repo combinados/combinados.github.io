@@ -1,4 +1,4 @@
-(() => {
+((window) => {
   console.log("window;", window);
   console.log("self;", self);
   self.addEventListener("activate", (e) => {
@@ -10,4 +10,4 @@
         clients.forEach(client => client.navigate(client.url));
       });
   });
-})();
+})(window || { teste: testado });
