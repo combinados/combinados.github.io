@@ -1,10 +1,10 @@
 (() => {
   console.log("self;", self);
   self.registration.unregister()
-    .then(() => {
-      return self.clients.matchAll();
+    .then((ok = {}) => {
+      console.log("ok;", ok);
     })
-    .then((clients) => {
-      clients.forEach(client => client.navigate(client.url));
+    .catch((naoOk = {}) => {
+      console.log("naoOk;", naoOk);
     });
 })();
